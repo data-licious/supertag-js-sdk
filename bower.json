@@ -1,0 +1,19 @@
+{
+  "name": "supertag-js-sdk",
+  "version": "0.0.1",
+  "homepage": "https://github.com/supertag/supertag-js-sdk",
+  "authors": [
+    "SuperTag <supertag@datalicious.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "1.11.3"
+  }
+}
