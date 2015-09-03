@@ -4,6 +4,7 @@
   "description": "Javascript SDK for SuperTag",
   "main": "index.js",
   "scripts": {
+    "postinstall": "bower install",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -17,6 +18,7 @@
   },
   "homepage": "https://github.com/supertag/supertag-js-sdk#readme",
   "devDependencies": {
+    "bower": "^1.5.2",
     "browser-sync": "^2.8.2",
     "del": "^2.0.0",
     "gulp": "^3.9.0",
