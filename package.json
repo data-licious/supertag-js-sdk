@@ -20,7 +20,6 @@
   "devDependencies": {
     "bower": "^1.5.2",
     "browser-sync": "^2.8.2",
-    "del": "^2.0.0",
     "gulp": "^3.9.0",
     "gulp-concat": "^2.6.0",
     "gulp-plumber": "^1.0.1",

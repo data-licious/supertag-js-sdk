@@ -2,7 +2,6 @@ var gulp = require('gulp'),
     uglify = require('gulp-uglify'),
     concat = require('gulp-concat'),
     plumber = require('gulp-plumber'),
-    del = require('del'),
     browserSync = require('browser-sync'),
     reload = browserSync.reload;
 
