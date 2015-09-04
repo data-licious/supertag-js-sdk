@@ -54,20 +54,20 @@
     };
 
     validatePlainObj = function(name, obj) {
-        if (!$.isPlainObject(obj)) {
+        if (undefined !== undefined && !$.isPlainObject(obj)) {
             error('[' + name + '] must be a plain object.');
         }
     };
 
     RestClient = (function() {
-        function RestClient(baseUrl, token) {
-            this.baseUrl = baseUrl || baseUrlDefault;
-            validateStr('Base URL', this.baseUrl);
+        function RestClient(token, baseUrl) {
             if (undefined === token) {
                 error('[Token] must be provided.');
             }
-            validateStr(token);
+            validateStr('Token', token);
             this.basicAuth = base64('token:' + token);
+            this.baseUrl = baseUrl || baseUrlDefault;
+            validateStr('Base URL', this.baseUrl);
         }
 
         RestClient.prototype.get = function(uri, query) {
@@ -90,7 +90,7 @@
             validateStr('URI', uri);
             validatePlainObj('Query parameters', query);
 
-            return this.baseUrl + uri + '?' + $.param(query);
+            return this.baseUrl + uri + (undefined === query ? '' : '?' + $.param(query));
         };
 
         RestClient.prototype.ajax = function(url, method, data) {
@@ -114,6 +114,8 @@
 
             return $.ajax(opts);
         };
+
+        return RestClient;
     })();
 
     st.RestClient = RestClient;
