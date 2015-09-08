@@ -1,9 +1,7 @@
 (function(window, document, $, undefined) {
     'use strict';
 
-    window.st = window.st || {};
-
-    var RestClient, baseUrlDefault, error, base64, stringify, validateStr, validatePlainObj;
+    var StSDK, baseUrlDefault, error, base64, stringify, validateDefined, validateStr, validatePlainObj;
 
     baseUrlDefault = 'https://app.supert.ag/api/';
 
@@ -41,59 +39,67 @@
 
     stringify = function(obj) {
         if (undefined === window.JSON) {
-            error('[polyfill] for JSON must be provided.');
+            error('[Polyfill] for JSON must be provided.');
         }
 
         return window.JSON.stringify(obj);
     };
 
+    validateDefined = function(name, variable) {
+        if (undefined === variable) {
+            error('[' + name + '] must be provided.');
+        }
+    };
+
     validateStr = function(name, str) {
+        validateDefined(name, str);
         if ('string' !== $.type(str)) {
             return error('[' + name + '] must be a string.');
         }
     };
 
     validatePlainObj = function(name, obj) {
-        if (undefined !== undefined && !$.isPlainObject(obj)) {
+        validateDefined(name, obj);
+        if (undefined !== obj && !$.isPlainObject(obj)) {
             error('[' + name + '] must be a plain object.');
         }
     };
 
-    RestClient = (function() {
-        function RestClient(token, baseUrl) {
-            if (undefined === token) {
-                error('[Token] must be provided.');
-            }
-            validateStr('Token', token);
-            this.basicAuth = base64('token:' + token);
-            this.baseUrl = baseUrl || baseUrlDefault;
+    StSDK = (function() {
+        function StSDK(options) {
+            validatePlainObj('SDK argument', options);
+            validateStr('Token', options.token);
+            this.basicAuth = base64('token:' + options.token);
+            this.baseUrl = options.baseUrl || baseUrlDefault;
             validateStr('Base URL', this.baseUrl);
         }
 
-        RestClient.prototype.get = function(uri, query) {
+        StSDK.prototype.get = function(uri, query) {
             return this.ajax(this.getEndpoint(uri, query), 'GET');
         };
 
-        RestClient.prototype.post = function(uri, query, payload) {
+        StSDK.prototype.post = function(uri, query, payload) {
             return this.ajax(this.getEndpoint(uri, query), 'POST', payload);
         };
 
-        RestClient.prototype.put = function(uri, query, payload) {
+        StSDK.prototype.put = function(uri, query, payload) {
             return this.ajax(this.getEndpoint(uri, query), 'PUT', payload);
         };
 
-        RestClient.prototype.delete = function(uri, query) {
+        StSDK.prototype.delete = function(uri, query) {
             return this.ajax(this.getEndpoint(uri, query), 'DELETE');
         };
 
-        RestClient.prototype.getEndpoint = function(uri, query) {
+        StSDK.prototype.getEndpoint = function(uri, query) {
             validateStr('URI', uri);
-            validatePlainObj('Query parameters', query);
+            if (undefined !== query) {
+                validatePlainObj('Query parameters', query);
+            }
 
             return this.baseUrl + uri + (undefined === query ? '' : '?' + $.param(query));
         };
 
-        RestClient.prototype.ajax = function(url, method, data) {
+        StSDK.prototype.ajax = function(url, method, data) {
             var url = url || this.baseUrl,
                 method = method || 'GET',
                 headers = {
@@ -115,8 +121,8 @@
             return $.ajax(opts);
         };
 
-        return RestClient;
+        return StSDK;
     })();
 
-    st.RestClient = RestClient;
+    window.StSDK = StSDK;
 }(window, document, jQuery));
