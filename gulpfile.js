@@ -8,7 +8,7 @@ var gulp = require('gulp'),
 gulp.task('js', function() {
     gulp.src('src/**/*.js')
         .pipe(plumber())
-        .pipe(concat('st.js'))
+        .pipe(concat('st.min.js'))
         .pipe(uglify())
         .pipe(gulp.dest('dist/'))
         .pipe(reload({

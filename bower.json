@@ -1,17 +1,24 @@
 {
   "name": "supertag-js-sdk",
-  "version": "0.0.1",
+  "description": "SuperTag JavaScript SDK",
+  "version": "1.0.0",
   "homepage": "https://github.com/supertag/supertag-js-sdk",
+  "license": "ISC",
   "authors": [
-    "SuperTag <supertag@datalicious.com>"
+    "SuperTag Team <supertag@datalicious.com>"
   ],
-  "license": "MIT",
+  "main": "src/st.js",
+  "moduleType": "globals",
+  "keywords": [
+    "datalicious",
+    "supertag",
+    "sdk"
+  ],
   "ignore": [
     "**/.*",
     "node_modules",
     "bower_components",
-    "test",
-    "tests"
+    "test"
   ],
   "dependencies": {
     "jquery": "1.11.3"
