@@ -121,6 +121,10 @@
             return $.ajax(opts);
         };
 
+        StSDK.prototype.getProjects = function() {
+            return this.get('companies/projects');
+        };
+
         return StSDK;
     })();
 
