@@ -1,7 +1,7 @@
 (function(window, document, $, undefined) {
     'use strict';
 
-    var StSDK, baseUrlDefault, error, base64, stringify, validateDefined, validateStr, validatePlainObj;
+    var StSDK, baseUrlDefault, error, base64, stringify, validateDefined, validateInt, validateStr, validatePlainObj;
 
     baseUrlDefault = 'https://app.supert.ag/api/';
 
@@ -51,6 +51,13 @@
         }
     };
 
+    validateInt = function(name, int) {
+        validateDefined(name, int);
+        if (int !== parseInt(int)) {
+            return error('[' + name + '] must be an integer.');
+        }
+    }
+
     validateStr = function(name, str) {
         validateDefined(name, str);
         if ('string' !== $.type(str)) {
@@ -60,7 +67,7 @@
 
     validatePlainObj = function(name, obj) {
         validateDefined(name, obj);
-        if (undefined !== obj && !$.isPlainObject(obj)) {
+        if (obj && !$.isPlainObject(obj)) {
             error('[' + name + '] must be a plain object.');
         }
     };
@@ -73,6 +80,14 @@
             this.baseUrl = options.baseUrl || baseUrlDefault;
             validateStr('Base URL', this.baseUrl);
         }
+
+        StSDK.prototype.validateDefined = validateDefined;
+
+        StSDK.prototype.validateInt = validateInt;
+
+        StSDK.prototype.validateStr = validateStr;
+
+        StSDK.prototype.validatePlainObj = validatePlainObj;
 
         StSDK.prototype.get = function(uri, query) {
             return this.ajax(this.getEndpoint(uri, query), 'GET');
@@ -119,10 +134,6 @@
             }
 
             return $.ajax(opts);
-        };
-
-        StSDK.prototype.getProjects = function() {
-            return this.get('companies/projects');
         };
 
         return StSDK;

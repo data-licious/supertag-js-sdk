@@ -6,7 +6,7 @@ var gulp = require('gulp'),
     reload = browserSync.reload;
 
 gulp.task('js', function() {
-    gulp.src('src/**/*.js')
+    gulp.src(['src/st.js', 'src/**/*.js'])
         .pipe(plumber())
         .pipe(concat('st.min.js'))
         .pipe(uglify())
