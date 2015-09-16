@@ -1,9 +1,12 @@
 (function(window, document, $, undefined) {
     'use strict';
 
-    var StSDK, baseUrlDefault, error, base64, stringify, validateDefined, validateInt, validateStr, validatePlainObj;
+    var StSDK, baseUrlDefault, ajaxOpts,
+        error, base64, jsonEncode, jsonDecode, validateDefined, validateInt, validateStr, validatePlainObj, validateAjaxOpts;
 
     baseUrlDefault = 'https://app.supert.ag/api/';
+
+    ajaxOpts = ['dataFilter'];
 
     error = function(msg) {
         throw 'ERROR: SuperTag: ' + msg;
@@ -37,12 +40,20 @@
         return output;
     };
 
-    stringify = function(obj) {
+    jsonEncode = function(obj) {
         if (undefined === window.JSON) {
             error('[Polyfill] for JSON must be provided.');
         }
 
         return window.JSON.stringify(obj);
+    };
+
+    jsonDecode = function(str) {
+        if (undefined === window.JSON) {
+            error('[Polyfill] for JSON must be provided.');
+        }
+
+        return window.JSON.parse(str);
     };
 
     validateDefined = function(name, variable) {
@@ -56,7 +67,7 @@
         if (int !== parseInt(int)) {
             return error('[' + name + '] must be an integer.');
         }
-    }
+    };
 
     validateStr = function(name, str) {
         validateDefined(name, str);
@@ -72,6 +83,15 @@
         }
     };
 
+    validateAjaxOpts = function(opts) {
+        validatePlainObj('Ajax options', opts);
+        $.each(opts, function(opt) {
+            if (!(opt in ajaxOpts)) {
+                error('[' + opt + '] is not a supported Ajax option.');
+            }
+        });
+    };
+
     StSDK = (function() {
         function StSDK(options) {
             validatePlainObj('SDK argument', options);
@@ -81,6 +101,10 @@
             validateStr('Base URL', this.baseUrl);
         }
 
+        StSDK.prototype.jsonEncode = jsonEncode;
+
+        StSDK.prototype.jsonDecode = jsonDecode;
+
         StSDK.prototype.validateDefined = validateDefined;
 
         StSDK.prototype.validateInt = validateInt;
@@ -89,32 +113,32 @@
 
         StSDK.prototype.validatePlainObj = validatePlainObj;
 
-        StSDK.prototype.get = function(uri, query) {
-            return this.ajax(this.getEndpoint(uri, query), 'GET');
+        StSDK.prototype.get = function(uri, query, ajaxOpts) {
+            return this.ajax(this.getEndpoint(uri, query), 'GET', null, ajaxOpts);
         };
 
-        StSDK.prototype.post = function(uri, query, payload) {
-            return this.ajax(this.getEndpoint(uri, query), 'POST', payload);
+        StSDK.prototype.post = function(uri, query, payload, ajaxOpts) {
+            return this.ajax(this.getEndpoint(uri, query), 'POST', payload, ajaxOpts);
         };
 
-        StSDK.prototype.put = function(uri, query, payload) {
-            return this.ajax(this.getEndpoint(uri, query), 'PUT', payload);
+        StSDK.prototype.put = function(uri, query, payload, ajaxOpts) {
+            return this.ajax(this.getEndpoint(uri, query), 'PUT', payload, ajaxOpts);
         };
 
-        StSDK.prototype.delete = function(uri, query) {
-            return this.ajax(this.getEndpoint(uri, query), 'DELETE');
+        StSDK.prototype.delete = function(uri, query, ajaxOpts) {
+            return this.ajax(this.getEndpoint(uri, query), 'DELETE', null, ajaxOpts);
         };
 
         StSDK.prototype.getEndpoint = function(uri, query) {
             validateStr('URI', uri);
-            if (undefined !== query) {
+            if (query) {
                 validatePlainObj('Query parameters', query);
             }
 
-            return this.baseUrl + uri + (undefined === query ? '' : '?' + $.param(query));
+            return this.baseUrl + uri + (!query ? '' : '?' + $.param(query));
         };
 
-        StSDK.prototype.ajax = function(url, method, data) {
+        StSDK.prototype.ajax = function(url, method, data, options) {
             var url = url || this.baseUrl,
                 method = method || 'GET',
                 headers = {
@@ -128,9 +152,14 @@
                     dataType: 'json'
                 };
 
-            if (undefined !== data) {
+            if (undefined !== data && null !== data) {
                 validatePlainObj('Data', data);
-                opts.data = stringify(data);
+                opts.data = jsonEncode(data);
+            }
+
+            if (undefined !== options) {
+                validateAjaxOpts(options);
+                $.extend(opts, options);
             }
 
             return $.ajax(opts);
