@@ -13,6 +13,6 @@ Example:
         project: 1234
     }); // tagsReq would be of jQuery jqXHR type which is Promise compatible
     tagsReq
-        .done(function() {...})
-        .fail(function() {...});
+        .done(function(data) {...})
+        .fail(function(data) {...});
 ```
