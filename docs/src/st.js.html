@@ -77,179 +77,529 @@
           </ul>
           <div class="scrollspy">
             <ul class="nav nav-list bs-docs-sidenav affix-top">
+              <li><a href="#StSDK"><i class="alert alert-success"></i><span>StSDK</span></a>
+              </li>
+              <li><a href="#jsonEncode"><i class="alert alert-success"></i><span>jsonEncode</span></a>
+              </li>
+              <li><a href="#jsonDecode"><i class="alert alert-success"></i><span>jsonDecode</span></a>
+              </li>
+              <li><a href="#validateDefined"><i class="alert alert-success"></i><span>validateDefined</span></a>
+              </li>
+              <li><a href="#validateInt"><i class="alert alert-success"></i><span>validateInt</span></a>
+              </li>
+              <li><a href="#validateStr"><i class="alert alert-success"></i><span>validateStr</span></a>
+              </li>
+              <li><a href="#validatePlainObj"><i class="alert alert-success"></i><span>validatePlainObj</span></a>
+              </li>
+              <li><a href="#get"><i class="alert alert-info"></i><span>get</span></a>
+              </li>
+              <li><a href="#post"><i class="alert alert-info"></i><span>post</span></a>
+              </li>
+              <li><a href="#put"><i class="alert alert-info"></i><span>put</span></a>
+              </li>
+              <li><a href="#delete"><i class="alert alert-info"></i><span>delete</span></a>
+              </li>
+              <li><a href="#getEndpoint"><i class="alert alert-info"></i><span>getEndpoint</span></a>
+              </li>
+              <li><a href="#ajax"><i class="alert alert-info"></i><span>ajax</span></a>
+              </li>
             </ul>
           </div>
         </div>
         <div class="span9">
-          <div class="description"> </div>
-          <pre><code class="language-javascript">(function(window, document, $, undefined) {
-    'use strict';
+          <section id="StSDK">
+            <h1>StSDK</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-success radius ctx-type">constructor</div><span>StSDK()</span>
+            </p>
+          </section>
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th style="width:20%">Option name</th>
+                <th style="width:20%">Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>options</td>
+                <td>Object</td>
+                <td><p>Arguments for the constructor (<code>token</code> is mandatory)</p></td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="description"><p>The constructor function for <code>StSDK</code></p> </div>
+          <pre><code class="language-javascript">function StSDK(options) {
+    validatePlainObj('SDK argument', options);
+    validateStr('Token', options.token);
+    this.basicAuth = base64('token:' + options.token);
+    this.baseUrl = options.baseUrl || baseUrlDefault;
+    validateStr('Base URL', this.baseUrl);
+}</code></pre>
+          <section id="jsonEncode">
+            <h1>jsonEncode</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-success radius ctx-type">property</div><span>StSDK.prototype.jsonEncode</span>
+            </p>
+          </section>
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th style="width:20%">Option name</th>
+                <th style="width:20%">Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>obj</td>
+                <td>Object</td>
+                <td><p>The object to encode</p></td>
+              </tr>
+              <tr>
+                <td>return</td>
+                <td>String</td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="description"><p>Encodes a JS plain object into a JSON string</p> </div>
+          <pre><code class="language-javascript">StSDK.prototype.jsonEncode = jsonEncode;</code></pre>
+          <section id="jsonDecode">
+            <h1>jsonDecode</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-success radius ctx-type">property</div><span>StSDK.prototype.jsonDecode</span>
+            </p>
+          </section>
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th style="width:20%">Option name</th>
+                <th style="width:20%">Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>str</td>
+                <td>String</td>
+                <td><p>The JSON string to decode</p></td>
+              </tr>
+              <tr>
+                <td>return</td>
+                <td>Object</td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="description"><p>Decodes a JSON string into a JS object</p> </div>
+          <pre><code class="language-javascript">StSDK.prototype.jsonDecode = jsonDecode;</code></pre>
+          <section id="validateDefined">
+            <h1>validateDefined</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-success radius ctx-type">property</div><span>StSDK.prototype.validateDefined</span>
+            </p>
+          </section>
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th style="width:20%">Option name</th>
+                <th style="width:20%">Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>name</td>
+                <td>String</td>
+                <td><p>The name of the variable</p></td>
+              </tr>
+              <tr>
+                <td>variable</td>
+                <td></td>
+                <td><p>The variable to validate</p></td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="description"><p>Validates a JS variable to be defined</p> </div>
+          <pre><code class="language-javascript">StSDK.prototype.validateDefined = validateDefined;</code></pre>
+          <section id="validateInt">
+            <h1>validateInt</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-success radius ctx-type">property</div><span>StSDK.prototype.validateInt</span>
+            </p>
+          </section>
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th style="width:20%">Option name</th>
+                <th style="width:20%">Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>name</td>
+                <td>String</td>
+                <td><p>The name of the variable</p></td>
+              </tr>
+              <tr>
+                <td>variable</td>
+                <td></td>
+                <td><p>The variable to validate</p></td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="description"><p>Validates a JS variable to be an integer</p> </div>
+          <pre><code class="language-javascript">StSDK.prototype.validateInt = validateInt;</code></pre>
+          <section id="validateStr">
+            <h1>validateStr</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-success radius ctx-type">property</div><span>StSDK.prototype.validateStr</span>
+            </p>
+          </section>
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th style="width:20%">Option name</th>
+                <th style="width:20%">Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>name</td>
+                <td>String</td>
+                <td><p>The name of the variable</p></td>
+              </tr>
+              <tr>
+                <td>variable</td>
+                <td></td>
+                <td><p>The variable to validate</p></td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="description"><p>Validates a JS variable to be a string</p> </div>
+          <pre><code class="language-javascript">StSDK.prototype.validateStr = validateStr;</code></pre>
+          <section id="validatePlainObj">
+            <h1>validatePlainObj</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-success radius ctx-type">property</div><span>StSDK.prototype.validatePlainObj</span>
+            </p>
+          </section>
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th style="width:20%">Option name</th>
+                <th style="width:20%">Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>name</td>
+                <td>String</td>
+                <td><p>The name of the variable</p></td>
+              </tr>
+              <tr>
+                <td>variable</td>
+                <td></td>
+                <td><p>The variable to validate</p></td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="description"><p>Validates a JS variable to be a plain object</p> </div>
+          <pre><code class="language-javascript">StSDK.prototype.validatePlainObj = validatePlainObj;</code></pre>
+          <section id="get">
+            <h1>get</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">method</div><span>StSDK.prototype.get()</span>
+            </p>
+          </section>
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th style="width:20%">Option name</th>
+                <th style="width:20%">Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>uri</td>
+                <td>String</td>
+                <td><p>The part of endpoint URI following /api/</p></td>
+              </tr>
+              <tr>
+                <td>query</td>
+                <td>Object</td>
+                <td><p>The query parameters in a plain object</p></td>
+              </tr>
+              <tr>
+                <td>ajaxOpts</td>
+                <td>Object</td>
+                <td><p>Extra options for setting up $.ajax</p></td>
+              </tr>
+              <tr>
+                <td>return</td>
+                <td>jqXHR</td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="description"><p>Gets the jqXHR object for a GET AJAX request</p> </div>
+          <pre><code class="language-javascript">StSDK.prototype.get = function(uri, query, ajaxOpts) {
+    return this.ajax(this.getEndpoint(uri, query), 'GET', null, ajaxOpts);
+};</code></pre>
+          <section id="post">
+            <h1>post</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">method</div><span>StSDK.prototype.post()</span>
+            </p>
+          </section>
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th style="width:20%">Option name</th>
+                <th style="width:20%">Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>uri</td>
+                <td>String</td>
+                <td><p>The part of endpoint URI following /api/</p></td>
+              </tr>
+              <tr>
+                <td>query</td>
+                <td>Object</td>
+                <td><p>The query parameters in a plain object</p></td>
+              </tr>
+              <tr>
+                <td>payload</td>
+                <td>Object</td>
+                <td><p>The content for the request</p></td>
+              </tr>
+              <tr>
+                <td>ajaxOpts</td>
+                <td>Object</td>
+                <td><p>Extra options for setting up $.ajax</p></td>
+              </tr>
+              <tr>
+                <td>return</td>
+                <td>jqXHR</td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="description"><p>Gets the jqXHR object for a POST AJAX request</p> </div>
+          <pre><code class="language-javascript">StSDK.prototype.post = function(uri, query, payload, ajaxOpts) {
+    return this.ajax(this.getEndpoint(uri, query), 'POST', payload, ajaxOpts);
+};</code></pre>
+          <section id="put">
+            <h1>put</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">method</div><span>StSDK.prototype.put()</span>
+            </p>
+          </section>
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th style="width:20%">Option name</th>
+                <th style="width:20%">Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>uri</td>
+                <td>String</td>
+                <td><p>The part of endpoint URI following /api/</p></td>
+              </tr>
+              <tr>
+                <td>query</td>
+                <td>Object</td>
+                <td><p>The query parameters in a plain object</p></td>
+              </tr>
+              <tr>
+                <td>payload</td>
+                <td>Object</td>
+                <td><p>The content for the request</p></td>
+              </tr>
+              <tr>
+                <td>ajaxOpts</td>
+                <td>Object</td>
+                <td><p>Extra options for setting up $.ajax</p></td>
+              </tr>
+              <tr>
+                <td>return</td>
+                <td>jqXHR</td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="description"><p>Gets the jqXHR object for a PUT AJAX request</p> </div>
+          <pre><code class="language-javascript">StSDK.prototype.put = function(uri, query, payload, ajaxOpts) {
+    return this.ajax(this.getEndpoint(uri, query), 'PUT', payload, ajaxOpts);
+};</code></pre>
+          <section id="delete">
+            <h1>delete</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">method</div><span>StSDK.prototype.delete()</span>
+            </p>
+          </section>
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th style="width:20%">Option name</th>
+                <th style="width:20%">Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>uri</td>
+                <td>String</td>
+                <td><p>The part of endpoint URI following /api/</p></td>
+              </tr>
+              <tr>
+                <td>query</td>
+                <td>Object</td>
+                <td><p>The query parameters in a plain object</p></td>
+              </tr>
+              <tr>
+                <td>ajaxOpts</td>
+                <td>Object</td>
+                <td><p>Extra options for setting up $.ajax</p></td>
+              </tr>
+              <tr>
+                <td>return</td>
+                <td>jqXHR</td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="description"><p>Gets the jqXHR object for a DELETE AJAX request</p> </div>
+          <pre><code class="language-javascript">StSDK.prototype.delete = function(uri, query, ajaxOpts) {
+    return this.ajax(this.getEndpoint(uri, query), 'DELETE', null, ajaxOpts);
+};</code></pre>
+          <section id="getEndpoint">
+            <h1>getEndpoint</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">method</div><span>StSDK.prototype.getEndpoint()</span>
+            </p>
+          </section>
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th style="width:20%">Option name</th>
+                <th style="width:20%">Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>uri</td>
+                <td>String</td>
+                <td><p>The part of endpoint URI following /api/</p></td>
+              </tr>
+              <tr>
+                <td>query</td>
+                <td>Object</td>
+                <td><p>The query parameters in a plain object</p></td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="description"><p>Gets the complete API endpoint URL based on URI and query parameters provided</p> </div>
+          <pre><code class="language-javascript">StSDK.prototype.getEndpoint = function(uri, query) {
+    validateStr('URI', uri);
+    if (query) {
+        validatePlainObj('Query parameters', query);
+    }
 
-    var StSDK, baseUrlDefault, ajaxOpts,
-        error, base64, jsonEncode, jsonDecode, validateDefined, validateInt, validateStr, validatePlainObj, validateAjaxOpts;
-
-    baseUrlDefault = 'https://app.supert.ag/api/';
-
-    ajaxOpts = ['dataFilter'];
-
-    error = function(msg) {
-        throw 'ERROR: SuperTag: ' + msg;
-    };
-
-    base64 = function(input) {
-        var chr1, chr2, chr3, enc1, enc2, enc3, enc4,
-            keyStr = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=',
-            output = '',
-            i = 0;
-
-        while (i &lt; input.length) {
-            chr1 = input.charCodeAt(i++);
-            chr2 = input.charCodeAt(i++);
-            chr3 = input.charCodeAt(i++);
-
-            enc1 = chr1 &gt;&gt; 2;
-            enc2 = ((chr1 &amp; 3) &lt;&lt; 4) | (chr2 &gt;&gt; 4);
-            enc3 = ((chr2 &amp; 15) &lt;&lt; 2) | (chr3 &gt;&gt; 6);
-            enc4 = chr3 &amp; 63;
-
-            if (isNaN(chr2)) {
-                enc3 = enc4 = 64;
-            } else if (isNaN(chr3)) {
-                enc4 = 64;
-            }
-
-            output += keyStr.charAt(enc1) + keyStr.charAt(enc2) + keyStr.charAt(enc3) + keyStr.charAt(enc4);
-        }
-
-        return output;
-    };
-
-    jsonEncode = function(obj) {
-        if (undefined === window.JSON) {
-            error('[Polyfill] for JSON must be provided.');
-        }
-
-        return window.JSON.stringify(obj);
-    };
-
-    jsonDecode = function(str) {
-        if (undefined === window.JSON) {
-            error('[Polyfill] for JSON must be provided.');
-        }
-
-        return window.JSON.parse(str);
-    };
-
-    validateDefined = function(name, variable) {
-        if (undefined === variable) {
-            error('[' + name + '] must be provided.');
-        }
-    };
-
-    validateInt = function(name, int) {
-        validateDefined(name, int);
-        if (int !== parseInt(int)) {
-            return error('[' + name + '] must be an integer.');
-        }
-    };
-
-    validateStr = function(name, str) {
-        validateDefined(name, str);
-        if ('string' !== $.type(str)) {
-            return error('[' + name + '] must be a string.');
-        }
-    };
-
-    validatePlainObj = function(name, obj) {
-        validateDefined(name, obj);
-        if (obj &amp;&amp; !$.isPlainObject(obj)) {
-            error('[' + name + '] must be a plain object.');
-        }
-    };
-
-    validateAjaxOpts = function(opts) {
-        validatePlainObj('Ajax options', opts);
-        $.each(opts, function(opt) {
-            if (!(opt in ajaxOpts)) {
-                error('[' + opt + '] is not a supported Ajax option.');
-            }
-        });
-    };
-
-    StSDK = (function() {
-        function StSDK(options) {
-            validatePlainObj('SDK argument', options);
-            validateStr('Token', options.token);
-            this.basicAuth = base64('token:' + options.token);
-            this.baseUrl = options.baseUrl || baseUrlDefault;
-            validateStr('Base URL', this.baseUrl);
-        }
-
-        StSDK.prototype.jsonEncode = jsonEncode;
-
-        StSDK.prototype.jsonDecode = jsonDecode;
-
-        StSDK.prototype.validateDefined = validateDefined;
-
-        StSDK.prototype.validateInt = validateInt;
-
-        StSDK.prototype.validateStr = validateStr;
-
-        StSDK.prototype.validatePlainObj = validatePlainObj;
-
-        StSDK.prototype.get = function(uri, query, ajaxOpts) {
-            return this.ajax(this.getEndpoint(uri, query), 'GET', null, ajaxOpts);
+    return this.baseUrl + uri + (!query ? '' : '?' + $.param(query));
+};</code></pre>
+          <section id="ajax">
+            <h1>ajax</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">method</div><span>StSDK.prototype.ajax()</span>
+            </p>
+          </section>
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th style="width:20%">Option name</th>
+                <th style="width:20%">Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>url</td>
+                <td>String</td>
+                <td><p>The API endpoint URL</p></td>
+              </tr>
+              <tr>
+                <td>method</td>
+                <td>String</td>
+                <td><p>The request method</p></td>
+              </tr>
+              <tr>
+                <td>data</td>
+                <td>Object</td>
+                <td><p>The data for the request</p></td>
+              </tr>
+              <tr>
+                <td>ajaxOpts</td>
+                <td>Object</td>
+                <td><p>Extra options for setting up $.ajax</p></td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="description"><p>Gets the jqXHR object for an AJAX request</p> </div>
+          <pre><code class="language-javascript">StSDK.prototype.ajax = function(url, method, data, ajaxOpts) {
+    var url = url || this.baseUrl,
+        method = method || 'GET',
+        headers = {
+            'Content-Type': 'application/json',
+            Authorization: 'Basic ' + this.basicAuth
+        },
+        opts = {
+            url: url,
+            method: method,
+            headers: headers,
+            dataType: 'json'
         };
 
-        StSDK.prototype.post = function(uri, query, payload, ajaxOpts) {
-            return this.ajax(this.getEndpoint(uri, query), 'POST', payload, ajaxOpts);
-        };
+    if (undefined !== data &amp;&amp; null !== data) {
+        validatePlainObj('Data', data);
+        opts.data = jsonEncode(data);
+    }
 
-        StSDK.prototype.put = function(uri, query, payload, ajaxOpts) {
-            return this.ajax(this.getEndpoint(uri, query), 'PUT', payload, ajaxOpts);
-        };
+    if (undefined !== ajaxOpts) {
+        validateAjaxOpts(ajaxOpts);
+        $.extend(opts, ajaxOpts);
+    }
 
-        StSDK.prototype.delete = function(uri, query, ajaxOpts) {
-            return this.ajax(this.getEndpoint(uri, query), 'DELETE', null, ajaxOpts);
-        };
+    return $.ajax(opts);
+};
 
-        StSDK.prototype.getEndpoint = function(uri, query) {
-            validateStr('URI', uri);
-            if (query) {
-                validatePlainObj('Query parameters', query);
-            }
-
-            return this.baseUrl + uri + (!query ? '' : '?' + $.param(query));
-        };
-
-        StSDK.prototype.ajax = function(url, method, data, options) {
-            var url = url || this.baseUrl,
-                method = method || 'GET',
-                headers = {
-                    'Content-Type': 'application/json',
-                    Authorization: 'Basic ' + this.basicAuth
-                },
-                opts = {
-                    url: url,
-                    method: method,
-                    headers: headers,
-                    dataType: 'json'
-                };
-
-            if (undefined !== data &amp;&amp; null !== data) {
-                validatePlainObj('Data', data);
-                opts.data = jsonEncode(data);
-            }
-
-            if (undefined !== options) {
-                validateAjaxOpts(options);
-                $.extend(opts, options);
-            }
-
-            return $.ajax(opts);
-        };
-
-        return StSDK;
+return StSDK;
     })();
 
     window.StSDK = StSDK;

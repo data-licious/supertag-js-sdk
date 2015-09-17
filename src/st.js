@@ -62,23 +62,23 @@
         }
     };
 
-    validateInt = function(name, int) {
-        validateDefined(name, int);
-        if (int !== parseInt(int)) {
+    validateInt = function(name, variable) {
+        validateDefined(name, variable);
+        if (variable !== parseInt(variable)) {
             return error('[' + name + '] must be an integer.');
         }
     };
 
-    validateStr = function(name, str) {
-        validateDefined(name, str);
-        if ('string' !== $.type(str)) {
+    validateStr = function(name, variable) {
+        validateDefined(name, variable);
+        if ('string' !== $.type(variable)) {
             return error('[' + name + '] must be a string.');
         }
     };
 
-    validatePlainObj = function(name, obj) {
-        validateDefined(name, obj);
-        if (obj && !$.isPlainObject(obj)) {
+    validatePlainObj = function(name, variable) {
+        validateDefined(name, variable);
+        if (variable && !$.isPlainObject(variable)) {
             error('[' + name + '] must be a plain object.');
         }
     };
@@ -93,6 +93,13 @@
     };
 
     StSDK = (function() {
+        /**
+         * The constructor function for `StSDK`
+         *
+         * @param {Object} options Arguments for the constructor (`token` is mandatory)
+         *
+         * @constructor
+         */
         function StSDK(options) {
             validatePlainObj('SDK argument', options);
             validateStr('Token', options.token);
@@ -101,34 +108,118 @@
             validateStr('Base URL', this.baseUrl);
         }
 
+        /**
+         * Encodes a JS plain object into a JSON string
+         *
+         * @param {Object} obj The object to encode
+         *
+         * @return {String}
+         */
         StSDK.prototype.jsonEncode = jsonEncode;
 
+        /**
+         * Decodes a JSON string into a JS object
+         *
+         * @param {String} str The JSON string to decode
+         *
+         * @return {Object}
+         */
         StSDK.prototype.jsonDecode = jsonDecode;
 
+        /**
+         * Validates a JS variable to be defined
+         *
+         * @param {String} name The name of the variable
+         * @param {*} variable The variable to validate
+         */
         StSDK.prototype.validateDefined = validateDefined;
 
+        /**
+         * Validates a JS variable to be an integer
+         *
+         * @param {String} name The name of the variable
+         * @param {*} variable The variable to validate
+         */
         StSDK.prototype.validateInt = validateInt;
 
+        /**
+         * Validates a JS variable to be a string
+         *
+         * @param {String} name The name of the variable
+         * @param {*} variable The variable to validate
+         */
         StSDK.prototype.validateStr = validateStr;
 
+        /**
+         * Validates a JS variable to be a plain object
+         *
+         * @param {String} name The name of the variable
+         * @param {*} variable The variable to validate
+         */
         StSDK.prototype.validatePlainObj = validatePlainObj;
 
+        /**
+         * Gets the jqXHR object for a GET AJAX request
+         *
+         * @param {String} uri The part of endpoint URI following /api/
+         * @param {Object} query The query parameters in a plain object
+         * @param {Object} ajaxOpts Extra options for setting up $.ajax
+         *
+         * @return {jqXHR}
+         */
         StSDK.prototype.get = function(uri, query, ajaxOpts) {
             return this.ajax(this.getEndpoint(uri, query), 'GET', null, ajaxOpts);
         };
 
+        /**
+         * Gets the jqXHR object for a POST AJAX request
+         *
+         * @param {String} uri The part of endpoint URI following /api/
+         * @param {Object} query The query parameters in a plain object
+         * @param {Object} payload The content for the request
+         * @param {Object} ajaxOpts Extra options for setting up $.ajax
+         *
+         * @return {jqXHR}
+         */
         StSDK.prototype.post = function(uri, query, payload, ajaxOpts) {
             return this.ajax(this.getEndpoint(uri, query), 'POST', payload, ajaxOpts);
         };
 
+        /**
+         * Gets the jqXHR object for a PUT AJAX request
+         *
+         * @param {String} uri The part of endpoint URI following /api/
+         * @param {Object} query The query parameters in a plain object
+         * @param {Object} payload The content for the request
+         * @param {Object} ajaxOpts Extra options for setting up $.ajax
+         *
+         * @return {jqXHR}
+         */
         StSDK.prototype.put = function(uri, query, payload, ajaxOpts) {
             return this.ajax(this.getEndpoint(uri, query), 'PUT', payload, ajaxOpts);
         };
 
+        /**
+         * Gets the jqXHR object for a DELETE AJAX request
+         *
+         * @param {String} uri The part of endpoint URI following /api/
+         * @param {Object} query The query parameters in a plain object
+         * @param {Object} ajaxOpts Extra options for setting up $.ajax
+         *
+         * @return {jqXHR}
+         */
         StSDK.prototype.delete = function(uri, query, ajaxOpts) {
             return this.ajax(this.getEndpoint(uri, query), 'DELETE', null, ajaxOpts);
         };
 
+        /**
+         * Gets the complete API endpoint URL based on URI and query parameters provided
+         *
+         * @param {String} uri The part of endpoint URI following /api/
+         * @param {Object} query The query parameters in a plain object
+         *
+         * @returns {string}
+         */
         StSDK.prototype.getEndpoint = function(uri, query) {
             validateStr('URI', uri);
             if (query) {
@@ -138,7 +229,17 @@
             return this.baseUrl + uri + (!query ? '' : '?' + $.param(query));
         };
 
-        StSDK.prototype.ajax = function(url, method, data, options) {
+        /**
+         * Gets the jqXHR object for an AJAX request
+         *
+         * @param {String} url The API endpoint URL
+         * @param {String} method The request method
+         * @param {Object} data The data for the request
+         * @param {Object} ajaxOpts Extra options for setting up $.ajax
+         *
+         * @returns {jqXHR}
+         */
+        StSDK.prototype.ajax = function(url, method, data, ajaxOpts) {
             var url = url || this.baseUrl,
                 method = method || 'GET',
                 headers = {
@@ -157,9 +258,9 @@
                 opts.data = jsonEncode(data);
             }
 
-            if (undefined !== options) {
-                validateAjaxOpts(options);
-                $.extend(opts, options);
+            if (undefined !== ajaxOpts) {
+                validateAjaxOpts(ajaxOpts);
+                $.extend(opts, ajaxOpts);
             }
 
             return $.ajax(opts);
