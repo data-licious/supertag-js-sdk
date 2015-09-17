@@ -96,7 +96,7 @@
         /**
          * The constructor function for `StSDK`
          *
-         * @param {Object} options Arguments for the constructor (`token` is mandatory)
+         * @param {Object} options Argument for the constructor (`token` is mandatory)
          *
          * @constructor
          */
@@ -120,7 +120,7 @@
          *
          * @param {Object} obj The object to encode
          *
-         * @return {String}
+         * @returns {String}
          */
         StSDK.prototype.jsonEncode = jsonEncode;
 
@@ -129,7 +129,7 @@
          *
          * @param {String} str The JSON string to decode
          *
-         * @return {Object}
+         * @returns {Object}
          */
         StSDK.prototype.jsonDecode = jsonDecode;
 
@@ -172,7 +172,7 @@
          * @param {Object} query The query parameters in a plain object
          * @param {Object} ajaxOpts Extra options for setting up $.ajax
          *
-         * @return {jqXHR}
+         * @returns {jqXHR}
          */
         StSDK.prototype.get = function(uri, query, ajaxOpts) {
             return this.ajax(this.getEndpoint(uri, query), 'GET', null, ajaxOpts);
@@ -186,7 +186,7 @@
          * @param {Object} payload The content for the request
          * @param {Object} ajaxOpts Extra options for setting up $.ajax
          *
-         * @return {jqXHR}
+         * @returns {jqXHR}
          */
         StSDK.prototype.post = function(uri, query, payload, ajaxOpts) {
             return this.ajax(this.getEndpoint(uri, query), 'POST', payload, ajaxOpts);
@@ -200,7 +200,7 @@
          * @param {Object} payload The content for the request
          * @param {Object} ajaxOpts Extra options for setting up $.ajax
          *
-         * @return {jqXHR}
+         * @returns {jqXHR}
          */
         StSDK.prototype.put = function(uri, query, payload, ajaxOpts) {
             return this.ajax(this.getEndpoint(uri, query), 'PUT', payload, ajaxOpts);
@@ -213,7 +213,7 @@
          * @param {Object} query The query parameters in a plain object
          * @param {Object} ajaxOpts Extra options for setting up $.ajax
          *
-         * @return {jqXHR}
+         * @returns {jqXHR}
          */
         StSDK.prototype.delete = function(uri, query, ajaxOpts) {
             return this.ajax(this.getEndpoint(uri, query), 'DELETE', null, ajaxOpts);

@@ -77,113 +77,380 @@
           </ul>
           <div class="scrollspy">
             <ul class="nav nav-list bs-docs-sidenav affix-top">
+              <li><a href="#APP_TEMPLATE_FORMAT_FLAT"><i class="alert alert-success"></i><span>APP_TEMPLATE_FORMAT_FLAT</span></a>
+              </li>
+              <li><a href="#APP_TEMPLATE_FORMAT_GROUPED"><i class="alert alert-success"></i><span>APP_TEMPLATE_FORMAT_GROUPED</span></a>
+              </li>
+              <li><a href="#APP_TEMPLATE_FORMAT_STANDARD"><i class="alert alert-success"></i><span>APP_TEMPLATE_FORMAT_STANDARD</span></a>
+              </li>
+              <li><a href="#getAppTemplate"><i class="alert alert-info"></i><span>getAppTemplate</span></a>
+              </li>
+              <li><a href="#createAppTemplate"><i class="alert alert-info"></i><span>createAppTemplate</span></a>
+              </li>
+              <li><a href="#updateAppTemplate"><i class="alert alert-info"></i><span>updateAppTemplate</span></a>
+              </li>
+              <li><a href="#deleteAppTemplate"><i class="alert alert-info"></i><span>deleteAppTemplate</span></a>
+              </li>
+              <li><a href="#getAppTemplates"><i class="alert alert-info"></i><span>getAppTemplates</span></a>
+              </li>
             </ul>
           </div>
         </div>
         <div class="span9">
+          <section id="APP_TEMPLATE_FORMAT_FLAT">
+            <h1>APP_TEMPLATE_FORMAT_FLAT</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-success radius ctx-type">property</div><span>StSDK.prototype.APP_TEMPLATE_FORMAT_FLAT</span>
+            </p>
+          </section>
           <div class="description"> </div>
-          <pre><code class="language-javascript">(function(window, document, $, undefined) {
-    'use strict';
+          <pre><code class="language-javascript">StSDK.prototype.APP_TEMPLATE_FORMAT_FLAT = 1;</code></pre>
+          <section id="APP_TEMPLATE_FORMAT_GROUPED">
+            <h1>APP_TEMPLATE_FORMAT_GROUPED</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-success radius ctx-type">property</div><span>StSDK.prototype.APP_TEMPLATE_FORMAT_GROUPED</span>
+            </p>
+          </section>
+          <div class="description"> </div>
+          <pre><code class="language-javascript">StSDK.prototype.APP_TEMPLATE_FORMAT_GROUPED = 2;</code></pre>
+          <section id="APP_TEMPLATE_FORMAT_STANDARD">
+            <h1>APP_TEMPLATE_FORMAT_STANDARD</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-success radius ctx-type">property</div><span>StSDK.prototype.APP_TEMPLATE_FORMAT_STANDARD</span>
+            </p>
+          </section>
+          <div class="description"> </div>
+          <pre><code class="language-javascript">StSDK.prototype.APP_TEMPLATE_FORMAT_STANDARD = 3;</code></pre>
+          <section id="getAppTemplate">
+            <h1>getAppTemplate</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">method</div><span>StSDK.prototype.getAppTemplate()</span>
+            </p>
+          </section>
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th style="width:20%">Option name</th>
+                <th style="width:20%">Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>options</td>
+                <td>Object</td>
+                <td><p><code>id</code> is mandatory</p></td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="description"><p>Gets details of a given app template</p> </div>
+          <pre><code class="language-javascript">StSDK.prototype.getAppTemplate = function(options) {
+    this.validatePlainObj('Argument', options);
+    var id;
+    this.validateInt('ID', id = options.id);
 
-    var StSDK = window.StSDK;
+    return this.get('app-templates/' + id);
+};</code></pre>
+          <section id="createAppTemplate">
+            <h1>createAppTemplate</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">method</div><span>StSDK.prototype.createAppTemplate()</span>
+            </p>
+          </section>
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th style="width:20%">Option name</th>
+                <th style="width:20%">Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>options</td>
+                <td>Object</td>
+                <td><p><code>content</code> is mandatory</p></td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="description"><p>Creates an app template</p> </div>
+          <pre><code class="language-javascript">StSDK.prototype.createAppTemplate = function(options) {
+    this.validatePlainObj('Argument', options);
+    var content;
+    this.validatePlainObj('Content', content = options.content);
 
-    StSDK.prototype.APP_TEMPLATE_FORMAT_FLAT = 1;
+    return this.post('app-templates', null, content);
+};</code></pre>
+          <section id="updateAppTemplate">
+            <h1>updateAppTemplate</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">method</div><span>StSDK.prototype.updateAppTemplate()</span>
+            </p>
+          </section>
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th style="width:20%">Option name</th>
+                <th style="width:20%">Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>options</td>
+                <td>Object</td>
+                <td><p><code>id</code> and <code>content</code> are mandatory</p></td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="description"><p>Updates an app template</p> </div>
+          <pre><code class="language-javascript">StSDK.prototype.updateAppTemplate = function(options) {
+    this.validatePlainObj('Argument', options);
+    var id, content;
+    this.validateInt('ID', id = options.id);
+    this.validatePlainObj('Content', content = options.content);
 
-    StSDK.prototype.APP_TEMPLATE_FORMAT_GROUPED = 2;
+    return this.put('app-templates/' + id, null, content);
+};</code></pre>
+          <section id="deleteAppTemplate">
+            <h1>deleteAppTemplate</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">method</div><span>StSDK.prototype.deleteAppTemplate()</span>
+            </p>
+          </section>
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th style="width:20%">Option name</th>
+                <th style="width:20%">Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>options</td>
+                <td>Object</td>
+                <td><p><code>id</code> is mandatory</p></td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="description"><p>Deletes an app template</p> </div>
+          <pre><code class="language-javascript">StSDK.prototype.deleteAppTemplate = function(options) {
+    this.validatePlainObj('Argument', options);
+    var id;
+    this.validateInt('ID', id = options.id);
 
-    StSDK.prototype.APP_TEMPLATE_FORMAT_STANDARD = 3;
+    return this.delete('app-templates/' + id);
+};</code></pre>
+          <section id="getAppTemplates">
+            <h1>getAppTemplates</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">method</div><span>StSDK.prototype.getAppTemplates()</span>
+            </p>
+          </section>
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th style="width:20%">Option name</th>
+                <th style="width:20%">Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>options</td>
+                <td>Object</td>
+                <td><p><code>format</code> is mandatory and value should be 1 (default), 2 or 3</p></td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="description"><p>Gets details of all/some app templates<br />Examples:</p><pre><code class="lang-javascript">     $.when(_stSDK.getAppTemplates({format: 1})).then(function(json) {
+         // Variable `json` comes with structure:
+         //  {
+         //      &quot;app_template&quot;: {
+         //          &quot;id&quot;: 1,
+         //          &quot;&quot;
+         //      }
+         //  }
+     });
+</code></pre>
+<pre><code class="lang-javascript">     $.when(_stSDK.getAppTemplates({format: 2})).then(function(json) {
+         // Variable `json` comes with structure:
+         //  {
+         //    &quot;Google&quot;: {
+         //      &quot;Google Analytics&quot;: [
+         //        {
+         //          &quot;id&quot;: 1,
+         //          &quot;name&quot;: &quot;App template 1&quot;,
+         //          &quot;tag_templates&quot;: [
+         //            {
+         //              &quot;id&quot;: 1,
+         //              &quot;name&quot;: &quot;Tag template 1&quot;,
+         //              ...
+         //            },
+         //            {
+         //              &quot;id&quot;: 2,
+         //              &quot;name&quot;: &quot;Tag template 2&quot;,
+         //              ...
+         //            }
+         //          ]
+         //        },
+         //        {
+         //          &quot;id&quot;: 2,
+         //          &quot;name&quot;: &quot;App template 2&quot;,
+         //          &quot;tag_templates&quot;: [
+         //            {
+         //              &quot;id&quot;: 3,
+         //              &quot;name&quot;: &quot;Tag template 3&quot;,
+         //              ...
+         //            },
+         //            {
+         //              &quot;id&quot;: 4,
+         //              &quot;name&quot;: &quot;Tag template 4&quot;,
+         //              ...
+         //            }
+         //          ]
+         //        }
+         //      ],
+         //      &quot;Google Adwords&quot;: [
+         //        ...
+         //      ]
+         //    },
+         //    &quot;Adobe&quot;: {
+         //      &quot;Adobe Analytics&quot;: [
+         //        ...
+         //      ]
+         //    }
+         //  }
+     });
+</code></pre>
+<pre><code class="lang-javascript">     $.when(_stSDK.getAppTemplates({format: 3})).then(function(json) {
+         // Variable `json` comes with structure:
+         //  [
+         //    {
+         //      &quot;name&quot;: &quot;Google&quot;,
+         //      &quot;platforms&quot;: [
+         //        {
+         //          &quot;name&quot;: &quot;Google Analytics&quot;,
+         //          &quot;applications&quot;: [
+         //            {
+         //              &quot;id&quot;: 1,
+         //              &quot;name&quot;: &quot;App template 1&quot;,
+         //              &quot;tag_templates&quot;: [
+         //                {
+         //                  &quot;id&quot;: 1,
+         //                  &quot;name&quot;: &quot;Tag template 1&quot;,
+         //                  ...
+         //                },
+         //                {
+         //                  &quot;id&quot;: 2,
+         //                  &quot;name&quot;: &quot;Tag template 2&quot;,
+         //                  ...
+         //                }
+         //              ]
+         //            },
+         //            {
+         //              &quot;id&quot;: 2,
+         //              &quot;name&quot;: &quot;App template 2&quot;
+         //              &quot;tag_templates&quot;: [
+         //                {
+         //                  &quot;id&quot;: 3,
+         //                  &quot;name&quot;: &quot;Tag template 3&quot;,
+         //                  ...
+         //                },
+         //                {
+         //                  &quot;id&quot;: 4,
+         //                  &quot;name&quot;: &quot;Tag template 4&quot;,
+         //                  ...
+         //                }
+         //              ]
+         //            }
+         //          ]
+         //        },
+         //        {
+         //          &quot;name&quot;: &quot;Google Adwords&quot;,
+         //          &quot;applications&quot;: [
+         //            ...
+         //          ]
+         //        }
+         //      ]
+         //    },
+         //    {
+         //      &quot;name&quot;: &quot;Adobe&quot;,
+         //      &quot;platforms&quot;: [
+         //        ...
+         //      ]
+         //    }
+         //  ]
+     });
+</code></pre>
+ </div>
+          <pre><code class="language-javascript">StSDK.prototype.getAppTemplates = function(options) {
+    this.validatePlainObj('Argument', options);
+    var format = options.format || this.APP_TEMPLATE_FORMAT_FLAT;
+    if (!(format in [this.APP_TEMPLATE_FORMAT_FLAT, this.APP_TEMPLATE_FORMAT_GROUPED, this.APP_TEMPLATE_FORMAT_STANDARD])) {
+        this.error('[Format] is not valid.');
+    }
 
-    StSDK.prototype.getAppTemplate = function(options) {
-        this.validatePlainObj('Argument', options);
-        var id;
-        this.validateInt('ID', id = options.id);
-
-        return this.get('app-templates/' + id);
-    };
-
-    StSDK.prototype.createAppTemplate = function(options) {
-        this.validatePlainObj('Argument', options);
-        var content;
-        this.validatePlainObj('Content', content = options.content);
-
-        return this.post('app-templates', null, content);
-    };
-
-    StSDK.prototype.updateAppTemplate = function(options) {
-        this.validatePlainObj('Argument', options);
-        var id, content;
-        this.validateInt('ID', id = options.id);
-        this.validatePlainObj('Content', content = options.content);
-
-        return this.put('app-templates/' + id, null, content);
-    };
-
-    StSDK.prototype.deleteAppTemplate = function(options) {
-        this.validatePlainObj('Argument', options);
-        var id;
-        this.validateInt('ID', id = options.id);
-
-        return this.delete('app-templates/' + id);
-    };
-
-    StSDK.prototype.getAppTemplates = function(options) {
-        this.validatePlainObj('Argument', options);
-        var format = options.format || this.APP_TEMPLATE_FORMAT_FLAT;
-        if (!(format in [this.APP_TEMPLATE_FORMAT_FLAT, this.APP_TEMPLATE_FORMAT_GROUPED, this.APP_TEMPLATE_FORMAT_STANDARD])) {
-            this.error('[Format] is not valid.');
-        }
-
-        return this.get('app-templates', null, {
-            'dataFilter': function(data, type) {
-                if (this.APP_TEMPLATE_FORMAT_FLAT === format || 'json' !== type) {
-                    return data;
-                }
-
-                data = this.jsonDecode(data);
-                if (!('app_templates' in data || !data[app_templates])) {
-                    return data;
-                }
-
-                var grouped = {},
-                    standard = [],
-                    apps = data['app_templates'];
-
-                $.each(apps, function(k, app) {
-                    var vendor = app.vendor,
-                        platform = app.platform;
-
-                    if (!(vendor in grouped)) {
-                        grouped[vendor] = {};
-                        grouped[vendor][platform] = [app];
-                    } else if (!(platform in grouped[vendor])) {
-                        grouped[vendor][platform] = [app];
-                    } else {
-                        grouped[vendor][platform].push(app);
-                    }
-                });
-
-                if (this.APP_TEMPLATE_FORMAT_GROUPED === format) {
-                    return this.jsonEncode(grouped);
-                }
-
-                $.each(grouped, function(vendorName, platforms) {
-                    var platformsFormatted = [];
-                    $.each(platforms, function(platformName, apps) {
-                        platformsFormatted.push({
-                            name: platformName,
-                            applications: apps
-                        });
-                    });
-                    standard.push({
-                        name: vendorName,
-                        platforms: platformsFormatted
-                    });
-                });
-
-                return this.jsonEncode(standard);
+    return this.get('app-templates', null, {
+        'dataFilter': function(data, type) {
+            if (this.APP_TEMPLATE_FORMAT_FLAT === format || 'json' !== type) {
+                return data;
             }
-        });
-    };
+
+            data = this.jsonDecode(data);
+            if (!('app_templates' in data || !data[app_templates])) {
+                return data;
+            }
+
+            var grouped = {},
+                standard = [],
+                apps = data['app_templates'];
+
+            $.each(apps, function(k, app) {
+                var vendor = app.vendor,
+                    platform = app.platform;
+
+                if (!(vendor in grouped)) {
+                    grouped[vendor] = {};
+                    grouped[vendor][platform] = [app];
+                } else if (!(platform in grouped[vendor])) {
+                    grouped[vendor][platform] = [app];
+                } else {
+                    grouped[vendor][platform].push(app);
+                }
+            });
+
+            if (this.APP_TEMPLATE_FORMAT_GROUPED === format) {
+                return this.jsonEncode(grouped);
+            }
+
+            $.each(grouped, function(vendorName, platforms) {
+                var platformsFormatted = [];
+                $.each(platforms, function(platformName, apps) {
+                    platformsFormatted.push({
+                        name: platformName,
+                        applications: apps
+                    });
+                });
+                standard.push({
+                    name: vendorName,
+                    platforms: platformsFormatted
+                });
+            });
+
+            return this.jsonEncode(standard);
+        }
+    });
+};
 }(window, document, jQuery));</code></pre>
         </div>
       </div>
