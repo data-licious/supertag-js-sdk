@@ -9,7 +9,7 @@
     ajaxOpts = ['dataFilter'];
 
     error = function(msg) {
-        throw 'ERROR: SuperTag: ' + msg;
+        throw 'ERROR: SuperTag JS SDK: ' + msg;
     };
 
     base64 = function(input) {
@@ -107,6 +107,13 @@
             this.baseUrl = options.baseUrl || baseUrlDefault;
             validateStr('Base URL', this.baseUrl);
         }
+
+        /**
+         * Throws an uncaught error with SuperTag info and given message
+         *
+         * @param {String} msg The error message
+         */
+        StSDK.prototype.error = error;
 
         /**
          * Encodes a JS plain object into a JSON string

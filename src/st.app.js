@@ -3,6 +3,12 @@
 
     var StSDK = window.StSDK;
 
+    StSDK.prototype.APP_TEMPLATE_FORMAT_FLAT = 1;
+
+    StSDK.prototype.APP_TEMPLATE_FORMAT_GROUPED = 2;
+
+    StSDK.prototype.APP_TEMPLATE_FORMAT_STANDARD = 3;
+
     StSDK.prototype.getAppTemplate = function(options) {
         this.validatePlainObj('Argument', options);
         var id;
@@ -36,37 +42,47 @@
         return this.delete('app-templates/' + id);
     };
 
-    StSDK.prototype.getAppTemplates = function() {
+    StSDK.prototype.getAppTemplates = function(options) {
+        this.validatePlainObj('Argument', options);
+        var format = options.format || this.APP_TEMPLATE_FORMAT_FLAT;
+        if (!(format in [this.APP_TEMPLATE_FORMAT_FLAT, this.APP_TEMPLATE_FORMAT_GROUPED, this.APP_TEMPLATE_FORMAT_STANDARD])) {
+            this.error('[Format] is not valid.');
+        }
+
         return this.get('app-templates', null, {
             'dataFilter': function(data, type) {
-                if ('json' !== type) {
-                    return;
+                if (this.APP_TEMPLATE_FORMAT_FLAT === format || 'json' !== type) {
+                    return data;
                 }
 
                 data = this.jsonDecode(data);
                 if (!('app_templates' in data || !data[app_templates])) {
-                    return;
+                    return data;
                 }
 
-                var vendors = {},
-                    res = [],
+                var grouped = {},
+                    standard = [],
                     apps = data['app_templates'];
 
                 $.each(apps, function(k, app) {
                     var vendor = app.vendor,
                         platform = app.platform;
 
-                    if (!(vendor in vendors)) {
-                        vendors[vendor] = {};
-                        vendors[vendor][platform] = [app];
-                    } else if (!(platform in vendors[vendor])) {
-                        vendors[vendor][platform] = [app];
+                    if (!(vendor in grouped)) {
+                        grouped[vendor] = {};
+                        grouped[vendor][platform] = [app];
+                    } else if (!(platform in grouped[vendor])) {
+                        grouped[vendor][platform] = [app];
                     } else {
-                        vendors[vendor][platform].push(app);
+                        grouped[vendor][platform].push(app);
                     }
                 });
 
-                $.each(vendors, function(vendorName, platforms) {
+                if (this.APP_TEMPLATE_FORMAT_GROUPED === format) {
+                    return this.jsonEncode(grouped);
+                }
+
+                $.each(grouped, function(vendorName, platforms) {
                     var platformsFormatted = [];
                     $.each(platforms, function(platformName, apps) {
                         platformsFormatted.push({
@@ -74,13 +90,13 @@
                             applications: apps
                         });
                     });
-                    res.push({
+                    standard.push({
                         name: vendorName,
                         platforms: platformsFormatted
                     });
                 });
 
-                return this.jsonEncode(res);
+                return this.jsonEncode(standard);
             }
         });
     };

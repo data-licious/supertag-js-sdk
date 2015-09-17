@@ -79,6 +79,8 @@
             <ul class="nav nav-list bs-docs-sidenav affix-top">
               <li><a href="#StSDK"><i class="alert alert-success"></i><span>StSDK</span></a>
               </li>
+              <li><a href="#error"><i class="alert alert-success"></i><span>error</span></a>
+              </li>
               <li><a href="#jsonEncode"><i class="alert alert-success"></i><span>jsonEncode</span></a>
               </li>
               <li><a href="#jsonDecode"><i class="alert alert-success"></i><span>jsonDecode</span></a>
@@ -138,6 +140,31 @@
     this.baseUrl = options.baseUrl || baseUrlDefault;
     validateStr('Base URL', this.baseUrl);
 }</code></pre>
+          <section id="error">
+            <h1>error</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-success radius ctx-type">property</div><span>StSDK.prototype.error</span>
+            </p>
+          </section>
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th style="width:20%">Option name</th>
+                <th style="width:20%">Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>msg</td>
+                <td>String</td>
+                <td><p>The error message</p></td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="description"><p>Throws an uncaught error with SuperTag info and given message</p> </div>
+          <pre><code class="language-javascript">StSDK.prototype.error = error;</code></pre>
           <section id="jsonEncode">
             <h1>jsonEncode</h1>
             <h5 class="subheader"></h5>
