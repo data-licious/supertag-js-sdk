@@ -77,19 +77,23 @@
           </ul>
           <div class="scrollspy">
             <ul class="nav nav-list bs-docs-sidenav affix-top">
+              <li><a href="#getProjects"><i class="alert alert-info"></i><span>getProjects</span></a>
+              </li>
             </ul>
           </div>
         </div>
         <div class="span9">
-          <div class="description"> </div>
-          <pre><code class="language-javascript">(function(window, document, $, undefined) {
-    'use strict';
-
-    var StSDK = window.StSDK;
-
-    StSDK.prototype.getProjects = function() {
-        return this.get('companies/projects');
-    };
+          <section id="getProjects">
+            <h1>getProjects</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">method</div><span>StSDK.prototype.getProjects()</span>
+            </p>
+          </section>
+          <div class="description"><p>Gets all projects</p> </div>
+          <pre><code class="language-javascript">StSDK.prototype.getProjects = function() {
+    return this.get('companies/projects');
+};
 }(window, document, jQuery));</code></pre>
         </div>
       </div>
