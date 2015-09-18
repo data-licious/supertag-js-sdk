@@ -4,19 +4,19 @@
     var StSDK = window.StSDK;
 
     /**
-     * @constant {Number} APP_TEMPLATE_FORMAT_FLAT
+     * @constant {String} APP_TEMPLATE_FORMAT_FLAT
      */
-    StSDK.prototype.APP_TEMPLATE_FORMAT_FLAT = 1;
+    StSDK.prototype.APP_TEMPLATE_FORMAT_FLAT = 'flat';
 
     /**
-     * @constant {Number} APP_TEMPLATE_FORMAT_GROUPED
+     * @constant {String} APP_TEMPLATE_FORMAT_GROUPED
      */
-    StSDK.prototype.APP_TEMPLATE_FORMAT_GROUPED = 2;
+    StSDK.prototype.APP_TEMPLATE_FORMAT_GROUPED = 'grouped';
 
     /**
-     * @constant {Number} APP_TEMPLATE_FORMAT_STANDARD
+     * @constant {String} APP_TEMPLATE_FORMAT_STANDARD
      */
-    StSDK.prototype.APP_TEMPLATE_FORMAT_STANDARD = 3;
+    StSDK.prototype.APP_TEMPLATE_FORMAT_STANDARD = 'standard';
 
     /**
      * Gets details of a given app template
