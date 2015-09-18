@@ -2,8 +2,17 @@ var gulp = require('gulp'),
     uglify = require('gulp-uglify'),
     concat = require('gulp-concat'),
     plumber = require('gulp-plumber'),
+    doxx = require('gulp-doxx'),
     browserSync = require('browser-sync'),
     reload = browserSync.reload;
+
+gulp.task('html', function() {
+    gulp.src('*.html')
+        .pipe(plumber())
+        .pipe(reload({
+            stream: true
+        }));
+});
 
 gulp.task('js', function() {
     gulp.src(['src/st.js', 'src/**/*.js'])
@@ -16,6 +25,15 @@ gulp.task('js', function() {
         }));
 });
 
+gulp.task('docs', function() {
+    gulp.src(['src/st.js', 'src/**/*.js'])
+        .pipe(plumber())
+        .pipe(doxx({
+            title: 'SuperTag JavaScript SDK'
+        }))
+        .pipe(gulp.dest('docs/'));
+});
+
 gulp.task('browser-sync', function() {
     browserSync({
         server: {
@@ -25,7 +43,8 @@ gulp.task('browser-sync', function() {
 });
 
 gulp.task('watch', function() {
-    gulp.watch('src/**/*.js', ['js']);
+    gulp.watch('*.html', ['html']);
+    gulp.watch('src/**/*.js', ['js', 'docs']);
 });
 
-gulp.task('default', ['js', 'browser-sync', 'watch']);
+gulp.task('default', ['html', 'js', 'docs', 'browser-sync', 'watch']);
