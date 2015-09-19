@@ -10,7 +10,7 @@
  * You don't have to run `bower install` because it will be run automatically after `npm install` is finished
 
 ##### Run the app in the browser
-* Under the project root, run `gulp`
+* Under the project root, run `gulp` or `npm start`
  * `BowserSync` will open a browser page to display the app's homepage
  * Any changes to the HTML and JS files will be processed and reflected in the browser without it being reloaded
 
