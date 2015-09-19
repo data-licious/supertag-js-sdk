@@ -31,7 +31,7 @@
     "prestart": "npm install",
     "start": "gulp",
     "pretest": "npm install",
-    "test": "node node_modules/karma/bin/karma start karma.conf.js",
-    "test-single": "node node_modules/karma/bin/karma start karma.conf.js  --single-run"
+    "test": "karma start karma.conf.js",
+    "test-single": "karma start karma.conf.js  --single-run"
   }
 }
