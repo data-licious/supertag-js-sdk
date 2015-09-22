@@ -4,7 +4,7 @@
     var StSDK = window.StSDK;
 
     /**
-     * Gets companies and projects relevant to the specific user
+     * Returns companies and projects relevant to the specific user
      *
      * @returns {jqXHR}
      */
@@ -15,5 +15,14 @@
         });
 
         return this.get('companies/projects' + params);
+    };
+
+    /**
+     * Returns project details
+     *
+     * @returns {jqXHR}
+     */
+    StSDK.prototype.getProject = function(id) {
+        return this.get('projects/' + id);
     };
 }(window));

@@ -82,6 +82,8 @@
             <ul class="nav nav-list bs-docs-sidenav affix-top">
               <li><a href="#getCompaniesAndProjects"><i class="alert alert-info"></i><span>getCompaniesAndProjects</span></a>
               </li>
+              <li><a href="#getProject"><i class="alert alert-info"></i><span>getProject</span></a>
+              </li>
             </ul>
           </div>
         </div>
@@ -93,7 +95,7 @@
               <div class="label label-info radius ctx-type">method</div><span>StSDK.prototype.getCompaniesAndProjects()</span>
             </p>
           </section>
-          <div class="description"><p>Gets companies and projects relevant to the specific user</p> </div>
+          <div class="description"><p>Returns companies and projects relevant to the specific user</p> </div>
           <pre><code class="language-javascript">StSDK.prototype.getCompaniesAndProjects = function(limit, filter) {
     var params = buildUrlParams({
         limit: limit,
@@ -101,6 +103,17 @@
     });
 
     return this.get('companies/projects' + params);
+};</code></pre>
+          <section id="getProject">
+            <h1>getProject</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">method</div><span>StSDK.prototype.getProject()</span>
+            </p>
+          </section>
+          <div class="description"><p>Returns project details</p> </div>
+          <pre><code class="language-javascript">StSDK.prototype.getProject = function(id) {
+    return this.get('projects/' + id);
 };
 }(window));</code></pre>
         </div>
