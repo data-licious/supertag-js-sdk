@@ -74,29 +74,49 @@
             <li><a href="st.js.html">st.js</a></li>
             <li><a href="st.app.js.html">st.app.js</a></li>
             <li><a href="st.company.js.html">st.company.js</a></li>
-            <li class="active"><a href="st.project.js.html">st.project.js</a></li>
-            <li><a href="st.tag.js.html">st.tag.js</a></li>
+            <li><a href="st.project.js.html">st.project.js</a></li>
+            <li class="active"><a href="st.tag.js.html">st.tag.js</a></li>
           </ul>
           <div class="scrollspy">
             <ul class="nav nav-list bs-docs-sidenav affix-top">
-              <li><a href="#getProjects"><i class="alert alert-info"></i><span>getProjects</span></a>
+              <li><a href="#getTagTree"><i class="alert alert-info"></i><span>getTagTree</span></a>
               </li>
             </ul>
           </div>
         </div>
         <div class="span9">
-          <section id="getProjects">
-            <h1>getProjects</h1>
+          <section id="getTagTree">
+            <h1>getTagTree</h1>
             <h5 class="subheader"></h5>
             <p>
-              <div class="label label-info radius ctx-type">method</div><span>StSDK.prototype.getProjects()</span>
+              <div class="label label-info radius ctx-type">method</div><span>StSDK.prototype.getTagTree()</span>
             </p>
           </section>
-          <div class="description"><p>Gets all projects</p> </div>
-          <pre><code class="language-javascript">StSDK.prototype.getProjects = function() {
-    return this.get('companies/projects');
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th style="width:20%">Option name</th>
+                <th style="width:20%">Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>options</td>
+                <td>Object</td>
+                <td><p><code>id</code> is mandatory</p></td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="description"><p>Gets the tag tree for the given project</p> </div>
+          <pre><code class="language-javascript">StSDK.prototype.getTagTree = function(options) {
+    this.validatePlainObj('Argument', options);
+    var id;
+    this.validateInt('ID', id = options.id);
+
+    return this.get('projects/' + id + '/tags');
 };
-}(window));</code></pre>
+}(window, document, jQuery));</code></pre>
         </div>
       </div>
     </div>

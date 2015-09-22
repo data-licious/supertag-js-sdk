@@ -73,28 +73,28 @@
           <ul class="nav nav-list bs-docs-sidenav affix-top">
             <li><a href="st.js.html">st.js</a></li>
             <li><a href="st.app.js.html">st.app.js</a></li>
-            <li><a href="st.company.js.html">st.company.js</a></li>
-            <li class="active"><a href="st.project.js.html">st.project.js</a></li>
+            <li class="active"><a href="st.company.js.html">st.company.js</a></li>
+            <li><a href="st.project.js.html">st.project.js</a></li>
             <li><a href="st.tag.js.html">st.tag.js</a></li>
           </ul>
           <div class="scrollspy">
             <ul class="nav nav-list bs-docs-sidenav affix-top">
-              <li><a href="#getProjects"><i class="alert alert-info"></i><span>getProjects</span></a>
+              <li><a href="#getCompany"><i class="alert alert-info"></i><span>getCompany</span></a>
               </li>
             </ul>
           </div>
         </div>
         <div class="span9">
-          <section id="getProjects">
-            <h1>getProjects</h1>
+          <section id="getCompany">
+            <h1>getCompany</h1>
             <h5 class="subheader"></h5>
             <p>
-              <div class="label label-info radius ctx-type">method</div><span>StSDK.prototype.getProjects()</span>
+              <div class="label label-info radius ctx-type">method</div><span>StSDK.prototype.getCompany()</span>
             </p>
           </section>
-          <div class="description"><p>Gets all projects</p> </div>
-          <pre><code class="language-javascript">StSDK.prototype.getProjects = function() {
-    return this.get('companies/projects');
+          <div class="description"><p>Return a single company details</p> </div>
+          <pre><code class="language-javascript">StSDK.prototype.getCompany = function (id) {
+    return this.get('companies/' + id);
 };
 }(window));</code></pre>
         </div>

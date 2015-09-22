@@ -4,11 +4,11 @@
     var StSDK = window.StSDK;
 
     /**
-     * Gets all projects
+     * Return a single company details
      *
      * @returns {jqXHR}
      */
-    StSDK.prototype.getProjects = function() {
-        return this.get('companies/projects');
+    StSDK.prototype.getCompany = function (id) {
+        return this.get('companies/' + id);
     };
 }(window));
