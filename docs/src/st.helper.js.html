@@ -73,31 +73,40 @@
           <ul class="nav nav-list bs-docs-sidenav affix-top">
             <li><a href="st.js.html">st.js</a></li>
             <li><a href="st.app.js.html">st.app.js</a></li>
-            <li class="active"><a href="st.company.js.html">st.company.js</a></li>
-            <li><a href="st.helper.js.html">st.helper.js</a></li>
+            <li><a href="st.company.js.html">st.company.js</a></li>
+            <li class="active"><a href="st.helper.js.html">st.helper.js</a></li>
             <li><a href="st.project.js.html">st.project.js</a></li>
             <li><a href="st.tag.js.html">st.tag.js</a></li>
           </ul>
           <div class="scrollspy">
             <ul class="nav nav-list bs-docs-sidenav affix-top">
-              <li><a href="#getCompany"><i class="alert alert-info"></i><span>getCompany</span></a>
+              <li><a href="#buildUrlParams"><i class="alert alert-info"></i><span>buildUrlParams</span></a>
               </li>
             </ul>
           </div>
         </div>
         <div class="span9">
-          <section id="getCompany">
-            <h1>getCompany</h1>
+          <section id="buildUrlParams">
+            <h1>buildUrlParams</h1>
             <h5 class="subheader"></h5>
             <p>
-              <div class="label label-info radius ctx-type">method</div><span>StSDK.prototype.getCompany()</span>
+              <div class="label label-info radius ctx-type">method</div><span>StSDK.prototype.buildUrlParams()</span>
             </p>
           </section>
-          <div class="description"><p>Return a single company details</p> </div>
-          <pre><code class="language-javascript">StSDK.prototype.getCompany = function (id) {
-    return this.get('companies/' + id);
+          <div class="description"><p>Compile params object in URL parameters. Will not append param on empty value.<br />Please, note that &quot;?&quot; will be added in front if result is not an empty string.</p> </div>
+          <pre><code class="language-javascript">StSDK.prototype.buildUrlParams = function(params) {
+    var filtered = {};
+    for (var key in params) {
+        if (null !== params[key] &amp;&amp; undefined !== params[key] &amp;&amp; &quot;&quot; !== params[key]) {
+            filtered[key] = params[key];
+        }
+    }
+
+    var res = $.param(filtered);
+
+    return res ? &quot;?&quot; + res : res;
 };
-}(window));</code></pre>
+}(window, jQuery));</code></pre>
         </div>
       </div>
     </div>

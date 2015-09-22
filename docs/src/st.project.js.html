@@ -74,27 +74,33 @@
             <li><a href="st.js.html">st.js</a></li>
             <li><a href="st.app.js.html">st.app.js</a></li>
             <li><a href="st.company.js.html">st.company.js</a></li>
+            <li><a href="st.helper.js.html">st.helper.js</a></li>
             <li class="active"><a href="st.project.js.html">st.project.js</a></li>
             <li><a href="st.tag.js.html">st.tag.js</a></li>
           </ul>
           <div class="scrollspy">
             <ul class="nav nav-list bs-docs-sidenav affix-top">
-              <li><a href="#getProjects"><i class="alert alert-info"></i><span>getProjects</span></a>
+              <li><a href="#getCompaniesAndProjects"><i class="alert alert-info"></i><span>getCompaniesAndProjects</span></a>
               </li>
             </ul>
           </div>
         </div>
         <div class="span9">
-          <section id="getProjects">
-            <h1>getProjects</h1>
+          <section id="getCompaniesAndProjects">
+            <h1>getCompaniesAndProjects</h1>
             <h5 class="subheader"></h5>
             <p>
-              <div class="label label-info radius ctx-type">method</div><span>StSDK.prototype.getProjects()</span>
+              <div class="label label-info radius ctx-type">method</div><span>StSDK.prototype.getCompaniesAndProjects()</span>
             </p>
           </section>
-          <div class="description"><p>Gets all projects</p> </div>
-          <pre><code class="language-javascript">StSDK.prototype.getProjects = function() {
-    return this.get('companies/projects');
+          <div class="description"><p>Gets companies and projects relevant to the specific user</p> </div>
+          <pre><code class="language-javascript">StSDK.prototype.getCompaniesAndProjects = function(limit, filter) {
+    var params = buildUrlParams({
+        limit: limit,
+        filter: filter
+    });
+
+    return this.get('companies/projects' + params);
 };
 }(window));</code></pre>
         </div>

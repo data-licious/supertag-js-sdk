@@ -4,11 +4,16 @@
     var StSDK = window.StSDK;
 
     /**
-     * Gets all projects
+     * Gets companies and projects relevant to the specific user
      *
      * @returns {jqXHR}
      */
-    StSDK.prototype.getProjects = function() {
-        return this.get('companies/projects');
+    StSDK.prototype.getCompaniesAndProjects = function(limit, filter) {
+        var params = buildUrlParams({
+            limit: limit,
+            filter: filter
+        });
+
+        return this.get('companies/projects' + params);
     };
 }(window));
