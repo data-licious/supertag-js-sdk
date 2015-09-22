@@ -9,7 +9,7 @@
      * @returns {jqXHR}
      */
     StSDK.prototype.getCompaniesAndProjects = function(limit, filter) {
-        var params = buildUrlParams({
+        var params = StSDK.buildUrlParams({
             limit: limit,
             filter: filter
         });
