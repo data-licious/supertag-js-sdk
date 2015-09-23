@@ -109,7 +109,7 @@
         }
 
         /**
-         * Test2 the deployment of docs
+         * Test3 the deployment of docs
          */
         function test() {}
 
