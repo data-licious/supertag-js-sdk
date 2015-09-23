@@ -109,6 +109,11 @@
         }
 
         /**
+         * Test the deployment of docs
+         */
+        function test() {}
+
+        /**
          * Throws an uncaught error with SuperTag info and given message
          *
          * @param {String} msg The error message
