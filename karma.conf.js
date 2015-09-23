@@ -4,7 +4,6 @@ module.exports = function(config) {
     frameworks: ['jasmine'],
     files: [
       'bower_components/jquery/dist/jquery.min.js',
-      'dist/st.min.js',
       'test/unit/**/*.js'
     ],
     exclude: [],

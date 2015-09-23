@@ -32,6 +32,7 @@
     "start": "gulp",
     "pretest": "npm install",
     "test": "karma start karma.conf.js",
+    "pretest-single": "npm install",
     "test-single": "karma start karma.conf.js  --single-run"
   }
 }
