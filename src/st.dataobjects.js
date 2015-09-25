@@ -11,6 +11,6 @@
      * @returns {jqXHR}
      */
     StSDK.prototype.getProjectDataObjects = function(projectId) {
-        return this.get('/projects/' + projectId + '/data-objects');
+        return this.get('projects/' + projectId + '/data-objects');
     };
 }(window));
