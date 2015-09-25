@@ -6,14 +6,12 @@
     /**
      * Gets the tag tree for the given project
      *
-     * @param {Object} options `id` is mandatory
+     * @param {Object} options The project ID
      *
      * @returns {jqXHR}
      */
-    StSDK.prototype.getTagTree = function(options) {
-        this.validatePlainObj('Argument', options);
-        var id;
-        this.validateInt('ID', id = options.id);
+    StSDK.prototype.getTagTree = function(id) {
+        this.validateInt('Project ID', id);
 
         return this.get('projects/' + id + '/tags');
     };
