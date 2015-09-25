@@ -7,18 +7,20 @@
      * Compile params object in URL parameters. Will not append param on empty value.
      * Please, note that "?" will be added in front if result is not an empty string.
      *
-     * @returns {jqXHR}
+     * @param {Object} params The query parameters in an object literal
+     *
+     * @returns {String}
      */
     StSDK.prototype.buildUrlParams = function(params) {
         var filtered = {};
         for (var key in params) {
-            if (null !== params[key] && undefined !== params[key] && "" !== params[key]) {
+            if (null !== params[key] && undefined !== params[key] && '' !== params[key]) {
                 filtered[key] = params[key];
             }
         }
 
         var res = $.param(filtered);
 
-        return res ? "?" + res : res;
+        return res ? '?' + res : res;
     };
 }(window, jQuery));

@@ -4,7 +4,10 @@
     var StSDK = window.StSDK;
 
     /**
-     * Returns companies and projects relevant to the specific user
+     * Gets companies and projects relevant to the specific user
+     *
+     * @param {Number} limit The limit of search
+     * @param {String} filter The filter of the search
      *
      * @returns {jqXHR}
      */
@@ -18,7 +21,9 @@
     };
 
     /**
-     * Returns project details
+     * Gets the details of a given project
+     *
+     * @param {Number} id The project ID
      *
      * @returns {jqXHR}
      */

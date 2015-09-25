@@ -4,7 +4,9 @@
     var StSDK = window.StSDK;
 
     /**
-     * Return a single company details
+     * Gets the details of a given company
+     *
+     * @param {Number} id The company ID
      *
      * @returns {jqXHR}
      */

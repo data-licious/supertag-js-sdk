@@ -21,14 +21,12 @@
     /**
      * Gets details of a given app template
      *
-     * @param {Object} options `id` is mandatory
+     * @param {Number} id The app template ID
      *
      * @returns {jqXHR}
      */
-    StSDK.prototype.getAppTemplate = function(options) {
-        this.validatePlainObj('Argument', options);
-        var id;
-        this.validateInt('ID', id = options.id);
+    StSDK.prototype.getAppTemplate = function(id) {
+        this.validateInt('App template ID', id);
 
         return this.get('app-templates/' + id);
     };
@@ -36,26 +34,25 @@
     /**
      * Creates an app template
      *
-     * @param {Object} options `content` is mandatory
+     * @param {Object} data The app template data
      *
      * @returns {jqXHR}
      */
-    StSDK.prototype.createAppTemplate = function(options) {
-        this.validatePlainObj('Argument', options);
-        var content;
-        this.validatePlainObj('Content', content = options.content);
+    StSDK.prototype.createAppTemplate = function(data) {
+        this.validatePlainObj('App template data', data);
 
-        return this.post('app-templates', null, content);
+        return this.post('app-templates', null, data);
     };
 
     /**
      * Updates an app template
      *
-     * @param {Object} options `id` and `content` are mandatory
+     * @param {Number} id The app template ID
+     * @param {Object} data The app template data
      *
      * @returns {jqXHR}
      */
-    StSDK.prototype.updateAppTemplate = function(options) {
+    StSDK.prototype.updateAppTemplate = function(id, data) {
         this.validatePlainObj('Argument', options);
         var id, content;
         this.validateInt('ID', id = options.id);
@@ -67,14 +64,12 @@
     /**
      * Deletes an app template
      *
-     * @param {Object} options `id` is mandatory
+     * @param {Number} id The app template ID
      *
      * @returns {jqXHR}
      */
-    StSDK.prototype.deleteAppTemplate = function(options) {
-        this.validatePlainObj('Argument', options);
-        var id;
-        this.validateInt('ID', id = options.id);
+    StSDK.prototype.deleteAppTemplate = function(id) {
+        this.validateInt('ID', id);
 
         return this.delete('app-templates/' + id);
     };
@@ -206,13 +201,12 @@
      *      });
      * ```
      *
-     * @param {Object} options `format` is mandatory and value should be 1 (default), 2 or 3
+     * @param {String} format The format of the response, options being `'flat'` (default), `'grouped'` or `'standard'`
      *
      * @returns {jqXHR}
      */
-    StSDK.prototype.getAppTemplates = function(options) {
-        this.validatePlainObj('Argument', options);
-        var format = options.format || this.APP_TEMPLATE_FORMAT_FLAT;
+    StSDK.prototype.getAppTemplates = function(format) {
+        var format = format || this.APP_TEMPLATE_FORMAT_FLAT;
         if (!(format in [this.APP_TEMPLATE_FORMAT_FLAT, this.APP_TEMPLATE_FORMAT_GROUPED, this.APP_TEMPLATE_FORMAT_STANDARD])) {
             this.error('[Format] is not valid.');
         }

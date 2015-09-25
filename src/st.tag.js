@@ -6,7 +6,7 @@
     /**
      * Gets the tag tree for the given project
      *
-     * @param {Object} options The project ID
+     * @param {Number} id The project ID
      *
      * @returns {jqXHR}
      */
