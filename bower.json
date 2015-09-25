@@ -1,7 +1,7 @@
 {
   "name": "supertag-js-sdk",
   "description": "SuperTag JavaScript SDK",
-  "version": "1.5.3",
+  "version": "1.5.4",
   "homepage": "https://github.com/supertag/supertag-js-sdk",
   "license": "ISC",
   "authors": [
