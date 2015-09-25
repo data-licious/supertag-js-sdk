@@ -29,4 +29,8 @@ Example:
 
 ===
 
-For docs, details of how to run the app and tests locally and other development/contributing information, please check out [CONTRIBUTING.md](https://github.com/supertag/supertag-js-sdk/blob/master/CONTRIBUTING.md)
+#### [Docs](http://supertag.github.io/supertag-js-sdk-docs/src/st.js.html)
+
+===
+
+For details of how to run the app and tests locally and other development/contributing information, please check out [CONTRIBUTING.md](https://github.com/supertag/supertag-js-sdk/blob/master/CONTRIBUTING.md)
