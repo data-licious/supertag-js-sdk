@@ -76,7 +76,7 @@
      * Gets details of all/some app templates
      * Examples:
      * ```javascript
-     *      $.when(_stSDK.getAppTemplates({format: 1})).then(function(json) {
+     *      $.when(_stSDK.getAppTemplates('flat')).then(function(json) {
      *          // Variable `json` comes with structure:
      *          //  {
      *          //      "app_template": {
@@ -87,7 +87,7 @@
      *      });
      * ```
      * ```javascript
-     *      $.when(_stSDK.getAppTemplates({format: 2})).then(function(json) {
+     *      $.when(_stSDK.getAppTemplates('grouped')).then(function(json) {
      *          // Variable `json` comes with structure:
      *          //  {
      *          //    "Google": {
@@ -138,7 +138,7 @@
      *      });
      * ```
      * ```javascript
-     *      $.when(_stSDK.getAppTemplates({format: 3})).then(function(json) {
+     *      $.when(_stSDK.getAppTemplates('standard')).then(function(json) {
      *          // Variable `json` comes with structure:
      *          //  [
      *          //    {
@@ -210,13 +210,13 @@
         }
 
         return this.get('app-templates', null, {
-            'dataFilter': function(data, type) {
+            dataFilter: function(data, type) {
                 if (this.APP_TEMPLATE_FORMAT_FLAT === format || 'json' !== type) {
                     return data;
                 }
 
                 data = this.jsonDecode(data);
-                if (!('app_templates' in data || !data[app_templates])) {
+                if (!('app_templates' in data) || !data['app_templates']) {
                     return data;
                 }
 
