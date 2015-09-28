@@ -4,16 +4,54 @@
     var StSDK = window.StSDK;
 
     /**
-     * Gets the tag tree for the given project
+     * @constant {String} PROJECT_TAG_TREE_FORMAT_STANDARD
+     */
+    StSDK.prototype.PROJECT_TAG_TREE_FORMAT_STANDARD = 'standard';
+
+    /**
+     * @constant {String} PROJECT_TAG_TREE_FORMAT_KENDOUI
+     */
+    StSDK.prototype.PROJECT_TAG_TREE_FORMAT_KENDOUI = 'kendoui';
+
+    /**
+     * Gets the tag tree for a given project
      *
      * @param {Number} id The project ID
+     * @param {String} format Should be either `'standard'` (default) or `'kendoui'`
      *
      * @returns {jqXHR}
      */
-    StSDK.prototype.getTagTree = function(id) {
+    StSDK.prototype.getTagTree = function(id, format) {
         this.validateInt('Project ID', id);
 
-        return this.get('projects/' + id + '/tags');
+        var format = format || this.PROJECT_TAG_TREE_FORMAT_STANDARD;
+        if (!~$.inArray(format, [this.PROJECT_TAG_TREE_FORMAT_STANDARD, this.PROJECT_TAG_TREE_FORMAT_KENDOUI])) {
+            this.error('[Format] is not valid.');
+        }
+
+        return this.get('projects/' + id + '/tags', null, {
+            dataFilter: function(data, type) {
+                if (this.APP_TEMPLATE_FORMAT_STANDARD === format || 'json' !== type) {
+                    return data;
+                }
+
+                data = this.jsonDecode(data);
+                if (!('tag_tree' in data) || !data['tag_tree']) {
+                    return data;
+                }
+
+                var kendouiFormated = [],
+                    tagTree = data['tag_tree'];
+
+                $.each();
+            }
+        });
+
+        function transform(tags) {
+            $.map(tags, function() {
+
+            });
+        }
     };
 
     /**
