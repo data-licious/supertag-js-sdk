@@ -211,11 +211,11 @@
 
         return this.get('app-templates', null, {
             dataFilter: function(data, type) {
-                if (this.APP_TEMPLATE_FORMAT_FLAT === format || 'json' !== type) {
+                if (StSDK.APP_TEMPLATE_FORMAT_FLAT === format || 'json' !== type) {
                     return data;
                 }
 
-                data = this.jsonDecode(data);
+                data = StSDK.jsonDecode(data);
                 if (!('app_templates' in data) || !data['app_templates']) {
                     return data;
                 }
