@@ -6,12 +6,12 @@
     /**
      * @constant {String} PROJECT_TAG_TREE_FORMAT_STANDARD
      */
-    StSDK.prototype.PROJECT_TAG_TREE_FORMAT_STANDARD = 'standard';
+    StSDK.PROJECT_TAG_TREE_FORMAT_STANDARD = 'standard';
 
     /**
      * @constant {String} PROJECT_TAG_TREE_FORMAT_KENDOUI
      */
-    StSDK.prototype.PROJECT_TAG_TREE_FORMAT_KENDOUI = 'kendoui';
+    StSDK.PROJECT_TAG_TREE_FORMAT_KENDOUI = 'kendoui';
 
     /**
      * Gets the tag tree for a given project
@@ -22,20 +22,20 @@
      * @returns {jqXHR}
      */
     StSDK.prototype.getTagTree = function(id, format) {
-        this.validateInt('Project ID', id);
+        StSDK.validateInt('Project ID', id);
 
-        var format = format || this.PROJECT_TAG_TREE_FORMAT_STANDARD;
-        if (!~$.inArray(format, [this.PROJECT_TAG_TREE_FORMAT_STANDARD, this.PROJECT_TAG_TREE_FORMAT_KENDOUI])) {
-            this.error('[Format] is not valid.');
+        var format = format || StSDK.PROJECT_TAG_TREE_FORMAT_STANDARD;
+        if (!~$.inArray(format, [StSDK.PROJECT_TAG_TREE_FORMAT_STANDARD, StSDK.PROJECT_TAG_TREE_FORMAT_KENDOUI])) {
+            StSDK.error('[Format] is not valid.');
         }
 
         return this.get('projects/' + id + '/tags', null, {
             dataFilter: function(data, type) {
-                if (this.APP_TEMPLATE_FORMAT_STANDARD === format || 'json' !== type) {
+                if (StSDK.APP_TEMPLATE_FORMAT_STANDARD === format || 'json' !== type) {
                     return data;
                 }
 
-                data = this.jsonDecode(data);
+                data = StSDK.jsonDecode(data);
                 if (!('tag_tree' in data) || !data['tag_tree']) {
                     return data;
                 }
@@ -64,9 +64,9 @@
      * @returns {jqXHR}
      */
     StSDK.prototype.installTag = function(projectId, tagTemplateId, data) {
-        this.validateInt('Project ID', projectId);
-        this.validateInt('Tag template ID', tagTemplateId);
-        this.validatePlainObj('Tag data', data);
+        StSDK.validateInt('Project ID', projectId);
+        StSDK.validateInt('Tag template ID', tagTemplateId);
+        StSDK.validatePlainObj('Tag data', data);
 
         return this.post('projects/' + projectId +'/tags/template/' + tagTemplateId, null, data);
     };

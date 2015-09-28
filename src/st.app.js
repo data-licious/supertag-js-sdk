@@ -6,17 +6,17 @@
     /**
      * @constant {String} APP_TEMPLATE_FORMAT_FLAT
      */
-    StSDK.prototype.APP_TEMPLATE_FORMAT_FLAT = 'flat';
+    StSDK.APP_TEMPLATE_FORMAT_FLAT = 'flat';
 
     /**
      * @constant {String} APP_TEMPLATE_FORMAT_GROUPED
      */
-    StSDK.prototype.APP_TEMPLATE_FORMAT_GROUPED = 'grouped';
+    StSDK.APP_TEMPLATE_FORMAT_GROUPED = 'grouped';
 
     /**
      * @constant {String} APP_TEMPLATE_FORMAT_STANDARD
      */
-    StSDK.prototype.APP_TEMPLATE_FORMAT_STANDARD = 'standard';
+    StSDK.APP_TEMPLATE_FORMAT_STANDARD = 'standard';
 
     /**
      * Gets details of a given app template
@@ -26,7 +26,7 @@
      * @returns {jqXHR}
      */
     StSDK.prototype.getAppTemplate = function(id) {
-        this.validateInt('App template ID', id);
+        StSDK.validateInt('App template ID', id);
 
         return this.get('app-templates/' + id);
     };
@@ -39,7 +39,7 @@
      * @returns {jqXHR}
      */
     StSDK.prototype.createAppTemplate = function(data) {
-        this.validatePlainObj('App template data', data);
+        StSDK.validatePlainObj('App template data', data);
 
         return this.post('app-templates', null, data);
     };
@@ -53,8 +53,8 @@
      * @returns {jqXHR}
      */
     StSDK.prototype.updateAppTemplate = function(id, data) {
-        this.validateInt('App template ID', id);
-        this.validatePlainObj('App template data', data);
+        StSDK.validateInt('App template ID', id);
+        StSDK.validatePlainObj('App template data', data);
 
         return this.put('app-templates/' + id, null, data);
     };
@@ -67,7 +67,7 @@
      * @returns {jqXHR}
      */
     StSDK.prototype.deleteAppTemplate = function(id) {
-        this.validateInt('ID', id);
+        StSDK.validateInt('ID', id);
 
         return this.delete('app-templates/' + id);
     };
@@ -204,9 +204,9 @@
      * @returns {jqXHR}
      */
     StSDK.prototype.getAppTemplates = function(format) {
-        var format = format || this.APP_TEMPLATE_FORMAT_FLAT;
-        if (!~$.inArray(format, [this.APP_TEMPLATE_FORMAT_FLAT, this.APP_TEMPLATE_FORMAT_GROUPED, this.APP_TEMPLATE_FORMAT_STANDARD])) {
-            this.error('[Format] is not valid.');
+        var format = format || StSDK.APP_TEMPLATE_FORMAT_FLAT;
+        if (!~$.inArray(format, [StSDK.APP_TEMPLATE_FORMAT_FLAT, StSDK.APP_TEMPLATE_FORMAT_GROUPED, StSDK.APP_TEMPLATE_FORMAT_STANDARD])) {
+            StSDK.error('[Format] is not valid.');
         }
 
         return this.get('app-templates', null, {
@@ -238,8 +238,8 @@
                     }
                 });
 
-                if (this.APP_TEMPLATE_FORMAT_GROUPED === format) {
-                    return this.jsonEncode(grouped);
+                if (StSDK.APP_TEMPLATE_FORMAT_GROUPED === format) {
+                    return StSDK.jsonEncode(grouped);
                 }
 
                 $.each(grouped, function(vendorName, platforms) {
@@ -256,7 +256,7 @@
                     });
                 });
 
-                return this.jsonEncode(standard);
+                return StSDK.jsonEncode(standard);
             }
         });
     };

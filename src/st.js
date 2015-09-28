@@ -111,59 +111,73 @@
         /**
          * Throws an uncaught error with SuperTag info and given message
          *
+         * @static
+         *
          * @param {String} msg The error message
          */
-        StSDK.prototype.error = error;
+        StSDK.error = error;
 
         /**
          * Encodes a JS plain object into a JSON string
+         *
+         * @static
          *
          * @param {Object} obj The object to encode
          *
          * @returns {String}
          */
-        StSDK.prototype.jsonEncode = jsonEncode;
+        StSDK.jsonEncode = jsonEncode;
 
         /**
          * Decodes a JSON string into a JS object
+         *
+         * @static
          *
          * @param {String} str The JSON string to decode
          *
          * @returns {Object}
          */
-        StSDK.prototype.jsonDecode = jsonDecode;
+        StSDK.jsonDecode = jsonDecode;
 
         /**
          * Validates a JS variable to be defined
          *
+         * @static
+         *
          * @param {String} name The name of the variable
          * @param {*} variable The variable to validate
          */
-        StSDK.prototype.validateDefined = validateDefined;
+        StSDK.validateDefined = validateDefined;
 
         /**
          * Validates a JS variable to be an integer
          *
+         * @static
+         *
          * @param {String} name The name of the variable
          * @param {*} variable The variable to validate
          */
-        StSDK.prototype.validateInt = validateInt;
+        StSDK.validateInt = validateInt;
 
         /**
          * Validates a JS variable to be a string
          *
-         * @param {String} name The name of the variable
-         * @param {*} variable The variable to validate
-         */
-        StSDK.prototype.validateStr = validateStr;
-
-        /**
-         * Validates a JS variable to be a plain object
+         * @static
          *
          * @param {String} name The name of the variable
          * @param {*} variable The variable to validate
          */
-        StSDK.prototype.validatePlainObj = validatePlainObj;
+        StSDK.validateStr = validateStr;
+
+        /**
+         * Validates a JS variable to be a plain object
+         *
+         * @static
+         *
+         * @param {String} name The name of the variable
+         * @param {*} variable The variable to validate
+         */
+        StSDK.validatePlainObj = validatePlainObj;
 
         /**
          * Gets the jqXHR object for a GET AJAX request

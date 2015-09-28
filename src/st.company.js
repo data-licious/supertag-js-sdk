@@ -11,6 +11,8 @@
      * @returns {jqXHR}
      */
     StSDK.prototype.getCompany = function (id) {
+        StSDK.validateInt('Company ID', id);
+
         return this.get('companies/' + id);
     };
 }(window));
