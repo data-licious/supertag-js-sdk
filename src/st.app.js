@@ -205,7 +205,7 @@
      */
     StSDK.prototype.getAppTemplates = function(format) {
         var format = format || this.APP_TEMPLATE_FORMAT_FLAT;
-        if (!(format in [this.APP_TEMPLATE_FORMAT_FLAT, this.APP_TEMPLATE_FORMAT_GROUPED, this.APP_TEMPLATE_FORMAT_STANDARD])) {
+        if (!~$.inArray(format, [this.APP_TEMPLATE_FORMAT_FLAT, this.APP_TEMPLATE_FORMAT_GROUPED, this.APP_TEMPLATE_FORMAT_STANDARD])) {
             this.error('[Format] is not valid.');
         }
 
