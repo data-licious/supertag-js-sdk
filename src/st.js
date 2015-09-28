@@ -86,7 +86,7 @@
     validateAjaxOpts = function(opts) {
         validatePlainObj('Ajax options', opts);
         $.each(opts, function(opt) {
-            if (!(opt in ajaxOpts)) {
+            if (!~$.inArray(opt, ajaxOpts)) {
                 error('[' + opt + '] is not a supported Ajax option.');
             }
         });
