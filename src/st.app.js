@@ -53,12 +53,10 @@
      * @returns {jqXHR}
      */
     StSDK.prototype.updateAppTemplate = function(id, data) {
-        this.validatePlainObj('Argument', options);
-        var id, content;
-        this.validateInt('ID', id = options.id);
-        this.validatePlainObj('Content', content = options.content);
+        this.validateInt('App template ID', id);
+        this.validatePlainObj('App template data', data);
 
-        return this.put('app-templates/' + id, null, content);
+        return this.put('app-templates/' + id, null, data);
     };
 
     /**
