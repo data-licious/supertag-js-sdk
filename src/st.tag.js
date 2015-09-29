@@ -37,19 +37,26 @@
 
                 data = StSDK.jsonDecode(data);
                 if (!('tag_tree' in data) || !data['tag_tree']) {
-                    return data;
+                    return StSDK.jsonEncode(data);
                 }
 
-                var kendouiFormated = [],
-                    tagTree = data['tag_tree'];
+                var kendouiFormatted = {data: data['tag_tree']};
+                transform(kendouiFormatted.data);
 
-                $.each();
+                return StSDK.jsonEncode(kendouiFormatted);
             }
         });
 
         function transform(tags) {
-            $.map(tags, function() {
+            $.map(tags, function(tag) {
+                tag.text = tag.name;
+                if ('children' in tag) {
+                    tag.items = tag.children;
+                    delete tag.children;
+                    transform(tag.items);
+                }
 
+                return tag;
             });
         }
     };
