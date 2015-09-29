@@ -50,6 +50,8 @@
         function transform(tags) {
             $.map(tags, function(tag) {
                 tag.text = tag.name;
+                tag.expanded = tag.isActive;
+
                 if ('children' in tag) {
                     tag.items = tag.children;
                     delete tag.children;
