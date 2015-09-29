@@ -40,8 +40,8 @@
                     return StSDK.jsonEncode(data);
                 }
 
-                var kendouiFormatted = {data: data['tag_tree']};
-                transform(kendouiFormatted.data);
+                var kendouiFormatted = data['tag_tree'];
+                transform(kendouiFormatted);
 
                 return StSDK.jsonEncode(kendouiFormatted);
             }
