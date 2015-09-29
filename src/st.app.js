@@ -215,14 +215,9 @@
                     return data;
                 }
 
-                data = StSDK.jsonDecode(data);
-                if (!('app_templates' in data) || !data['app_templates']) {
-                    return data;
-                }
-
                 var grouped = {},
                     standard = [],
-                    apps = data['app_templates'];
+                    apps = StSDK.jsonDecode(data);
 
                 $.each(apps, function(k, app) {
                     var vendor = app.vendor,
