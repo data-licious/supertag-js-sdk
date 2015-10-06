@@ -14,6 +14,16 @@
     StSDK.PROJECT_TAG_TREE_FORMAT_KENDOUI = 'kendoui';
 
     /**
+     * @constant {String} PROJECT_TAG_ACTION_ACTIVATE
+     */
+    StSDK.PROJECT_TAG_ACTION_ACTIVATE = 'activate';
+
+    /**
+     * @constant {String} PROJECT_TAG_ACTION_DEACTIVATE
+     */
+    StSDK.PROJECT_TAG_ACTION_DEACTIVATE = 'deactivate';
+
+    /**
      * Gets the tag tree for a given project
      *
      * @param {Number} id The project ID
@@ -78,5 +88,26 @@
         StSDK.validatePlainObj('Tag data', data);
 
         return this.post('projects/' + projectId +'/tags/template/' + tagTemplateId, null, data);
+    };
+
+    /**
+     * Activate or deactivate a tag
+     *
+     * @param {Number} id The tag ID
+     * @param {String} action The action on the tag, options being `'activate'` and `'deactivate'`
+     *
+     * @returns {jqXHR}
+     */
+    StSDK.prototype.toggleTag = function(id, action) {
+        StSDK.validateInt('Project ID', id);
+        if (!~$.inArray(action, [StSDK.PROJECT_TAG_ACTION_ACTIVATE, StSDK.PROJECT_TAG_ACTION_DEACTIVATE])) {
+            StSDK.error('[Action] is not valid.');
+        }
+
+        if (StSDK.PROJECT_TAG_ACTION_ACTIVATE === action) {
+            return this.put('tags/' + id + '/activate');
+        } else {
+            return this.put('tags/' + id + '/deactivate');
+        }
     };
 }(window, document, jQuery));
