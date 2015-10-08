@@ -6,7 +6,7 @@
     /**
      * Gets all data objects available in the specific project
      *
-     * @param {Number} projectId ID of the project
+     * @param {Number} id ID of the project
      *
      * @returns {jqXHR}
      */
@@ -16,6 +16,13 @@
         return this.get('projects/' + id + '/data-objects');
     };
 
+    /**
+     * Returns data object human readable label for data object
+     *
+     * @param {Object} data Data object
+     *
+     * @returns {String}
+     */
     StSDK.prototype.getDataObjectTypeLabel = function(data) {
         switch (data.type) {
             case "affinity_group_variable":
@@ -42,5 +49,6 @@
         }
 
         return "";
-    }
+    };
+
 }(window));
