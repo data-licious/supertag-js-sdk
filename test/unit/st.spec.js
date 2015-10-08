@@ -31,5 +31,14 @@ describe('st', function() {
         it('should not include param if value is an empty string', function() {
             expect(_stSDK.buildUrlParams({one: 1, two: ""})).toBe('?one=1');
         });
-    })
+    });
+
+    describe('StSDK.getDataObjectTypeLabel', function() {
+        it('should return "Affinity" for affinity data objects', function() {
+            expect(_stSDK.getDataObjectTypeLabel({"type": "affinity_group_variable" })).toBe("Affinity");
+        });
+        it('should return "Vendor" for generic data objects', function() {
+            expect(_stSDK.getDataObjectTypeLabel({"type": "variable_template_variable", "vendor": "Datalicious"})).toBe("Datalicious");
+        });
+    });
 });

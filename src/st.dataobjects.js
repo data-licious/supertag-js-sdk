@@ -15,4 +15,32 @@
 
         return this.get('projects/' + id + '/data-objects');
     };
+
+    StSDK.prototype.getDataObjectTypeLabel = function(data) {
+        switch (data.type) {
+            case "affinity_group_variable":
+                return "Affinity";
+            case "cookie_parameter_variable":
+                return "Cookie";
+            case "double_click_advertiser_id_variable":
+                return "DoubleClick Advertiser";
+            case "element_text_variable":
+                return "Element text";
+            case "javascript_variable":
+            case "special_javascript_value_variable":
+                return "JavaScript";
+            case "query_parameter_variable":
+                return "URL Parameter";
+            case "string_variable":
+                return "String";
+            case "variable_template_variable":
+                return data.vendor;
+            case "rule_bound_variable":
+                return "Rule based";
+            case "referrer_parameter_variable":
+                return "Referrer parameter";
+        }
+
+        return "";
+    }
 }(window));
