@@ -24,6 +24,21 @@
     StSDK.PROJECT_TAG_ACTION_DEACTIVATE = 'deactivate';
 
     /**
+     * @constant {string} PROJECT_TAG_MOVE_POSITION_BEFORE
+     */
+    StSDK.PROJECT_TAG_MOVE_POSITION_BEFORE = 'before';
+
+    /**
+     * @constant {string} PROJECT_TAG_MOVE_POSITION_AFTER
+     */
+    StSDK.PROJECT_TAG_MOVE_POSITION_AFTER = 'after';
+
+    /**
+     * @constant {string} PROJECT_TAG_MOVE_POSITION_OVER
+     */
+    StSDK.PROJECT_TAG_MOVE_POSITION_OVER = 'over';
+
+    /**
      * Gets the tag tree for a given project
      *
      * @param {Number} id The project ID
@@ -35,9 +50,10 @@
         StSDK.validateInt('Project ID', id);
 
         var format = format || StSDK.PROJECT_TAG_TREE_FORMAT_STANDARD;
-        if (!~$.inArray(format, [StSDK.PROJECT_TAG_TREE_FORMAT_STANDARD, StSDK.PROJECT_TAG_TREE_FORMAT_KENDOUI])) {
-            StSDK.error('[Format] is not valid.');
-        }
+        StSDK.validateOpts('Format', format, [
+            StSDK.PROJECT_TAG_TREE_FORMAT_STANDARD,
+            StSDK.PROJECT_TAG_TREE_FORMAT_KENDOUI
+        ]);
 
         return this.get('projects/' + id + '/tags', null, {
             dataFilter: function(data, type) {
@@ -90,7 +106,7 @@
     };
 
     /**
-     * Activate or deactivate a tag
+     * Activates or deactivates a tag
      *
      * @param {Number} id The tag ID
      * @param {String} action The action on the tag, options being `'activate'` and `'deactivate'`
@@ -99,14 +115,45 @@
      */
     StSDK.prototype.toggleTag = function(id, action) {
         StSDK.validateInt('Project ID', id);
-        if (!~$.inArray(action, [StSDK.PROJECT_TAG_ACTION_ACTIVATE, StSDK.PROJECT_TAG_ACTION_DEACTIVATE])) {
-            StSDK.error('[Action] is not valid.');
-        }
+        StSDK.validateOpts('Action', action, [
+            StSDK.PROJECT_TAG_ACTION_ACTIVATE,
+            StSDK.PROJECT_TAG_ACTION_DEACTIVATE
+        ]);
 
         if (StSDK.PROJECT_TAG_ACTION_ACTIVATE === action) {
             return this.put('tags/' + id + '/activate');
         } else {
             return this.put('tags/' + id + '/deactivate');
         }
+    };
+
+    /**
+     * Moves a tag
+     *
+     * @param {Number} projectId The project ID
+     * @param {Number[]} tagIds An array of the IDs of the tags to move
+     * @param {Number} targetTagId The target tag ID
+     * @param {String} position The drop position, options being `'before'`, `'after'` and `'over'`
+     *
+     * @returns {jqXHR}
+     */
+    StSDK.prototype.moveTag = function(projectId, tagIds, targetTagId, pos) {
+        StSDK.validateInt('Project ID', projectId);
+        StSDK.validateArr('Tag IDs', tagIds, true);
+        for (var i = 0; i < tagIds.length; i++) {
+            StSDK.validateInt('Tag ID', tagIds[i]);
+        }
+        StSDK.validateInt('Target tag ID', targetTagId);
+        StSDK.validateOpts('Position', pos, [
+            StSDK.PROJECT_TAG_MOVE_POSITION_BEFORE,
+            StSDK.PROJECT_TAG_MOVE_POSITION_AFTER,
+            StSDK.PROJECT_TAG_MOVE_POSITION_OVER
+        ]);
+
+        return this.put('projects/' + projectId + '/tags/move', null, {
+            tagIds: tagIds,
+            targetTagId: targetTagId,
+            nodePosition: pos
+        });
     };
 }(window, document, jQuery));

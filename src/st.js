@@ -2,7 +2,7 @@
     'use strict';
 
     var StSDK, baseUrlDefault, ajaxOpts,
-        error, base64, jsonEncode, jsonDecode, validateDefined, validateInt, validateStr, validatePlainObj, validateAjaxOpts;
+        error, base64, jsonEncode, jsonDecode, validateDefined, validateInt, validateStr, validateArr, validatePlainObj, validateOpts, validateAjaxOpts;
 
     baseUrlDefault = 'https://app.supert.ag/api/';
 
@@ -76,10 +76,31 @@
         }
     };
 
+    validateArr = function(name, variable, notEmpty) {
+        validateDefined(name, variable);
+        if (!$.isArray(variable)) {
+            return error('[' + name + '] must be an array.');
+        }
+        if (true === notEmpty && 0 === variable.length) {
+            return error('[' + name + '] must not be empty.');
+        }
+    };
+
     validatePlainObj = function(name, variable) {
         validateDefined(name, variable);
         if (variable && !$.isPlainObject(variable)) {
             error('[' + name + '] must be a plain object.');
+        }
+    };
+
+    validateOpts = function(name, opt, opts) {
+        validateStr(name, opt);
+        validateArr('Options', opts);
+        for (var i = 0; i < opts.length; i++) {
+            validateStr('Option', opts[i]);
+        }
+        if (!~$.inArray(opt, opts)) {
+            error('[' + name + '] is not valid. Options are [' + opts.join(', ') + '].');
         }
     };
 
@@ -170,6 +191,17 @@
         StSDK.validateStr = validateStr;
 
         /**
+         * Validates a JS variable to be an array
+         *
+         * @static
+         *
+         * @param {String} name The name of the variable
+         * @param {*} variable The variable to validate
+         * @param {Boolean} notEmpty The flag to specify whether the array cannot be empty
+         */
+        StSDK.validateArr = validateArr;
+
+        /**
          * Validates a JS variable to be a plain object
          *
          * @static
@@ -178,6 +210,17 @@
          * @param {*} variable The variable to validate
          */
         StSDK.validatePlainObj = validatePlainObj;
+
+        /**
+         * Validates a string option to be valid
+         *
+         * @static
+         *
+         * @param {String} name The name of the option
+         * @param {String} opt The value of the option
+         * @param {String[]} opts An array of the valid options
+         */
+        StSDK.validateOpts = validateOpts;
 
         /**
          * Gets the jqXHR object for a GET AJAX request

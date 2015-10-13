@@ -3,7 +3,7 @@
     var StSDK = window.StSDK;
 
     /**
-     * Gets all rules available in the specific project.
+     * Gets all rules available in the given project
      *
      * @param {Number} id ID of the project
      *
@@ -14,5 +14,4 @@
 
         return this.get('projects/' + id + '/rules');
     };
-
 }(window));

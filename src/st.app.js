@@ -205,9 +205,11 @@
      */
     StSDK.prototype.getAppTemplates = function(format) {
         var format = format || StSDK.APP_TEMPLATE_FORMAT_FLAT;
-        if (!~$.inArray(format, [StSDK.APP_TEMPLATE_FORMAT_FLAT, StSDK.APP_TEMPLATE_FORMAT_GROUPED, StSDK.APP_TEMPLATE_FORMAT_STANDARD])) {
-            StSDK.error('[Format] is not valid.');
-        }
+        StSDK.validateOpts('Format', format, [
+            StSDK.APP_TEMPLATE_FORMAT_FLAT,
+            StSDK.APP_TEMPLATE_FORMAT_GROUPED,
+            StSDK.APP_TEMPLATE_FORMAT_STANDARD
+        ]);
 
         return this.get('app-templates', null, {
             dataFilter: function(data, type) {
