@@ -27,6 +27,8 @@
         switch (data.type) {
             case "business_rule":
                 return "Business rule";
+            case "event":
+                return "Event";
         }
 
         return "";
