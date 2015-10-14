@@ -106,6 +106,19 @@
     };
 
     /**
+     * Deletes a tag
+     *
+     * @param {Number} id The tag ID
+     *
+     * @returns {jqXHR}
+     */
+    StSDK.prototype.deleteTag = function(id) {
+        StSDK.validateInt('Tag ID', id);
+
+        return this.delete('tags/' + id);
+    };
+
+    /**
      * Activates or deactivates a tag
      *
      * @param {Number} id The tag ID
