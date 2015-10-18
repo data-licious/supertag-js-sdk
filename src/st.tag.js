@@ -53,6 +53,7 @@
         return this.post('projects/' + projectId + '/tags/template/' + tagId, null, payload);
     }
 
+
     /**
      * Gets the tag tree for a given project
      *
