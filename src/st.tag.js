@@ -39,7 +39,7 @@
     StSDK.PROJECT_TAG_MOVE_POSITION_OVER = 'over';
 
     /**
-     * Saves Tag Install form
+     * Save Tag Template information
      *
      * @param {Number} projectId Project Id
      * @param {Number} tagId Tag template Id
