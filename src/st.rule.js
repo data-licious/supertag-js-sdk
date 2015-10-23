@@ -36,13 +36,31 @@
 
 
     /**
-     * Returns rule human readable label for rule operator
+     * Returns human readable label for rule operator
      *
-     * @param {Object} data rule object
+     * @param rule operator
      *
      * @returns {String}
      */
     StSDK.prototype.getRuleOperatorLabel = function(operatorName) {
+        switch (operatorName) {
+            case "logical_and":
+                return "And";
+            case "logical_or":
+                return "Or";
+        }
+
+        return "";
+    };
+
+    /**
+     * Returns rule human readable label for rule condition operator
+     *
+     * @param rule condition operator
+     *
+     * @returns {String}
+     */
+    StSDK.prototype.getRuleConditionLabel = function(operatorName) {
         switch (operatorName) {
             case "contains":
                 return "Contains";
@@ -54,10 +72,6 @@
                 return "Greater than";
             case "less_than":
                 return "Less than";
-            case "logical_and":
-                return "Logical and";
-            case "logical_or":
-                return "Logical or";
             case "not_contains":
                 return "Not contains";
             case "not_equal":
