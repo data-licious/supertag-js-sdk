@@ -32,4 +32,17 @@
 
         return this.get('projects/' + id);
     };
+
+
+    /**
+     * Retrieves Project Release notes prior to deployement (required Admin role)
+     *
+     * @param {Number} id The project ID
+     *
+     * @returns {jqXHR}
+     */
+    StSDK.prototype.getProjectReleaseNotes = function(id) {
+        StSDK.validateInt('Project ID', id);
+        return this.get('projects/' + id + '/release-notes');
+    };
 }(window));
