@@ -35,7 +35,20 @@
 
 
     /**
-     * Retrieves Project Release notes prior to deployement (required Admin role)
+     * Gets Project deployment history data based on Project Id
+     *
+     * @param {Number} id The project ID
+     *
+     * @returns {jqXHR}
+     */
+    StSDK.prototype.getProjectDeployHistory = function(id) {
+        StSDK.validateInt('Project ID', id);
+        return this.get('projects/' + id + '/deployments');        
+    };
+
+
+    /**
+     * Retrieves Project Release notes prior to deployement (requires Admin role)
      *
      * @param {Number} id The project ID
      *
