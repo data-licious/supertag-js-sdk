@@ -23,10 +23,18 @@
      *
      * @returns {jqXHR}
      */
-    StSDK.prototype.updateRule = function(id, data) {
+    StSDK.prototype.updateRule = function(id, projectId, data) {
         StSDK.validateInt('Rule ID', id);
 
-        return this.put('projects/rule/' + id, null, data);
+        return this.put('projects/' + projectId + '/rule/' + id, null, {
+            'id': data.id,
+            'name': data.name,
+            'description': data.description,
+            'conditions': data.conditions,
+            'type': data.type,
+            'selector': data.selector,
+            'event_name': data.event_name,
+        });
     };
 
     /**
