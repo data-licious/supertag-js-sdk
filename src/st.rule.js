@@ -15,6 +15,20 @@
         return this.get('projects/' + id + '/rules');
     };
 
+    /**
+     * Updates an rule
+     *
+     * @param {Number} id The rule ID
+     * @param {Object} data The rule data
+     *
+     * @returns {jqXHR}
+     */
+    StSDK.prototype.updateRule = function(id, data) {
+        StSDK.validateInt('Rule ID', id);
+        StSDK.validatePlainObj('rule data', data);
+
+        return this.put('projects/rule/' + id, null, data);
+    };
 
     /**
      * Returns rule human readable label for rule
