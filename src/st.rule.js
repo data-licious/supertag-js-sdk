@@ -25,7 +25,6 @@
      */
     StSDK.prototype.updateRule = function(id, data) {
         StSDK.validateInt('Rule ID', id);
-        StSDK.validatePlainObj('rule data', data);
 
         return this.put('projects/rule/' + id, null, data);
     };
