@@ -19,6 +19,11 @@
     StSDK.APP_TEMPLATE_FORMAT_STANDARD = 'standard';
 
     /**
+     * @constant {string} APP_TEMPLATE_FORMAT_VENDOR_ONLY
+     */
+    StSDK.APP_TEMPLATE_FORMAT_VENDOR_ONLY = 'vendor_only';
+
+    /**
      * Gets details of a given app template
      *
      * @param {Number} id The app template ID
@@ -208,7 +213,8 @@
         StSDK.validateOpts('Format', format, [
             StSDK.APP_TEMPLATE_FORMAT_FLAT,
             StSDK.APP_TEMPLATE_FORMAT_GROUPED,
-            StSDK.APP_TEMPLATE_FORMAT_STANDARD
+            StSDK.APP_TEMPLATE_FORMAT_STANDARD,
+            StSDK.APP_TEMPLATE_FORMAT_VENDOR_ONLY
         ]);
 
         return this.get('app-templates', null, {
@@ -219,6 +225,7 @@
 
                 var grouped = {},
                     standard = [],
+                    vendorOnly = {},
                     apps = StSDK.jsonDecode(data);
 
                 $.each(apps, function(k, app) {
@@ -233,10 +240,18 @@
                     } else {
                         grouped[vendor][platform].push(app);
                     }
+
+                    if (!(vendor in vendorOnly)) {
+                        vendorOnly[vendor] = [app];
+                    } else {
+                        vendorOnly[vendor].push(app);
+                    }
                 });
 
                 if (StSDK.APP_TEMPLATE_FORMAT_GROUPED === format) {
                     return StSDK.jsonEncode(grouped);
+                } else if (StSDK.APP_TEMPLATE_FORMAT_VENDOR_ONLY === format) {
+                    return StSDK.jsonEncode(vendorOnly);
                 }
 
                 $.each(grouped, function(vendorName, platforms) {
