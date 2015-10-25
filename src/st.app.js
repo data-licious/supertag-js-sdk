@@ -19,9 +19,14 @@
     StSDK.APP_TEMPLATE_FORMAT_STANDARD = 'standard';
 
     /**
-     * @constant {string} APP_TEMPLATE_FORMAT_VENDOR_ONLY
+     * @constant {string} APP_TEMPLATE_FORMAT_VENDOR_ONLY_GROUPED
      */
-    StSDK.APP_TEMPLATE_FORMAT_VENDOR_ONLY = 'vendor_only';
+    StSDK.APP_TEMPLATE_FORMAT_VENDOR_ONLY_GROUPED = 'vendor_only_grouped';
+
+    /**
+     * @constant {string} APP_TEMPLATE_FORMAT_VENDOR_ONLY_STANDARD
+     */
+    StSDK.APP_TEMPLATE_FORMAT_VENDOR_ONLY_STANDARD = 'vendor_only_standard';
 
     /**
      * Gets details of a given app template
@@ -214,7 +219,8 @@
             StSDK.APP_TEMPLATE_FORMAT_FLAT,
             StSDK.APP_TEMPLATE_FORMAT_GROUPED,
             StSDK.APP_TEMPLATE_FORMAT_STANDARD,
-            StSDK.APP_TEMPLATE_FORMAT_VENDOR_ONLY
+            StSDK.APP_TEMPLATE_FORMAT_VENDOR_ONLY_GROUPED,
+            StSDK.APP_TEMPLATE_FORMAT_VENDOR_ONLY_STANDARD
         ]);
 
         return this.get('app-templates', null, {
@@ -225,7 +231,8 @@
 
                 var grouped = {},
                     standard = [],
-                    vendorOnly = {},
+                    vendorOnlyGrouped = {},
+                    vendorOnlyStandard = [],
                     apps = StSDK.jsonDecode(data);
 
                 $.each(apps, function(k, app) {
@@ -241,34 +248,45 @@
                         grouped[vendor][platform].push(app);
                     }
 
-                    if (!(vendor in vendorOnly)) {
-                        vendorOnly[vendor] = [app];
+                    if (!(vendor in vendorOnlyGrouped)) {
+                        vendorOnlyGrouped[vendor] = [app];
                     } else {
-                        vendorOnly[vendor].push(app);
+                        vendorOnlyGrouped[vendor].push(app);
                     }
                 });
 
                 if (StSDK.APP_TEMPLATE_FORMAT_GROUPED === format) {
                     return StSDK.jsonEncode(grouped);
-                } else if (StSDK.APP_TEMPLATE_FORMAT_VENDOR_ONLY === format) {
-                    return StSDK.jsonEncode(vendorOnly);
+                } else if (StSDK.APP_TEMPLATE_FORMAT_VENDOR_ONLY_GROUPED === format) {
+                    return StSDK.jsonEncode(vendorOnlyGrouped);
                 }
 
-                $.each(grouped, function(vendorName, platforms) {
-                    var platformsFormatted = [];
-                    $.each(platforms, function(platformName, apps) {
-                        platformsFormatted.push({
-                            name: platformName,
-                            applications: apps
+                if (StSDK.APP_TEMPLATE_FORMAT_STANDARD === format) {
+                    $.each(grouped, function(vendorName, platforms) {
+                        var platformsFormatted = [];
+                        $.each(platforms, function(platformName, apps) {
+                            platformsFormatted.push({
+                                name: platformName,
+                                applications: apps
+                            });
+                        });
+                        standard.push({
+                            name: vendorName,
+                            platforms: platformsFormatted
                         });
                     });
-                    standard.push({
-                        name: vendorName,
-                        platforms: platformsFormatted
+
+                    return StSDK.jsonEncode(standard);
+                }
+
+                $.each(vendorOnlyGrouped, function(vendorName, apps) {
+                    vendorOnlyStandard.push({
+                        vendor: vendorName,
+                        applications: apps
                     });
                 });
 
-                return StSDK.jsonEncode(standard);
+                return StSDK.jsonEncode(vendorOnlyStandard);
             }
         });
     };
