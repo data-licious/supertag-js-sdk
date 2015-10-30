@@ -61,6 +61,7 @@
         switch (data) {
             case "business_rule":
                 return "Business rule";
+            case "event_container":
             case "event":
                 return "Event";
         }
