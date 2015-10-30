@@ -39,21 +39,6 @@
     StSDK.PROJECT_TAG_MOVE_POSITION_OVER = 'over';
 
     /**
-     * Saves Tag Template information
-     *
-     * @param {Number} projectId Project Id
-     * @param {Number} tagId Tag template Id
-     * @param {Object} payload Object payload
-     *
-     * @returns {jqXHR}
-     */
-    StSDK.prototype.saveTagInstall = function(projectId, tagId, payload) {
-        StSDK.validateInt('Project Id', projectId);
-        StSDK.validateInt('Tagt Id', tagId);
-        return this.post('projects/' + projectId + '/tags/template/' + tagId, null, payload);
-    };
-
-    /**
      * Gets the tag tree for a given project
      *
      * @param {Number} id The project ID
