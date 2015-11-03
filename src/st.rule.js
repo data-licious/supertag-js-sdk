@@ -3,6 +3,33 @@
     var StSDK = window.StSDK;
 
     /**
+     * Create an rule
+     *
+     * @param {Number} projectId  The project ID
+     * @param {Object} data The rule data
+     *
+     * @returns {jqXHR}
+     */
+    StSDK.prototype.addRule = function(projectId, data) {
+        StSDK.validateInt('Project ID', projectId);
+
+        var ruleObj = {
+            'name': data.name,
+            'description': data.description,
+            'type': data.type,
+        };
+        if ('event' == data.type) {
+            ruleObj.selector = data.selector;
+            ruleObj.eventName = data.event_name;
+        } else {
+            ruleObj.logicalOperatorHandle = data.conditions.logicalOperatorHandle;
+            ruleObj.children = data.conditions.children;
+        }
+
+        return this.post('projects/' + projectId + '/rule', null, ruleObj);
+    };
+
+    /**
      * Gets all dataObjects available in the given project
      *
      * @param {Number} id ID of the project
@@ -32,6 +59,7 @@
      * Updates an rule
      *
      * @param {Number} id The rule ID
+     * @param {Number} projectId  The project ID
      * @param {Object} data The rule data
      *
      * @returns {jqXHR}
@@ -46,7 +74,7 @@
             'conditions': data.conditions,
             'type': data.type,
             'selector': data.selector,
-            'event_name': data.event_name,
+            'event_name': data.event_name
         });
     };
 
@@ -73,7 +101,7 @@
     /**
      * Returns human readable label for rule operator
      *
-     * @param rule operator
+     * @param {String} operatorName
      *
      * @returns {String}
      */
@@ -91,7 +119,7 @@
     /**
      * Returns rule human readable label for rule condition operator
      *
-     * @param rule condition operator
+     * @param {String} operatorName Condition operator
      *
      * @returns {String}
      */
