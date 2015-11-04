@@ -10,3 +10,4 @@ docs
 # IDE #
 #######
 .idea
+.DS_store

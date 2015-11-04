@@ -17,6 +17,19 @@
     };
 
     /**
+     * Add new Data Object to a Project
+     *
+     * @param {Number} projectId Project Id
+     * @param {Object} oPayload  Payload data object
+     *
+     * @returns {jqXHR}
+     */
+    StSDK.prototype.addProjectDataObject = function(projectId, oPayload) {
+        return this.post('projects/'+ projectId + '/data-objects', null, oPayload);
+    };
+
+
+    /**
      * Returns data object human readable label for data object
      *
      * @param {Object} data Data object
