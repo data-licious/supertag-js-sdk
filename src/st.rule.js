@@ -16,7 +16,7 @@
         var ruleObj = {
             'name': data.name,
             'description': data.description,
-            'type': data.type,
+            'type': data.type
         };
         if ('event' == data.type) {
             ruleObj.selector = data.selector;
@@ -185,5 +185,58 @@
                 "starts_with"
             ];
     };
+
+    /**
+     * Returns rule(Event) type list
+     *
+     * @returns {Array}
+     */
+    StSDK.prototype.getEventTypeList = function() {
+        return [
+                'click',
+                'dblclick',
+                'focus',
+                'blur',
+                'mouseup',
+                'mousedown',
+                'load',
+                'submit',
+                'change'
+            ];
+    };
+
+
+    /**
+     * Returns rule(Event) human readable type
+     *
+     * @param {String} typeName rule type
+     *
+     * @returns {String}
+     */
+    StSDK.prototype.getEventTypeName = function(typeName) {
+        switch (typeName) {
+            case 'click':
+                return 'Click';
+            case 'dblclick':
+                return 'Double Click';
+            case 'focus':
+                return 'Focus';
+            case 'blur':
+                return 'Blur';
+            case 'mouseup':
+                return 'Mouse Up';
+            case 'mousedown':
+                return 'Mouse Down';
+            case 'load':
+                return 'Load';
+            case 'submit':
+                return 'Submit';
+            case 'change':
+                return 'Change';
+        }
+
+        return "";
+    };
+
 
 }(window));
