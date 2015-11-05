@@ -102,7 +102,7 @@
         StSDK.validateInt('Tag template ID', tagTemplateId);
         StSDK.validatePlainObj('Tag data', data);
 
-        return this.post('projects/' + projectId +'/tags/template/' + tagTemplateId, null, data);
+        return this.post('projects/' + projectId +'/tags/template/' + tagTemplateId + '?error_format=new', null, data);
     };
 
     /**
