@@ -39,7 +39,7 @@
     StSDK.prototype.getDataObjectList = function(id) {
         StSDK.validateInt('Project ID', id);
 
-        return this.get('projects/' + id + '/data-object-list');
+        return this.get('projects/' + id + '/data-objects?simple=1');
     };
 
     /**
