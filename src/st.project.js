@@ -103,7 +103,7 @@
 
                 $.each(apps, function(k, app) {
                     var tagTmpls = {},
-                        platform = app.platform,
+                        platform = app.platform.toLowerCase(),
                         tags = app.tags;
 
                     $.each(tags, function(j, tag) {

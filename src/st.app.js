@@ -236,8 +236,8 @@
                     apps = StSDK.jsonDecode(data);
 
                 $.each(apps, function(k, app) {
-                    var vendor = app.vendor,
-                        platform = app.platform;
+                    var vendor = app.vendor.toLowerCase(),
+                        platform = app.platform.toLowerCase();
 
                     if (!(vendor in grouped)) {
                         grouped[vendor] = {};
