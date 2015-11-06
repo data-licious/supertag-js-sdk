@@ -19,15 +19,61 @@
     /**
      * Add new Data Object to a Project
      *
-     * @param {Number} projectId Project Id
-     * @param {Object} oPayload  Payload data object
+     * @param {Number} projectId ID of the project
+     * @param {Object} data Payload data object
      *
      * @returns {jqXHR}
      */
-    StSDK.prototype.addProjectDataObject = function(projectId, oPayload) {
-        return this.post('projects/'+ projectId + '/data-objects', null, oPayload);
-    };
+    StSDK.prototype.createDataObject = function(projectId, data) {
+        var field;
 
+        switch (data.type) {
+
+            case "cookie_parameter_variable":
+                field = 'cookie_name';
+                break;
+
+            case "element_text_variable":
+                field = 'element_selector';
+                break;
+
+            case "javascript_variable":
+            case "special_javascript_value_variable":
+                field = "variable_name";
+                break;
+
+            case "query_parameter_variable":
+                field = "query_string_key";
+                break;
+
+            case "double_click_advertiser_id_variable":
+            case "string_variable":
+                field = "value";
+                break;
+
+            case "referrer_parameter_variable":
+                field = 'referrer_parameter_key';
+                break;
+
+            case "variable_template_variable":
+                //field = "parameter_value";
+                throw "Not implemented";
+
+            case "affinity_group_variable":
+                throw "Not implemented";
+
+            case "rule_bound_variable":
+                throw "Not implemented";
+
+            default:
+                throw 'Undefined type';
+        }
+
+        data[field] = data.value;
+        delete data.value;
+
+        return this.post('projects/'+ projectId + '/data-objects', null, data);
+    };
 
     /**
      * Returns data object human readable label for data object
