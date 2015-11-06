@@ -102,7 +102,22 @@
                     apps = StSDK.jsonDecode(data);
 
                 $.each(apps, function(k, app) {
-                    var platform = app.platform;
+                    var tagTmpls = {},
+                        platform = app.platform,
+                        tags = app.tags;
+
+                    $.each(tags, function(j, tag) {
+                        var tagTmplId = tag.templateId;
+
+                        if (!(tagTmplId in tagTmpls)) {
+                            tagTmpls[tagTmplId] = [tag];
+                        } else {
+                            tagTmpls[tagTmplId].push(tag);
+                        }
+                    });
+
+                    app['tag_templates'] = tagTmpls;
+                    delete app.tags;
 
                     if (!(platform in grouped)) {
                         grouped[platform] = [app]
