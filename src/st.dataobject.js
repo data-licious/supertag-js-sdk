@@ -110,7 +110,7 @@
     /**
      * Returns information about data object type
      *
-     * @param type
+     * @param dataObject
      * @returns {*}
      */
     StSDK.prototype.getDataObjectTypeInformation = _getDataObjectTypeInformation;
@@ -147,8 +147,7 @@
             {
                 type: "javascript_variable",
                 name: "JavaScript",
-                paramName: "Javascript Code",
-                paramField: ""
+                paramName: "Javascript Code"
             },
             {
                 type: "variable_template_variable",
