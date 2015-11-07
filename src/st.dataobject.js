@@ -142,12 +142,18 @@
         }
     }
 
-    function _getDataObjectTypeInformation(type) {
+    function _getDataObjectTypeInformation(dataObject) {
         var dataObjectTypes = [
             {
                 type: "javascript_variable",
                 name: "JavaScript",
-                paramName: "Javascript Code"
+                paramName: "Javascript Code",
+                paramField: ""
+            },
+            {
+                type: "variable_template_variable",
+                name: dataObject.vendor,
+                parameterName: dataObject.parameter_name
             },
             {
                 type: "query_parameter_variable",
@@ -178,11 +184,21 @@
                 type: "double_click_advertiser_id_variable",
                 name: "Advertiser ID",
                 paramName: "Advertiser ID"
+            },
+            {
+                type: "double_click_advertiser_id_variable",
+                name: "Generic",
+                paramName: "Advertiser ID"
+            },
+            {
+                type: "rule_bound_variable",
+                name: "Rule bound",
+                paramName: "Default"
             }
         ];
 
         var res = $.grep(dataObjectTypes, function (entry) {
-            return entry.type == type;
+            return entry.type == dataObject.type;
         });
 
         if (!res.length) throw "Undefined type";
