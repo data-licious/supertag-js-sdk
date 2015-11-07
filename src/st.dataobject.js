@@ -13,7 +13,28 @@
     StSDK.prototype.getProjectDataObjects = function(id) {
         StSDK.validateInt('Project ID', id);
 
-        return this.get('projects/' + id + '/data-objects');
+        return this.get('projects/' + id + '/data-objects', null, {
+            'dataFilter': function (data) {
+                var res = [];
+
+                $.each(StSDK.jsonDecode(data), function(k, dataObject) {
+                    res.push({
+                        id: dataObject.id,
+                        name: dataObject.name,
+                        description: dataObject.description,
+                        value: _getFieldNameByType(dataObject.type),
+                        date_created: dataObject.date_created,
+                        date_updated: dataObject.date_updated,
+                        tags: dataObject.usage ? dataObject.usage.tags : [],
+                        rules: dataObject.usage ? dataObject.usage.rules : [],
+                        numTags: dataObject.usage ? (dataObject.usage.tags ? dataObject.usage.tags.length : 0) : 0,
+                        numRules: dataObject.usage ? (dataObject.usage.rules ? dataObject.usage.rules.length : 0) : 0
+                    });
+                });
+
+                return StSDK.jsonEncode(res);
+            }
+        });
     };
 
     /**
