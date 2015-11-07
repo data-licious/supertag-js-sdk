@@ -14,6 +14,11 @@
     StSDK.APP_TEMPLATE_FORMAT_GROUPED = 'grouped';
 
     /**
+     * @constant {String} APP_TEMPLATE_FORMAT_GROUPED_APP_ONLY
+     */
+    StSDK.APP_TEMPLATE_FORMAT_GROUPED_APP_ONLY = 'grouped_app_only';
+
+    /**
      * @constant {String} APP_TEMPLATE_FORMAT_STANDARD
      */
     StSDK.APP_TEMPLATE_FORMAT_STANDARD = 'standard';
@@ -209,7 +214,7 @@
      *      });
      * ```
      *
-     * @param {String} format The format of the response, options being `'flat'` (default), `'grouped'` or `'standard'`
+     * @param {String} format The format of the response, options being `'flat'` (default), `'grouped'`, `'grouped_app_only'`, `'vendor_only_grouped'`, `'vendor_only_standard'` or `'standard'`
      *
      * @returns {jqXHR}
      */
@@ -218,6 +223,7 @@
         StSDK.validateOpts('Format', format, [
             StSDK.APP_TEMPLATE_FORMAT_FLAT,
             StSDK.APP_TEMPLATE_FORMAT_GROUPED,
+            StSDK.APP_TEMPLATE_FORMAT_GROUPED_APP_ONLY,
             StSDK.APP_TEMPLATE_FORMAT_STANDARD,
             StSDK.APP_TEMPLATE_FORMAT_VENDOR_ONLY_GROUPED,
             StSDK.APP_TEMPLATE_FORMAT_VENDOR_ONLY_STANDARD
@@ -230,6 +236,7 @@
                 }
 
                 var grouped = {},
+                    groupedAppOnly = {},
                     standard = [],
                     vendorOnlyGrouped = {},
                     vendorOnlyStandard = [],
@@ -237,7 +244,9 @@
 
                 $.each(apps, function(k, app) {
                     var vendor = app.vendor.toLowerCase(),
-                        platform = app.platform.toLowerCase();
+                        platform = app.platform.toLowerCase(),
+                        appId = app.id,
+                        tagsObj = {};
 
                     if (!(vendor in grouped)) {
                         grouped[vendor] = {};
@@ -253,10 +262,25 @@
                     } else {
                         vendorOnlyGrouped[vendor].push(app);
                     }
+
+                    $.each(app['tag_templates'], function(j, tag) {
+                        if (!(tag.id in tagsObj)) {
+                            tagsObj[tag.id] = tag;
+                        }
+                    });
+
+                    delete app['tag_templates'];
+                    app['tag_templates'] = tagsObj;
+
+                    if (!(appId in groupedAppOnly)) {
+                        groupedAppOnly[appId] = app;
+                    }
                 });
 
                 if (StSDK.APP_TEMPLATE_FORMAT_GROUPED === format) {
                     return StSDK.jsonEncode(grouped);
+                } else if (StSDK.APP_TEMPLATE_FORMAT_GROUPED_APP_ONLY === format) {
+                    return StSDK.jsonEncode(groupedAppOnly);
                 } else if (StSDK.APP_TEMPLATE_FORMAT_VENDOR_ONLY_GROUPED === format) {
                     return StSDK.jsonEncode(vendorOnlyGrouped);
                 }
