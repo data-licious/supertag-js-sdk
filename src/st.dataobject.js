@@ -25,54 +25,30 @@
      * @returns {jqXHR}
      */
     StSDK.prototype.createDataObject = function(projectId, data) {
-        var field;
+        data[_getFieldNameByType(data.type)] = data.value;
 
-        switch (data.type) {
-
-            case "cookie_parameter_variable":
-                field = 'cookie_name';
-                break;
-
-            case "element_text_variable":
-                field = 'element_selector';
-                break;
-
-            case "javascript_variable":
-            case "special_javascript_value_variable":
-                field = "variable_name";
-                break;
-
-            case "query_parameter_variable":
-                field = "query_string_key";
-                break;
-
-            case "double_click_advertiser_id_variable":
-            case "string_variable":
-                field = "value";
-                break;
-
-            case "referrer_parameter_variable":
-                field = 'referrer_parameter_key';
-                break;
-
-            case "variable_template_variable":
-                //field = "parameter_value";
-                throw "Not implemented";
-
-            case "affinity_group_variable":
-                throw "Not implemented";
-
-            case "rule_bound_variable":
-                throw "Not implemented";
-
-            default:
-                throw 'Undefined type';
-        }
-
-        data[field] = data.value;
         delete data.value;
 
         return this.post('projects/'+ projectId + '/data-objects', null, data);
+    };
+
+    /**
+     * Update Data Object
+     *
+     * @param {Number} projectId ID of the project
+     * @param {Object} data Payload data object
+     *
+     * @returns {jqXHR}
+     */
+    StSDK.prototype.updateDataObject = function(projectId, data) {
+        var payload = {
+            name: data.name,
+            description: data.description
+        };
+
+        payload[_getFieldNameByType(data.type)] = data.value;
+
+        return this.put('projects/'+ projectId + '/data-objects/' + data.id, null, payload);
     };
 
     /**
@@ -109,5 +85,32 @@
 
         return "";
     };
+
+    function _getFieldNameByType(type) {
+        switch (type) {
+            case "cookie_parameter_variable":
+                return 'cookie_name';
+            case "element_text_variable":
+                return 'element_selector';
+            case "javascript_variable":
+            case "special_javascript_value_variable":
+                return "variable_name";
+            case "query_parameter_variable":
+                return "query_string_key";
+            case "double_click_advertiser_id_variable":
+            case "string_variable":
+                return "value";
+            case "referrer_parameter_variable":
+                return 'referrer_parameter_key';
+            case "variable_template_variable":
+                return "parameter_value";
+            case "affinity_group_variable":
+                throw "Not implemented";
+            case "rule_bound_variable":
+                throw "Not implemented";
+            default:
+                throw 'Undefined type';
+        }
+    }
 
 }(window));
