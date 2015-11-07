@@ -107,6 +107,14 @@
         return "";
     };
 
+    /**
+     * Returns information about data object type
+     *
+     * @param type
+     * @returns {*}
+     */
+    StSDK.prototype.getDataObjectTypeInformation = _getDataObjectTypeInformation;
+
     function _getFieldNameByType(type) {
         switch (type) {
             case "cookie_parameter_variable":
@@ -132,6 +140,54 @@
             default:
                 throw 'Undefined type';
         }
+    }
+
+    function _getDataObjectTypeInformation(type) {
+        var dataObjectTypes = [
+            {
+                type: "javascript_variable",
+                name: "JavaScript",
+                paramName: "Javascript Code"
+            },
+            {
+                type: "query_parameter_variable",
+                name: "Query parameter",
+                paramName: "Parameter Name"
+            },
+            {
+                type: "cookie_parameter_variable",
+                name: "Cookie parameter",
+                paramName: "Cookie Name"
+            },
+            {
+                type: "element_text_variable",
+                name: "Element text",
+                paramName: "Element Selector"
+            },
+            {
+                type: "string_variable",
+                name: "String",
+                paramName: "String"
+            },
+            {
+                type: "referrer_parameter_variable",
+                name: "Referrer parameter",
+                paramName: "Parameter Name"
+            },
+            {
+                type: "double_click_advertiser_id_variable",
+                name: "Advertiser ID",
+                paramName: "Advertiser ID"
+            }
+        ];
+
+        var res = $.grep(dataObjectTypes, function (entry) {
+            return entry.type == type;
+        });
+
+        if (!res.length) throw "Undefined type";
+
+        return res[0];
     }
 
 }(window));
