@@ -63,7 +63,15 @@
 
         delete data.value;
 
-        return this.post('projects/'+ projectId + '/data-objects', null, data);
+        return this.post('projects/'+ projectId + '/data-objects', null, data, {
+            'dataFilter': function (data) {
+                var res = StSDK.jsonDecode(data);
+                res.value = res[_getFieldNameByType(res.type)];
+                delete res[_getFieldNameByType(dataObject.type)];
+
+                return StSDK.jsonEncode(res);
+            }
+        });
     };
 
     /**
