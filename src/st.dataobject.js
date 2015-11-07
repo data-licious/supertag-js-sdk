@@ -28,7 +28,7 @@
                         type: dataObject.type,
                         owner_type: dataObject.owner_type,
                         description: dataObject.description,
-                        value: _getFieldNameByType(dataObject.type),
+                        value: dataObject[_getFieldNameByType(dataObject.type)],
                         date_created: dataObject.date_created,
                         date_updated: dataObject.date_updated,
                         tags: dataObject.usage ? dataObject.usage.tags : [],
