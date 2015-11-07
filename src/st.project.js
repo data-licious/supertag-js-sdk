@@ -71,7 +71,21 @@
      */
     StSDK.prototype.getProjectReleaseNotes = function(id) {
         StSDK.validateInt('Project ID', id);
+
         return this.get('projects/' + id + '/release-notes');
+    };
+
+    /**
+     * Gets project sites
+     *
+     * @param {Number} id The project ID
+     *
+     * @returns {jqXHR}
+     */
+    StSDK.prototype.getProjectSites = function(id) {
+        StSDK.validateInt('Project ID', id);
+
+        return this.get('projects/' + id + '/sites');
     };
 
     /**
