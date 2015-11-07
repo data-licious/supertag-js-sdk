@@ -56,6 +56,19 @@
     };
 
     /**
+     * Gets all rules available in the given project in Simple list
+     *
+     * @param {Number} id ID of the project
+     *
+     * @returns {jqXHR}
+     */
+    StSDK.prototype.getProjectRulesSimpleList = function(id) {
+        StSDK.validateInt('Project ID', id);
+
+        return this.get('projects/' + id + '/rules?simple=1');
+    };
+
+    /**
      * Updates an rule
      *
      * @param {Number} id The rule ID
