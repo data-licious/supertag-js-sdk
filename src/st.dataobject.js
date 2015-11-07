@@ -67,7 +67,7 @@
             'dataFilter': function (data) {
                 var res = StSDK.jsonDecode(data);
                 res.value = res[_getFieldNameByType(res.type)];
-                delete res[_getFieldNameByType(dataObject.type)];
+                delete res[_getFieldNameByType(res.type)];
 
                 return StSDK.jsonEncode(res);
             }
