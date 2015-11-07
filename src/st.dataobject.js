@@ -20,7 +20,13 @@
                 $.each(StSDK.jsonDecode(data), function(k, dataObject) {
                     res.push({
                         id: dataObject.id,
+                        js_code: dataObject.js_code,
+                        is_new:dataObject.is_new,
+                        is_updated:dataObject.is_updated,
+                        is_editable:dataObject.is_editable,
                         name: dataObject.name,
+                        type: dataObject.type,
+                        owner_type: dataObject.owner_type,
                         description: dataObject.description,
                         value: _getFieldNameByType(dataObject.type),
                         date_created: dataObject.date_created,
@@ -28,7 +34,14 @@
                         tags: dataObject.usage ? dataObject.usage.tags : [],
                         rules: dataObject.usage ? dataObject.usage.rules : [],
                         numTags: dataObject.usage ? (dataObject.usage.tags ? dataObject.usage.tags.length : 0) : 0,
-                        numRules: dataObject.usage ? (dataObject.usage.rules ? dataObject.usage.rules.length : 0) : 0
+                        numRules: dataObject.usage ? (dataObject.usage.rules ? dataObject.usage.rules.length : 0) : 0,
+                        variable_template: dataObject.variable_template,
+                        parameter_name: dataObject.parameter_name,
+                        parameter_value: dataObject.parameter_value,
+                        twig_template: dataObject.twig_template,
+                        vendor: dataObject.vendor,
+                        platform: dataObject.platform,
+                        version: dataObject.version
                     });
                 });
 
