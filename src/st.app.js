@@ -19,19 +19,19 @@
     StSDK.APP_TEMPLATE_FORMAT_GROUPED_APP_ONLY = 'grouped_app_only';
 
     /**
+     * @constant {string} APP_TEMPLATE_FORMAT_GROUPED_VENDOR_ONLY
+     */
+    StSDK.APP_TEMPLATE_FORMAT_GROUPED_VENDOR_ONLY = 'grouped_vendor_only';
+
+    /**
      * @constant {String} APP_TEMPLATE_FORMAT_STANDARD
      */
     StSDK.APP_TEMPLATE_FORMAT_STANDARD = 'standard';
 
     /**
-     * @constant {string} APP_TEMPLATE_FORMAT_VENDOR_ONLY_GROUPED
+     * @constant {string} APP_TEMPLATE_FORMAT_STANDARD_VENDOR_ONLY
      */
-    StSDK.APP_TEMPLATE_FORMAT_VENDOR_ONLY_GROUPED = 'vendor_only_grouped';
-
-    /**
-     * @constant {string} APP_TEMPLATE_FORMAT_VENDOR_ONLY_STANDARD
-     */
-    StSDK.APP_TEMPLATE_FORMAT_VENDOR_ONLY_STANDARD = 'vendor_only_standard';
+    StSDK.APP_TEMPLATE_FORMAT_STANDARD_VENDOR_ONLY = 'standard_vendor_only';
 
     /**
      * Gets details of a given app template
@@ -214,7 +214,7 @@
      *      });
      * ```
      *
-     * @param {String} format The format of the response, options being `'flat'` (default), `'grouped'`, `'grouped_app_only'`, `'vendor_only_grouped'`, `'vendor_only_standard'` or `'standard'`
+     * @param {String} format The format of the response, options being `'flat'` (default), `'grouped'`, `'grouped_app_only'`, `'grouped_vendor_only'`, `'standard'` or `'standard_vendor_only'`
      *
      * @returns {jqXHR}
      */
@@ -224,9 +224,9 @@
             StSDK.APP_TEMPLATE_FORMAT_FLAT,
             StSDK.APP_TEMPLATE_FORMAT_GROUPED,
             StSDK.APP_TEMPLATE_FORMAT_GROUPED_APP_ONLY,
+            StSDK.APP_TEMPLATE_FORMAT_GROUPED_VENDOR_ONLY,
             StSDK.APP_TEMPLATE_FORMAT_STANDARD,
-            StSDK.APP_TEMPLATE_FORMAT_VENDOR_ONLY_GROUPED,
-            StSDK.APP_TEMPLATE_FORMAT_VENDOR_ONLY_STANDARD
+            StSDK.APP_TEMPLATE_FORMAT_STANDARD_VENDOR_ONLY
         ]);
 
         return this.get('app-templates', null, {
@@ -237,9 +237,9 @@
 
                 var grouped = {},
                     groupedAppOnly = {},
+                    groupedVendorOnly = {},
                     standard = [],
-                    vendorOnlyGrouped = {},
-                    vendorOnlyStandard = [],
+                    standardVendorOnly = [],
                     apps = StSDK.jsonDecode(data);
 
                 $.each(apps, function(k, app) {
@@ -257,10 +257,10 @@
                         grouped[vendor][platform].push(app);
                     }
 
-                    if (!(vendor in vendorOnlyGrouped)) {
-                        vendorOnlyGrouped[vendor] = [app];
+                    if (!(vendor in groupedVendorOnly)) {
+                        groupedVendorOnly[vendor] = [app];
                     } else {
-                        vendorOnlyGrouped[vendor].push(app);
+                        groupedVendorOnly[vendor].push(app);
                     }
 
                     $.each(app['tag_templates'], function(j, tag) {
@@ -281,8 +281,8 @@
                     return StSDK.jsonEncode(grouped);
                 } else if (StSDK.APP_TEMPLATE_FORMAT_GROUPED_APP_ONLY === format) {
                     return StSDK.jsonEncode(groupedAppOnly);
-                } else if (StSDK.APP_TEMPLATE_FORMAT_VENDOR_ONLY_GROUPED === format) {
-                    return StSDK.jsonEncode(vendorOnlyGrouped);
+                } else if (StSDK.APP_TEMPLATE_FORMAT_GROUPED_VENDOR_ONLY === format) {
+                    return StSDK.jsonEncode(groupedVendorOnly);
                 }
 
                 if (StSDK.APP_TEMPLATE_FORMAT_STANDARD === format) {
@@ -303,14 +303,14 @@
                     return StSDK.jsonEncode(standard);
                 }
 
-                $.each(vendorOnlyGrouped, function(vendorName, apps) {
-                    vendorOnlyStandard.push({
+                $.each(groupedVendorOnly, function(vendorName, apps) {
+                    standardVendorOnly.push({
                         vendor: vendorName,
                         applications: apps
                     });
                 });
 
-                return StSDK.jsonEncode(vendorOnlyStandard);
+                return StSDK.jsonEncode(standardVendorOnly);
             }
         });
     };
