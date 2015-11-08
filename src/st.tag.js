@@ -106,6 +106,21 @@
     };
 
     /**
+     * Updates a tag
+     *
+     * @param {Number} id The tag ID
+     * @param {Object} data The data of the tag
+     *
+     * @returns {jqXHR}
+     */
+    StSDK.prototype.updateTag = function(id, data) {
+        StSDK.validateInt('Tag ID', id);
+        StSDK.validatePlainObj('Tag data', data);
+
+        return this.put('tags/' + id, null, data);
+    };
+
+    /**
      * Deletes a tag
      *
      * @param {Number} id The tag ID
