@@ -117,7 +117,8 @@
 
                 $.each(apps, function(k, app) {
                     var tagTmpls = {},
-                        platform = app.platform.toLowerCase(),
+                        vendor = app.vendor.toLowerCase(),
+                        platform = '[' + vendor +  ']' + app.platform.toLowerCase(),
                         tags = app.tags;
 
                     $.each(tags, function(j, tag) {
@@ -134,7 +135,7 @@
                     delete app.tags;
 
                     if (!(platform in grouped)) {
-                        grouped[platform] = [app]
+                        grouped[platform] = [app];
                     } else {
                         grouped[platform].push(app);
                     }
