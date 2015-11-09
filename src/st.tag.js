@@ -117,7 +117,7 @@
         StSDK.validateInt('Tag ID', id);
         StSDK.validatePlainObj('Tag data', data);
 
-        return this.put('tags/' + id, null, data);
+        return this.put('tags/' + id + '?error_format=new', null, data);
     };
 
     /**
