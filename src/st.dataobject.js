@@ -155,11 +155,11 @@
             case "variable_template_variable":
                 return "parameter_value";
             case "affinity_group_variable":
-                throw "Not implemented";
+                return "";
             case "rule_bound_variable":
-                throw "Not implemented";
+                return "";
             default:
-                throw 'Undefined type';
+                return "";
         }
     }
 
