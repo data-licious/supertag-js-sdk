@@ -263,17 +263,19 @@
                         groupedVendorOnly[vendor].push(app);
                     }
 
-                    $.each(app['tag_templates'], function(j, tag) {
-                        if (!(tag.id in tagsObj)) {
-                            tagsObj[tag.id] = tag;
+                    if (StSDK.APP_TEMPLATE_FORMAT_STANDARD_VENDOR_ONLY !== format) {
+                        $.each(app['tag_templates'], function(j, tag) {
+                            if (!(tag.id in tagsObj)) {
+                                tagsObj[tag.id] = tag;
+                            }
+                        });
+
+                        delete app['tag_templates'];
+                        app['tag_templates'] = tagsObj;
+
+                        if (!(appId in groupedAppOnly)) {
+                            groupedAppOnly[appId] = app;
                         }
-                    });
-
-                    delete app['tag_templates'];
-                    app['tag_templates'] = tagsObj;
-
-                    if (!(appId in groupedAppOnly)) {
-                        groupedAppOnly[appId] = app;
                     }
                 });
 
