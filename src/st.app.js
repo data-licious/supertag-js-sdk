@@ -263,7 +263,7 @@
                         groupedVendorOnly[vendor].push(app);
                     }
 
-                    if (StSDK.APP_TEMPLATE_FORMAT_STANDARD_VENDOR_ONLY !== format) {
+                    if (StSDK.APP_TEMPLATE_FORMAT_GROUPED_APP_ONLY === format) {
                         $.each(app['tag_templates'], function(j, tag) {
                             if (!(tag.id in tagsObj)) {
                                 tagsObj[tag.id] = tag;
