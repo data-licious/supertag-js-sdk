@@ -92,6 +92,21 @@
     };
 
     /**
+     * Delete an rule
+     *
+     * @param {Number} id The rule ID
+     * @param {Number} projectId  The project ID
+     *
+     * @returns {jqXHR}
+     */
+    StSDK.prototype.deleteRule = function(id, projectId) {
+        StSDK.validateInt('Rule ID', id);
+        StSDK.validateInt('Project ID', projectId);
+
+        return this.delete('projects/' + projectId + '/rule/' + id);
+    };
+
+    /**
      * Returns rule human readable label for rule
      *
      * @param {Object} data rule object
