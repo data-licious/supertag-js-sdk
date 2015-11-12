@@ -3,6 +3,22 @@
 
     var StSDK = window.StSDK;
 
+
+    /**
+     * Delete an DataObject
+     *
+     * @param {Number} id The DataObject ID
+     * @param {Number} projectId  The project ID
+     *
+     * @returns {jqXHR}
+     */
+    StSDK.prototype.deleteDataObject = function(id, projectId) {
+        StSDK.validateInt('DataObject ID', id);
+        StSDK.validateInt('Project ID', projectId);
+
+        return this.delete('projects/' + projectId + '/data-objects/' + id);
+    };
+
     /**
      * Gets all data objects available in the specific project
      *
