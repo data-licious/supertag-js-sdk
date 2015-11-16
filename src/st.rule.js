@@ -29,6 +29,25 @@
         return this.post('projects/' + projectId + '/rule', null, ruleObj);
     };
 
+
+
+    /**
+     * Apply an rule to tag
+     *
+     * @param {Number} projectId The project ID
+     * @param {Number} ruleId The rule ID
+     * @param {Number} tagId The tag ID
+     *
+     * @returns {jqXHR}
+     */
+    StSDK.prototype.applyRuleToTag = function(projectId, ruleId, tagId) {
+        StSDK.validateInt('Project ID', projectId);
+        StSDK.validateInt('Rule ID', ruleId);
+        StSDK.validateInt('Tag ID', tagId);
+
+        return this.post('projects/' + projectId + '/apply/' + ruleId + '/' + tagId);
+    };
+
     /**
      * Gets all dataObjects available in the given project
      *
