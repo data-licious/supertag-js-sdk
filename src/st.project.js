@@ -50,19 +50,6 @@
 
 
     /**
-     * Gets the deployment history for a given project
-     *
-     * @param {Number} id The project ID
-     *
-     * @returns {jqXHR}
-     */
-    StSDK.prototype.getProjectDeployHistory = function(id) {
-        StSDK.validateInt('Project ID', id);
-        return this.get('projects/' + id + '/deployments');
-    };
-
-
-    /**
      * Gets the release notes for a given project
      *
      * @param {Number} id The project ID
