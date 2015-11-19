@@ -31,4 +31,17 @@
         return this.get('projects/' + projectId + '/deployments/' + deploymentId);
     };
 
+    /**
+     * Schedule deployment.
+     *
+     * @param {Number} projectId Project ID
+     * @param {String} comment Deployment comment
+     *
+     * @returns {jqXHR}
+     */
+    StSDK.prototype.scheduleDeployment = function(projectId, comment) {
+
+        return this.post('projects/' + projectId + '/deploy', undefined, {comment: comment});
+    };
+
 }(window));
