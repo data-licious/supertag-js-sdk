@@ -108,16 +108,18 @@
     /**
      * Updates a tag
      *
+     * @param {Number} projectId The project ID
      * @param {Number} id The tag ID
      * @param {Object} data The data of the tag
      *
      * @returns {jqXHR}
      */
-    StSDK.prototype.updateTag = function(id, data) {
+    StSDK.prototype.updateTag = function(projectId, id, data) {
+        StSDK.validateInt('Project ID', projectId);
         StSDK.validateInt('Tag ID', id);
         StSDK.validatePlainObj('Tag data', data);
 
-        return this.put('tags/' + id + '?error_format=new', null, data);
+        return this.put('projects/' + projectId + '/tags/' + id + '?error_format=new', null, data);
     };
 
     /**
