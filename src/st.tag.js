@@ -123,6 +123,21 @@
     };
 
     /**
+     * Duplicatge a tag
+     *
+     * @param {Number} projectId The project ID
+     * @param {Number} id The tag ID
+     *
+     * @returns {jqXHR}
+     */
+    StSDK.prototype.duplicateTag = function(projectId, tagId, newTagName) {
+        StSDK.validateInt('Project ID', projectId);
+        StSDK.validateInt('Tag ID', tagId);
+
+        return this.post('projects/' + projectId + '/tags/duplicate/' + tagId, null, {name: newTagName});
+    };
+
+    /**
      * Deletes a tag
      *
      * @param {Number} id The tag ID
