@@ -44,4 +44,18 @@
         return this.post('projects/' + projectId + '/deploy', undefined, {comment: comment});
     };
 
+    /**
+     * Schedule re-deployment.
+     *
+     * @param {Number} projectId Project ID
+     * @param {String} version Version to re-deploy
+     * @param {String} comment Redeployment comment
+     *
+     * @returns {jqXHR}
+     */
+    StSDK.prototype.scheduleRedeployment = function(projectId, version, comment) {
+
+        return this.post('projects/' + projectId + '/redeploy/' + version, undefined, {comment: comment});
+    };
+
 }(window));
