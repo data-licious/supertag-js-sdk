@@ -151,6 +151,19 @@
     };
 
     /**
+     * Deletes a tag
+     *
+     * @param {Number} id The tag ID
+     *
+     * @returns {jqXHR}
+     */
+    StSDK.prototype.codePreview = function(id) {
+        StSDK.validateInt('Tag ID', id);
+
+        return this.get('tags/' + id + '/code-preview');
+    };
+
+    /**
      * Activates or deactivates a tag
      *
      * @param {Number} id The tag ID
