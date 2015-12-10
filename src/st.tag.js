@@ -157,7 +157,7 @@
      *
      * @returns {jqXHR}
      */
-    StSDK.prototype.getTagcode = function(id) {
+    StSDK.prototype.getTagCode = function(id) {
         StSDK.validateInt('Tag ID', id);
 
         return this.get('tags/' + id + '/code-preview');
