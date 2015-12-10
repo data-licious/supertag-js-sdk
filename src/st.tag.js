@@ -123,7 +123,7 @@
     };
 
     /**
-     * Duplicatge a tag
+     * Duplicates a tag
      *
      * @param {Number} projectId The project ID
      * @param {Number} id The tag ID
@@ -151,13 +151,13 @@
     };
 
     /**
-     * Deletes a tag
+     * Gets the code of a tag
      *
      * @param {Number} id The tag ID
      *
      * @returns {jqXHR}
      */
-    StSDK.prototype.codePreview = function(id) {
+    StSDK.prototype.getTagcode = function(id) {
         StSDK.validateInt('Tag ID', id);
 
         return this.get('tags/' + id + '/code-preview');
