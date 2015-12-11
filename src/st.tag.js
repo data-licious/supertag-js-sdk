@@ -89,6 +89,23 @@
     };
 
     /**
+     * Gets the full information of a tag
+     *
+     * @param {Number} tagId The tag ID
+     * @param {Number} projectId The project ID
+     *
+     * @returns {jqXHR}
+     */
+    StSDK.prototype.getTagFullInfo = function(tagId, projectId) {
+        StSDK.validateInt('Tag ID', tagId);
+        StSDK.validateInt('Project ID', projectId);
+
+        return this.get('tags/' + tagId + '/full', {
+            project: projectId
+        });
+    };
+
+    /**
      * Installs a tag into a project
      *
      * @param {Number} projectId The project ID
