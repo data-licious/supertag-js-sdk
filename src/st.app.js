@@ -4,6 +4,16 @@
     var StSDK = window.StSDK;
 
     /**
+     * @constant {string} APP_FORMAT_FLAT
+     */
+    StSDK.APP_FORMAT_FLAT = 'flat';
+
+    /**
+     * @constant {string} APP_FORMAT_STANDARD
+     */
+    StSDK.APP_FORMAT_STANDARD = 'standard';
+
+    /**
      * @constant {String} APP_TEMPLATE_FORMAT_FLAT
      */
     StSDK.APP_TEMPLATE_FORMAT_FLAT = 'flat';
@@ -32,6 +42,49 @@
      * @constant {string} APP_TEMPLATE_FORMAT_STANDARD_VENDOR_ONLY
      */
     StSDK.APP_TEMPLATE_FORMAT_STANDARD_VENDOR_ONLY = 'standard_vendor_only';
+
+    /**
+     * Gets details of a given app
+     *
+     * @param {Number} id The app ID
+     *
+     * @returns {jqXHR}
+     */
+    StSDK.prototype.getApp = function(id, format) {
+        var format = format || StSDK.APP_FORMAT_FLAT;
+        StSDK.validateInt('App ID', id);
+        StSDK.validateOpts('Format', format, [
+            StSDK.APP_FORMAT_FLAT,
+            StSDK.APP_FORMAT_STANDARD
+        ]);
+
+        return this.get('apps/' + id, null, {
+            dataFilter: function(data, type) {
+                if (StSDK.APP_FORMAT_FLAT === format || 'json' !== type) {
+                    return data;
+                }
+
+                var app = StSDK.jsonDecode(data),
+                    tagTmpls = {},
+                    tags = app.tags;
+
+                $.each(tags, function(k, tag) {
+                    var tagTmplId = tag.templateId;
+
+                    if (!(tagTmplId in tagTmpls)) {
+                        tagTmpls[tagTmplId] = [tag];
+                    } else {
+                        tagTmpls[tagTmplId].push(tag);
+                    }
+                });
+
+                app['tag_templates'] = tagTmpls;
+                delete app.tags;
+
+                return StSDK.jsonEncode(app);
+            }
+        });
+    };
 
     /**
      * Gets details of a given app template
