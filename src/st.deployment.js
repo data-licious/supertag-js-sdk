@@ -66,7 +66,7 @@
      *
      * @returns {jqXHR}
      */
-    StSDK.prototype.scheduleRedeployment = function(projectId, message) {
+    StSDK.prototype.requestDeployment = function(projectId, message) {
 
         return this.post('projects/' + projectId + '/request-deployment', undefined, {message: message});
     };
