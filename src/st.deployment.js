@@ -58,4 +58,17 @@
         return this.post('projects/' + projectId + '/redeploy/' + version, undefined, {comment: comment});
     };
 
+    /**
+     * Request deployment.
+     *
+     * @param {Number} projectId Project ID
+     * @param {String} message Message to project admins
+     *
+     * @returns {jqXHR}
+     */
+    StSDK.prototype.scheduleRedeployment = function(projectId, message) {
+
+        return this.post('projects/' + projectId + '/request-deployment', undefined, {message: message});
+    };
+
 }(window));
