@@ -156,4 +156,22 @@
             }
         });
     };
+
+    /**
+     * Installs an application onto a given project
+     *
+     * @param {String} appName The application name
+     * @param {Number} projectId The project ID
+     * @param {Number} appTmplId The application template name
+     *
+     * @returns {jqXHR}
+     */
+    StSDK.prototype.installApplication = function(appName, projectId, appTmplId) {
+        StSDK.validateInt('Project ID', projectId);
+        StSDK.validateInt('Application template ID', appTmplId);
+
+        return this.post('projects/' + projectId + '/app-templates/' + appTmplId + '/install', null, {
+            app_name: appName
+        });
+    };
 }(window));
