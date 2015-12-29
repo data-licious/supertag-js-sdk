@@ -36,6 +36,29 @@
     };
 
     /**
+     * Gets companies and projects with details relevant to the specific user
+     *
+     * @returns {jqXHR}
+     */
+    StSDK.prototype.getCompaniesData = function() {
+
+        return this.get('companies/home-list');
+    };
+
+    /**
+     * Gets rojects with details by company for Home Page
+     *
+     * @param {Number} id The company ID
+     * 
+     * @returns {jqXHR}
+     */
+    StSDK.prototype.getProjectsDataByCompany = function(companyId) {
+        StSDK.validateInt('Company ID', companyId);
+
+        return this.get('companies/' + companyId + '/projects');
+    };
+
+    /**
      * Gets the details of a given project
      *
      * @param {Number} id The project ID
