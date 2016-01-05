@@ -197,4 +197,19 @@
             app_name: appName
         });
     };
+
+    /**
+     * Delete application with tags
+     *
+     * @param {Number} projectId The project ID
+     * @param {Number} appId The application ID
+     *
+     * @returns {jqXHR}
+     */
+    StSDK.prototype.deleteApplication = function(projectId, appId) {
+        StSDK.validateInt('Project ID', projectId);
+        StSDK.validateInt('Application ID', appId);
+
+        return this.delete('projects/' + projectId + '/apps/' + appId);
+    };
 }(window));
