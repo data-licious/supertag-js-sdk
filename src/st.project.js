@@ -46,10 +46,10 @@
     };
 
     /**
-     * Gets rojects with details by company for Home Page
+     * Gets projects with details by company for Home Page
      *
      * @param {Number} id The company ID
-     * 
+     *
      * @returns {jqXHR}
      */
     StSDK.prototype.getProjectsDataByCompany = function(companyId) {
@@ -69,6 +69,19 @@
         StSDK.validateInt('Project ID', id);
 
         return this.get('projects/' + id);
+    };
+
+    /**
+     * Gets the audit of a given project
+     *
+     * @param {Number} id The project ID
+     *
+     * @returns {jqXHR}
+     */
+    StSDK.prototype.getProjectAudit = function(id) {
+        StSDK.validateInt('Project ID', id);
+
+        return this.get('projects/' + id + '/audits');
     };
 
     /**
