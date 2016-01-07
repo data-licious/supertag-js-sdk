@@ -89,6 +89,23 @@
     };
 
     /**
+     * Installs a tag into a project
+     *
+     * @param {Number} projectId The project ID
+     * @param {Number} tagTemplateId The tag template ID
+     * @param {Object} data The data of the tag
+     *
+     * @returns {jqXHR}
+     */
+    StSDK.prototype.installTag = function(projectId, tagTemplateId, data) {
+        StSDK.validateInt('Project ID', projectId);
+        StSDK.validateInt('Tag template ID', tagTemplateId);
+        StSDK.validatePlainObj('Tag data', data);
+
+        return this.post('projects/' + projectId +'/tags/template/' + tagTemplateId + '?error_format=new', null, data);
+    };
+
+    /**
      * Gets the full information of a tag
      *
      * @param {Number} tagId The tag ID
@@ -106,20 +123,18 @@
     };
 
     /**
-     * Installs a tag into a project
+     * Create Tag Function
      *
      * @param {Number} projectId The project ID
-     * @param {Number} tagTemplateId The tag template ID
-     * @param {Object} data The data of the tag
+     * @param {Object} params Object parameter (<strong>function_name</strong> ,  <strong>name</strong>, description, top_code, params)
      *
      * @returns {jqXHR}
      */
-    StSDK.prototype.installTag = function(projectId, tagTemplateId, data) {
+    StSDK.prototype.createTagFunction = function(projectId, params) {
         StSDK.validateInt('Project ID', projectId);
-        StSDK.validateInt('Tag template ID', tagTemplateId);
-        StSDK.validatePlainObj('Tag data', data);
+        StSDK.validatePlainObj('Create Tag function parameter', params);
 
-        return this.post('projects/' + projectId +'/tags/template/' + tagTemplateId + '?error_format=new', null, data);
+        return this.post('projects/' + projectId +'/functions', null, params);
     };
 
     /**
