@@ -246,4 +246,48 @@
             nodePosition: pos
         });
     };
+
+    /**
+     * Add function call for tag container
+     *
+     * @param {Number} projectId The project ID
+     * @param {Number} id The tag ID
+     * @param {Object} functionData Object parameter (<strong>function_id</strong> ,  <strong>params</strong>)
+     *
+     * @returns {jqXHR}
+     */
+    StSDK.prototype.addFunctionCall = function(projectId, tagId, functionData) {
+        StSDK.validateInt('Project ID', projectId);
+        StSDK.validateInt('Tag ID', tagId);
+
+        return this.post('projects/' + projectId + '/function-call/' + tagId, null, functionData);
+    };
+
+    /**
+     * Get function call info
+     *
+     * @param {Number} projectId The project ID
+     * @param {Number} id Function call ID
+     *
+     * @returns {jqXHR}
+     */
+    StSDK.prototype.functionCallInfo = function(projectId, tagId) {
+        StSDK.validateInt('Project ID', projectId);
+        StSDK.validateInt('Tag ID', tagId);
+
+        return this.get('projects/' + projectId + '/function-call/' + tagId + '/info');
+    };
+
+    /**
+     * Get all functions for project
+     *
+     * @param {Number} projectId The project ID
+     *
+     * @returns {jqXHR}
+     */
+    StSDK.prototype.getFunctionShortList = function(projectId) {
+        StSDK.validateInt('Project ID', projectId);
+
+        return this.get('projects/' + projectId + '/functions?simple=1');
+    };
 }(window, document, jQuery));
