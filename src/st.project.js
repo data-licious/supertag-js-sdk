@@ -19,6 +19,11 @@
     StSDK.PROJECT_APP_FORMAT_STANDARD_WITH_PLATFORM = 'standard_with_platform';
 
     /**
+     * @constant {string} PROJECT_VERSION_UNDEPLOYED
+     */
+    StSDK.PROJECT_VERSION_UNDEPLOYED = 'undeployed';
+
+    /**
      * Gets companies and projects relevant to the specific user
      *
      * @param {Number} limit The limit of search
@@ -78,10 +83,22 @@
      *
      * @returns {jqXHR}
      */
-    StSDK.prototype.getProjectAudit = function(id) {
+    StSDK.prototype.getProjectAudit = function(id, version) {
         StSDK.validateInt('Project ID', id);
 
-        return this.get('projects/' + id + '/audits');
+        var url = 'projects/' + id + '/audits';
+
+        if (undefined !== version) {
+            if (version !== parseInt(version) && version !== StSDK.PROJECT_VERSION_UNDEPLOYED) {
+                StSDK.error('[Version] must be an integer or "' + StSDK.PROJECT_VERSION_UNDEPLOYED + '".');
+            }
+
+            return this.get(url, {
+                project_version: version
+            });
+        }
+
+        return this.get(url);
     };
 
     /**
