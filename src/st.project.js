@@ -111,7 +111,7 @@
     StSDK.prototype.getProjectLatestVersion = function(id) {
         StSDK.validateInt('Project ID', id);
 
-        return this.get('projects/' + id + 'latest-version');
+        return this.get('projects/' + id + '/latest-version');
     };
 
     /**
