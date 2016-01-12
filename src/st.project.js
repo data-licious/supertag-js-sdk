@@ -102,6 +102,19 @@
     };
 
     /**
+     * Gets the latest version number of a given project
+     *
+     * @param {Number} id The project ID
+     *
+     * @returns {jqXHR}
+     */
+    StSDK.prototype.getProjectLatestVersion = function(id) {
+        StSDK.validateInt('Project ID', id);
+
+        return this.get('projects/' + id + 'latest-version');
+    };
+
+    /**
      * Gets the code of a given project
      *
      * @param {Number} id The project ID
