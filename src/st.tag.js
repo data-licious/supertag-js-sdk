@@ -335,6 +335,22 @@
     };
 
     /**
+     * Edit function call tag
+     *
+     * @param {Number} projectId The project ID
+     * @param {Number} id The function call tag ID
+     * @param {Object} functionData Object parameter (<strong>function_id</strong> ,  <strong>params</strong>)
+     *
+     * @returns {jqXHR}
+     */
+    StSDK.prototype.editFunctionCall = function(projectId, tagId, functionData) {
+        StSDK.validateInt('Project ID', projectId);
+        StSDK.validateInt('Function call tag ID', tagId);
+
+        return this.put('projects/' + projectId + '/function-call/' + tagId + '/edit', null, functionData);
+    };
+
+    /**
      * Get all functions for project
      *
      * @param {Number} projectId The project ID
