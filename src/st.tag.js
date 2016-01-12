@@ -123,18 +123,74 @@
     };
 
     /**
-     * Create Tag Function
+     * Create Tag Function.
      *
      * @param {Number} projectId The project ID
-     * @param {Object} params Object parameter (<strong>function_name</strong> ,  <strong>name</strong>, description, top_code, params)
+     * @param {Object} param Object parameter (<strong>function_name</strong> ,  <strong>name</strong>, description, top_code, params)
      *
      * @returns {jqXHR}
      */
-    StSDK.prototype.createTagFunction = function(projectId, params) {
+    StSDK.prototype.createTagFunction = function(projectId, param) {
         StSDK.validateInt('Project ID', projectId);
-        StSDK.validatePlainObj('Create Tag function parameter', params);
+        StSDK.validatePlainObj('Create Tag Function parameter', param);
 
-        return this.post('projects/' + projectId +'/functions', null, params);
+        return this.post('projects/' + projectId +'/functions', null, param);
+    };
+
+    /**
+     * Retrieve list of Tag Functions of a project.
+     *
+     * @param {Number} projectId The project ID
+     *
+     * @returns {jqXHR}
+     */
+    StSDK.prototype.getTagFunctionsList = function(projectId) {
+        StSDK.validateInt('Project ID', projectId);
+
+        return this.get('projects/' + projectId +'/functions');
+    };
+
+
+    /**
+     * Retrieve a Tag Function Container information.
+     *
+     * @param {Number} fnId Tag Function ID
+     *
+     * @returns {jqXHR}
+     */
+    StSDK.prototype.getTagFunctionInfo = function(fnId) {
+        StSDK.validateInt('Function Id ', fnId);
+
+        return this.get('functions/' + fnId +'/info');
+    };
+
+    /**
+     * Retrieve a Tag Function Call information.
+     *
+     * @param {Number} fnId Tag Function ID
+     *
+     * @returns {jqXHR}
+     */
+    StSDK.prototype.getTagFunctionCallInfo = function(fnId) {
+        StSDK.validateInt('Function Id ', fnId);
+
+        return this.get('function-call/' + fnId +'/info');
+    };
+
+
+    /**
+     * Edit a Tag Function.
+     *
+     * @param {Number} fnId Tag Function Id
+     * @param {Object} param Object parameter (<strong>function_name</strong> ,  <strong>name</strong>, description, top_code, params)
+     *
+     * @returns {jqXHR}
+     */
+    StSDK.prototype.editTagFunction = function(fnId, param) {
+        StSDK.validateInt('Tag Function ID', fnId);
+        StSDK.validatePlainObj('Edit Tag Function parameter', param);
+
+        return this.put('functions/' + fnId +'/edit', null, param);
     };
 
     /**
