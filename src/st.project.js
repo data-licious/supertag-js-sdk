@@ -242,4 +242,17 @@
 
         return this.delete('projects/' + projectId + '/apps/' + appId);
     };
+
+    /**
+     * Retrieve project Install Code.
+     *
+     * @param {Number} projectId The project ID
+     *
+     * @returns {jqXHR}
+     */
+    StSDK.prototype.getProjectInstallCode = function(projectId) {
+        StSDK.validateInt('Project ID', projectId);
+
+        return this.get('projects/' + projectId + '/code-install');
+    };
 }(window));
