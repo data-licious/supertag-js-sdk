@@ -362,4 +362,35 @@
 
         return this.get('projects/' + projectId + '/functions?simple=1');
     };
+
+    /**
+     * Get all tags, data-objects and rules will be duplicated on the tag copying
+     *
+     * @param {Number} tagId The root tag ID
+     *
+     * @returns {jqXHR}
+     */
+    StSDK.prototype.getCopyDryData = function(tagId) {
+        StSDK.validateInt('Tag ID', tagId);
+
+        return this.get('tags/' + tagId + '/copy-dry');
+    };
+
+
+
+    /**
+     * Copy a tag to another project
+     *
+     * @param {Number} projectId Copy TO Project ID
+     * @param {Number} tagId The tag ID
+     *
+     * @returns {jqXHR}
+     */
+    StSDK.prototype.copyToProject = function(tagId, projectId) {
+        StSDK.validateInt('Project ID', projectId);
+        StSDK.validateInt('Tag ID', tagId);
+
+        return this.post('tags/' + tagId + '/copy-to-project/' + projectId);
+    };
+
 }(window, document, jQuery));
