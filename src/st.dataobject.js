@@ -75,14 +75,14 @@
      * @returns {jqXHR}
      */
     StSDK.prototype.createDataObject = function(projectId, data) {
-        data[_getFieldNameByType(data.type)] = data.value;
+        data[_getFieldNameByType(data.type)] = data.paramValue;
 
-        delete data.value;
+        delete data.paramValue;
 
         return this.post('projects/'+ projectId + '/data-objects', null, data, {
             'dataFilter': function (data) {
                 var res = StSDK.jsonDecode(data);
-                res.value = res[_getFieldNameByType(res.type)];
+                res.paramValue = res[_getFieldNameByType(res.type)];
                 delete res[_getFieldNameByType(res.type)];
 
                 return StSDK.jsonEncode(res);
