@@ -97,7 +97,7 @@
 
         delete data.paramValue;
 
-        return this.put('projects/'+ projectId + '/data-objects/' + data.id, null, payload, {
+        return this.put('projects/'+ projectId + '/data-objects/' + data.id, null, data, {
             dataFilter: _doJsonDataFilter
         });
     };
