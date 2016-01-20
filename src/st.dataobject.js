@@ -44,7 +44,7 @@
                         type: dataObject.type,
                         owner_type: dataObject.owner_type,
                         description: dataObject.description,
-                        value: dataObject[_getFieldNameByType(dataObject.type)],
+                        paramValue: dataObject[_getFieldNameByType(dataObject.type)],
                         date_created: dataObject.date_created,
                         date_updated: dataObject.date_updated,
                         tags: dataObject.usage ? dataObject.usage.tags : [],
@@ -80,13 +80,7 @@
         delete data.paramValue;
 
         return this.post('projects/'+ projectId + '/data-objects', null, data, {
-            'dataFilter': function (data) {
-                var res = StSDK.jsonDecode(data);
-                res.value = res[_getFieldNameByType(res.type)];
-                delete res[_getFieldNameByType(res.type)];
-
-                return StSDK.jsonEncode(res);
-            }
+            dataFilter: _doJsonDataFilter
         });
     };
 
@@ -104,7 +98,7 @@
             description: data.description
         };
 
-        payload[_getFieldNameByType(data.type)] = data.value;
+        payload[_getFieldNameByType(data.type)] = data.paramValue;
 
         return this.put('projects/'+ projectId + '/data-objects/' + data.id, null, payload);
     };
@@ -151,6 +145,14 @@
      * @returns {*}
      */
     StSDK.prototype.getDataObjectTypeInformation = _getDataObjectTypeInformation;
+
+    function _doJsonDataFilter(data) {
+        var res = StSDK.jsonDecode(data);
+        res.paramValue = res[_getFieldNameByType(res.type)];
+        delete res[_getFieldNameByType(res.type)];
+
+        return StSDK.jsonEncode(res);
+    }
 
     function _getFieldNameByType(type) {
         switch (type) {
@@ -219,11 +221,6 @@
             {
                 type: "double_click_advertiser_id_variable",
                 name: "Advertiser ID",
-                paramName: "Advertiser ID"
-            },
-            {
-                type: "double_click_advertiser_id_variable",
-                name: "Generic",
                 paramName: "Advertiser ID"
             },
             {
