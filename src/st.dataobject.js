@@ -93,13 +93,14 @@
      * @returns {jqXHR}
      */
     StSDK.prototype.updateDataObject = function(projectId, data) {
-        data[_getFieldNameByType(data.type)] = data.paramValue;
+        var payload = {
+            name: data.name,
+            description: data.description
+        };
 
-        delete data.paramValue;
+        payload[_getFieldNameByType(data.type)] = data.paramValue;
 
-        return this.put('projects/'+ projectId + '/data-objects/' + data.id, null, data, {
-            dataFilter: _doJsonDataFilter
-        });
+        return this.put('projects/'+ projectId + '/data-objects/' + data.id, null, payload);
     };
 
     /**
