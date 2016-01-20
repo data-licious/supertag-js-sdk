@@ -222,11 +222,6 @@
                 paramName: "Advertiser ID"
             },
             {
-                type: "double_click_advertiser_id_variable",
-                name: "Generic",
-                paramName: "Advertiser ID"
-            },
-            {
                 type: "rule_bound_variable",
                 name: "Rule bound",
                 paramName: "Default"
