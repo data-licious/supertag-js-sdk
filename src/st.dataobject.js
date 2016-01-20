@@ -75,9 +75,9 @@
      * @returns {jqXHR}
      */
     StSDK.prototype.createDataObject = function(projectId, data) {
-        data[_getFieldNameByType(data.type)] = data.value;
+        data[_getFieldNameByType(data.type)] = data.paramValue;
 
-        delete data.value;
+        delete data.paramValue;
 
         return this.post('projects/'+ projectId + '/data-objects', null, data, {
             'dataFilter': function (data) {

@@ -255,4 +255,17 @@
 
         return this.get('projects/' + projectId + '/code-install');
     };
+
+    /**
+     * Get project Access Rights
+     *
+     * @param {Number} projectId The project ID
+     *
+     * @returns {jqXHR}
+     */
+    StSDK.prototype.getProjectAccessRights = function(projectId) {
+        StSDK.validateInt('Project ID', projectId);
+
+        return this.get('projects/' + projectId + '/access-rights');
+    };
 }(window));
