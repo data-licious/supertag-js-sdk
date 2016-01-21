@@ -142,6 +142,19 @@
     };
 
     /**
+     * Runs project deploy preview
+     *
+     * @param {Number} id The project ID
+     *
+     * @returns {jqXHR}
+     */
+    StSDK.prototype.runProjectDeployPreview = function(id) {
+        StSDK.validateInt('Project ID', id);
+
+        return this.post('projects/' + id + '/deploy-preview');
+    };
+
+    /**
      * Gets the applications installed in a given project
      *
      * @param {Number} id The project ID
