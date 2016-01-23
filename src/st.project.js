@@ -138,7 +138,7 @@
     StSDK.prototype.getProjectSites = function(id) {
         StSDK.validateInt('Project ID', id);
 
-        return this.get('projects/' + id + '/sites');
+        return this.get('projects/' + id + '/sites?with_default=1');
     };
 
     /**
