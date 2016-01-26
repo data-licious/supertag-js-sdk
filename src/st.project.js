@@ -77,6 +77,32 @@
     };
 
     /**
+     * Updates an project
+     *
+     * @param {Number} projectId  The project ID
+     * @param {Object} data The project data
+     *
+     * @returns {jqXHR}
+     */
+    StSDK.prototype.updateProject = function(projectId, data) {
+        StSDK.validateInt('Project ID', projectId);
+        var updateData = {
+            'async': data.async,
+            'compressor': data.compressor,
+            'minify_js': data.minify_js,
+            'name': data.name,
+            'description': data.description,
+            'deployment_type': data.deployment_type,
+            'hosted_subdomain': data.hosted_subdomain,
+            'include_turbobytes_code': data.include_turbobytes_code === 'true',
+            'obfuscate_js': data.obfuscate_js
+
+        };
+
+        return this.put('projects/' + projectId, null, updateData);
+    };
+
+    /**
      * Gets the audit of a given project
      *
      * @param {Number} id The project ID
