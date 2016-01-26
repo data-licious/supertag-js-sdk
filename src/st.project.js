@@ -94,7 +94,7 @@
             'description': data.description,
             'deployment_type': data.deployment_type,
             'hosted_subdomain': data.hosted_subdomain,
-            'include_turbobytes_code': data.include_turbobytes_code === 'true',
+            'include_turbobytes_code': data.include_turbobytes_code,
             'obfuscate_js': data.obfuscate_js
 
         };
