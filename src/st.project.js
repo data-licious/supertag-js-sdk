@@ -4,6 +4,21 @@
     var StSDK = window.StSDK;
 
     /**
+     * @constant {String} PROJECT_ROLE_ADMINISTRATOR
+     */
+    StSDK.PROJECT_ROLE_ADMINISTRATOR = 'administrator';
+
+    /**
+     * @constant {String} PROJECT_ROLE_EDITOR
+     */
+    StSDK.PROJECT_ROLE_EDITOR = 'editor';
+
+    /**
+     * @constant {String} PROJECT_ROLE_VIEWER
+     */
+    StSDK.PROJECT_ROLE_VIEWER = 'viewer';
+
+    /**
      * @constant {String} PROJECT_APP_FORMAT_FLAT
      */
     StSDK.PROJECT_APP_FORMAT_FLAT = 'flat';
@@ -306,5 +321,26 @@
         StSDK.validateInt('Project ID', projectId);
 
         return this.get('projects/' + projectId + '/access-rights');
+    };
+
+    /**
+     * Revoke project Access Rights
+     *
+     * @param {Number} projectId The project ID
+     * @param {Number} userId The User ID
+     * @param {string} role [editor|viewer|administrator]
+     *
+     * @returns {jqXHR}
+     */
+    StSDK.prototype.revokeProjectAccess = function(projectId, userId, role) {
+        StSDK.validateInt('Project ID', projectId);
+        StSDK.validateInt('User ID', userId);
+        StSDK.validateOpts('Format', role, [
+            StSDK.PROJECT_ROLE_ADMINISTRATOR,
+            StSDK.PROJECT_ROLE_EDITOR,
+            StSDK.PROJECT_ROLE_VIEWER
+        ]);
+
+        return this.delete('projects/' + projectId + '/revoke-access/' + userId + '/' + role);
     };
 }(window));
