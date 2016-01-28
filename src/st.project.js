@@ -343,4 +343,24 @@
 
         return this.delete('projects/' + projectId + '/revoke-access/' + userId + '/' + role);
     };
+
+    /**
+     * Grant project Access Rights
+     *
+     * @param {Number} projectId The project ID
+     * @param {string} email The User email
+     * @param {string} role [editor|viewer|administrator]
+     *
+     * @returns {jqXHR}
+     */
+    StSDK.prototype.grantProjectAccess = function(projectId, email, role) {
+        StSDK.validateInt('Project ID', projectId);
+        StSDK.validateOpts('Format', role, [
+            StSDK.PROJECT_ROLE_ADMINISTRATOR,
+            StSDK.PROJECT_ROLE_EDITOR,
+            StSDK.PROJECT_ROLE_VIEWER
+        ]);
+
+        return this.post('projects/' + projectId + '/grant-access/' + email + '/' + role);
+    };
 }(window));
