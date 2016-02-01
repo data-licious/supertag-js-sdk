@@ -173,13 +173,19 @@
      * Gets project sites
      *
      * @param {Number} id The project ID
+     * @param {String} withDefault Flag with default
      *
      * @returns {jqXHR}
      */
-    StSDK.prototype.getProjectSites = function(id) {
+    StSDK.prototype.getProjectSites = function(id, withDefault) {
         StSDK.validateInt('Project ID', id);
+        var paramWithDefault = '';
+        if (withDefault) {
+            paramWithDefault = '?with_default=1';
 
-        return this.get('projects/' + id + '/sites?with_default=1');
+        }
+
+        return this.get('projects/' + id + '/sites' + paramWithDefault);
     };
 
     /**
