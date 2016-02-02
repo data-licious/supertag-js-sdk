@@ -189,6 +189,64 @@
     };
 
     /**
+     * Create project site
+     *
+     * @param {Number} id The project ID
+     * @param {Object} data The site data
+     *
+     * @returns {jqXHR}
+     */
+    StSDK.prototype.createProjectSite = function(id, data) {
+        StSDK.validateInt('Project ID', id);
+        var createData = {
+            'url': data.url,
+            'name': data.name,
+            'testing_url': data.testing_url,
+            'description': data.description
+        };
+
+        return this.post('projects/' + id + '/site', null, createData);
+    };
+
+    /**
+     * Delete project site
+     *
+     * @param {Number} projectId The project ID
+     * @param {Number} siteId The site ID
+     *
+     * @returns {jqXHR}
+     */
+    StSDK.prototype.deleteProjectSite = function(projectId, siteId) {
+        StSDK.validateInt('Project ID', projectId);
+        StSDK.validateInt('Site ID', siteId);
+
+        return this.delete('projects/' + projectId + '/sites/' + siteId);
+    };
+
+    /**
+     * Update project site
+     *
+     * @param {Number} projectId The project ID
+     * @param {Number} siteId The site ID
+     * @param {Object} data The site data
+     *
+     * @returns {jqXHR}
+     */
+    StSDK.prototype.updateProjectSite = function(projectId, siteId, data) {
+        StSDK.validateInt('Project ID', projectId);
+        StSDK.validateInt('Site ID', siteId);
+        var updateData = {
+            'url': data.url,
+            'name': data.name,
+            'testing_url': data.testing_url,
+            'description': data.description
+        };
+
+        return this.put('projects/' + projectId + '/sites/' + siteId, null, updateData);
+    };
+
+
+    /**
      * Runs project deploy preview
      *
      * @param {Number} id The project ID
