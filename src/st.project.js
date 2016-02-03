@@ -427,4 +427,23 @@
 
         return this.post('projects/' + projectId + '/grant-access/' + email + '/' + role);
     };
+
+    /**
+     * Installs a tag into a project
+     *
+     * @param {Number} projectId The project ID
+     * @param {Number} tagTemplateId The tag template ID
+     * @param {Object} data The data of the tag
+     *
+     * @returns {jqXHR}
+     */
+    StSDK.prototype.installTag = function(projectId, tagTemplateId, data) {
+        StSDK.validateInt('Project ID', projectId);
+        StSDK.validateInt('Tag template ID', tagTemplateId);
+        StSDK.validatePlainObj('Tag data', data);
+
+        return this.post('projects/' + projectId +'/tags/template/' + tagTemplateId, {
+            error_format: 'new'
+        }, data);
+    };
 }(window));
