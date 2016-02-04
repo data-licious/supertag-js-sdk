@@ -201,8 +201,7 @@
         var createData = {
             'url': data.url,
             'name': data.name,
-            'testing_url': data.testing_url,
-            'description': data.description
+            'testing_url': data.testing_url
         };
 
         return this.post('projects/' + id + '/site', null, createData);
@@ -238,8 +237,7 @@
         var updateData = {
             'url': data.url,
             'name': data.name,
-            'testing_url': data.testing_url,
-            'description': data.description
+            'testing_url': data.testing_url
         };
 
         return this.put('projects/' + projectId + '/sites/' + siteId, null, updateData);
