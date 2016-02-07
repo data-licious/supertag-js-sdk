@@ -47,7 +47,7 @@
             };
         }
 
-        return this.post('companies/' + companyId + '/access/' + email, null, data);
+        return this.post('companies/' + companyId + '/grant-access/' + email, null, data);
     };
 
 
@@ -63,6 +63,6 @@
         StSDK.validateInt('company ID', companyId);
         StSDK.validateInt('User ID', userId);
 
-        return this.delete('companies/' + companyId + '/access/' + userId);
+        return this.delete('companies/' + companyId + '/revoke-access/' + userId);
     };
 }(window));
