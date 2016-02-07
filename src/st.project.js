@@ -415,15 +415,21 @@
      *
      * @returns {jqXHR}
      */
-    StSDK.prototype.grantProjectAccess = function(projectId, email, role) {
+    StSDK.prototype.grantProjectAccess = function(projectId, email, role, boolInvite) {
         StSDK.validateInt('Project ID', projectId);
         StSDK.validateOpts('Format', role, [
             StSDK.PROJECT_ROLE_ADMINISTRATOR,
             StSDK.PROJECT_ROLE_EDITOR,
             StSDK.PROJECT_ROLE_VIEWER
         ]);
+        var data = {};
+        if (boolInvite) {
+            data = {
+                'invite': 1
+            };
+        }
 
-        return this.post('projects/' + projectId + '/grant-access/' + email + '/' + role);
+        return this.post('projects/' + projectId + '/grant-access/' + email + '/' + role, null, data);
     };
 
     /**
