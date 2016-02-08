@@ -450,4 +450,22 @@
             error_format: 'new'
         }, data);
     };
+
+    /**
+     * Create project
+     *
+     * @param {Number} companyId The company ID
+     * @param {Object} data The site data
+     *
+     * @returns {jqXHR}
+     */
+    StSDK.prototype.createProject = function(companyId, data) {
+        StSDK.validateInt('Company ID', companyId);
+        var createData = {
+            'name': data.name,
+            'async': data.async
+        };
+
+        return this.post('companies/' + companyId + '/project', null, createData);
+    };
 }(window));
