@@ -65,4 +65,36 @@
 
         return this.delete('companies/' + companyId + '/revoke-access/' + userId);
     };
+
+    /**
+     * Updates company settings
+     *
+     * @param {Number} id The company ID
+     * @param {Object} data The comapny settings
+     *
+     * @returns {jqXHR}
+     */
+    StSDK.prototype.updateCompanySettings = function(id, data) {
+        StSDK.validateInt('Company ID', id);
+
+        return this.put('comapnies/' + id + '/setings', null, {
+            'name': data.name,
+            'new_ip_range': data.new_ip_range,
+            'test_ip': data.test_ip,
+            'delete_ip_ranges': data.delete_ip_ranges,
+        });
+    };
+
+    /**
+     * Get company settings
+     *
+     * @param {Number} id The company ID
+     *
+     * @returns {jqXHR}
+     */
+    StSDK.prototype.getCompanySettings = function(id) {
+        StSDK.validateInt('Company ID', id);
+
+        return this.get('comapnies/' + id + '/setings');
+    };
 }(window));
