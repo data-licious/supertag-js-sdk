@@ -95,6 +95,6 @@
     StSDK.prototype.getCompanySettings = function(id) {
         StSDK.validateInt('Company ID', id);
 
-        return this.get('comapnies/' + id + '/setings');
+        return this.get('companies/' + id + '/settings');
     };
 }(window));
