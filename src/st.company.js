@@ -77,7 +77,7 @@
     StSDK.prototype.updateCompanySettings = function(id, data) {
         StSDK.validateInt('Company ID', id);
 
-        return this.put('comapnies/' + id + '/setings', null, {
+        return this.put('companies/' + id + '/settings', null, {
             'name': data.name,
             'new_ip_range': data.new_ip_range,
             'test_ip': data.test_ip,
