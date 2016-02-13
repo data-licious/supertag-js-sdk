@@ -4,6 +4,21 @@
     var StSDK = window.StSDK;
 
     /**
+     * @constant {String} PROJECT_ROLE_ADMINISTRATOR
+     */
+    StSDK.PROJECT_ROLE_ADMINISTRATOR = 'administrator';
+
+    /**
+     * @constant {String} PROJECT_ROLE_EDITOR
+     */
+    StSDK.PROJECT_ROLE_EDITOR = 'editor';
+
+    /**
+     * @constant {String} PROJECT_ROLE_VIEWER
+     */
+    StSDK.PROJECT_ROLE_VIEWER = 'viewer';
+
+    /**
      * @constant {String} PROJECT_APP_FORMAT_FLAT
      */
     StSDK.PROJECT_APP_FORMAT_FLAT = 'flat';
@@ -77,6 +92,32 @@
     };
 
     /**
+     * Updates an project
+     *
+     * @param {Number} projectId  The project ID
+     * @param {Object} data The project data
+     *
+     * @returns {jqXHR}
+     */
+    StSDK.prototype.updateProject = function(projectId, data) {
+        StSDK.validateInt('Project ID', projectId);
+        var updateData = {
+            'async': data.async,
+            'compressor': data.compressor,
+            'minify_js': data.minify_js,
+            'name': data.name,
+            'description': data.description,
+            'deployment_type': data.deployment_type,
+            'hosted_subdomain': data.hosted_subdomain,
+            'include_turbobytes_code': data.include_turbobytes_code,
+            'obfuscate_js': data.obfuscate_js
+
+        };
+
+        return this.put('projects/' + projectId, null, updateData);
+    };
+
+    /**
      * Gets the audit of a given project
      *
      * @param {Number} id The project ID
@@ -132,13 +173,88 @@
      * Gets project sites
      *
      * @param {Number} id The project ID
+     * @param {String} withDefault Flag with default
      *
      * @returns {jqXHR}
      */
-    StSDK.prototype.getProjectSites = function(id) {
+    StSDK.prototype.getProjectSites = function(id, withDefault) {
+        StSDK.validateInt('Project ID', id);
+        var paramWithDefault = '';
+        if (withDefault) {
+            paramWithDefault = '?with_default=1';
+
+        }
+
+        return this.get('projects/' + id + '/sites' + paramWithDefault);
+    };
+
+    /**
+     * Create project site
+     *
+     * @param {Number} id The project ID
+     * @param {Object} data The site data
+     *
+     * @returns {jqXHR}
+     */
+    StSDK.prototype.createProjectSite = function(id, data) {
+        StSDK.validateInt('Project ID', id);
+        var createData = {
+            'url': data.url,
+            'name': data.name,
+            'testing_url': data.testing_url
+        };
+
+        return this.post('projects/' + id + '/site', null, createData);
+    };
+
+    /**
+     * Delete project site
+     *
+     * @param {Number} projectId The project ID
+     * @param {Number} siteId The site ID
+     *
+     * @returns {jqXHR}
+     */
+    StSDK.prototype.deleteProjectSite = function(projectId, siteId) {
+        StSDK.validateInt('Project ID', projectId);
+        StSDK.validateInt('Site ID', siteId);
+
+        return this.delete('projects/' + projectId + '/sites/' + siteId);
+    };
+
+    /**
+     * Update project site
+     *
+     * @param {Number} projectId The project ID
+     * @param {Number} siteId The site ID
+     * @param {Object} data The site data
+     *
+     * @returns {jqXHR}
+     */
+    StSDK.prototype.updateProjectSite = function(projectId, siteId, data) {
+        StSDK.validateInt('Project ID', projectId);
+        StSDK.validateInt('Site ID', siteId);
+        var updateData = {
+            'url': data.url,
+            'name': data.name,
+            'testing_url': data.testing_url
+        };
+
+        return this.put('projects/' + projectId + '/sites/' + siteId, null, updateData);
+    };
+
+
+    /**
+     * Runs project deploy preview
+     *
+     * @param {Number} id The project ID
+     *
+     * @returns {jqXHR}
+     */
+    StSDK.prototype.runProjectDeployPreview = function(id) {
         StSDK.validateInt('Project ID', id);
 
-        return this.get('projects/' + id + '/sites');
+        return this.post('projects/' + id + '/deploy-preview');
     };
 
     /**
@@ -254,5 +370,102 @@
         StSDK.validateInt('Project ID', projectId);
 
         return this.get('projects/' + projectId + '/code-install');
+    };
+
+    /**
+     * Get project Access Rights
+     *
+     * @param {Number} projectId The project ID
+     *
+     * @returns {jqXHR}
+     */
+    StSDK.prototype.getProjectAccessRights = function(projectId) {
+        StSDK.validateInt('Project ID', projectId);
+
+        return this.get('projects/' + projectId + '/access-rights');
+    };
+
+    /**
+     * Revoke project Access Rights
+     *
+     * @param {Number} projectId The project ID
+     * @param {Number} userId The User ID
+     * @param {string} role [editor|viewer|administrator]
+     *
+     * @returns {jqXHR}
+     */
+    StSDK.prototype.revokeProjectAccess = function(projectId, userId, role) {
+        StSDK.validateInt('Project ID', projectId);
+        StSDK.validateInt('User ID', userId);
+        StSDK.validateOpts('Format', role, [
+            StSDK.PROJECT_ROLE_ADMINISTRATOR,
+            StSDK.PROJECT_ROLE_EDITOR,
+            StSDK.PROJECT_ROLE_VIEWER
+        ]);
+
+        return this.delete('projects/' + projectId + '/revoke-access/' + userId + '/' + role);
+    };
+
+    /**
+     * Grant project Access Rights
+     *
+     * @param {Number} projectId The project ID
+     * @param {string} email The User email
+     * @param {string} role [editor|viewer|administrator]
+     *
+     * @returns {jqXHR}
+     */
+    StSDK.prototype.grantProjectAccess = function(projectId, email, role, boolInvite) {
+        StSDK.validateInt('Project ID', projectId);
+        StSDK.validateOpts('Format', role, [
+            StSDK.PROJECT_ROLE_ADMINISTRATOR,
+            StSDK.PROJECT_ROLE_EDITOR,
+            StSDK.PROJECT_ROLE_VIEWER
+        ]);
+        var data = {};
+        if (boolInvite) {
+            data = {
+                'invite': 1
+            };
+        }
+
+        return this.post('projects/' + projectId + '/grant-access/' + email + '/' + role, null, data);
+    };
+
+    /**
+     * Installs a tag into a project
+     *
+     * @param {Number} projectId The project ID
+     * @param {Number} tagTemplateId The tag template ID
+     * @param {Object} data The data of the tag
+     *
+     * @returns {jqXHR}
+     */
+    StSDK.prototype.installTag = function(projectId, tagTemplateId, data) {
+        StSDK.validateInt('Project ID', projectId);
+        StSDK.validateInt('Tag template ID', tagTemplateId);
+        StSDK.validatePlainObj('Tag data', data);
+
+        return this.post('projects/' + projectId +'/tags/template/' + tagTemplateId, {
+            error_format: 'new'
+        }, data);
+    };
+
+    /**
+     * Create project
+     *
+     * @param {Number} companyId The company ID
+     * @param {Object} data The site data
+     *
+     * @returns {jqXHR}
+     */
+    StSDK.prototype.createProject = function(companyId, data) {
+        StSDK.validateInt('Company ID', companyId);
+        var createData = {
+            'name': data.name,
+            'async': data.async
+        };
+
+        return this.post('companies/' + companyId + '/project', null, createData);
     };
 }(window));

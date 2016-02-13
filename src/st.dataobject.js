@@ -117,14 +117,14 @@
             case "cookie_parameter_variable":
                 return "Cookie";
             case "double_click_advertiser_id_variable":
-                return "DoubleClick Advertiser";
+                return "DoubleClick Advertiser ID";
             case "element_text_variable":
                 return "Element text";
             case "javascript_variable":
             case "special_javascript_value_variable":
                 return "JavaScript";
             case "query_parameter_variable":
-                return "URL Parameter";
+                return "Query Parameter";
             case "string_variable":
                 return "String";
             case "variable_template_variable":

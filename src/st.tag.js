@@ -1,4 +1,4 @@
-(function(window, document, $, undefined) {
+(function(window, document, $) {
     'use strict';
 
     var StSDK = window.StSDK;
@@ -86,23 +86,6 @@
                 return tag;
             });
         }
-    };
-
-    /**
-     * Installs a tag into a project
-     *
-     * @param {Number} projectId The project ID
-     * @param {Number} tagTemplateId The tag template ID
-     * @param {Object} data The data of the tag
-     *
-     * @returns {jqXHR}
-     */
-    StSDK.prototype.installTag = function(projectId, tagTemplateId, data) {
-        StSDK.validateInt('Project ID', projectId);
-        StSDK.validateInt('Tag template ID', tagTemplateId);
-        StSDK.validatePlainObj('Tag data', data);
-
-        return this.post('projects/' + projectId +'/tags/template/' + tagTemplateId + '?error_format=new', null, data);
     };
 
     /**
@@ -304,7 +287,7 @@
     };
 
     /**
-     * Add function call for tag container
+     * Adds function call for a tag container
      *
      * @param {Number} projectId The project ID
      * @param {Number} id The tag ID
@@ -320,7 +303,7 @@
     };
 
     /**
-     * Get function call info
+     * Gets function call info
      *
      * @param {Number} projectId The project ID
      * @param {Number} id Function call ID
@@ -335,7 +318,7 @@
     };
 
     /**
-     * Edit function call tag
+     * Edits function call tag
      *
      * @param {Number} projectId The project ID
      * @param {Number} id The function call tag ID
@@ -351,7 +334,7 @@
     };
 
     /**
-     * Get all functions for project
+     * Gets all functions for a project
      *
      * @param {Number} projectId The project ID
      *
@@ -364,7 +347,7 @@
     };
 
     /**
-     * Get all tags, data-objects and rules will be duplicated on the tag copying
+     * Gets all tags, data-objects and rules will be duplicated on the tag copying
      *
      * @param {Number} tagId The root tag ID
      *
@@ -376,10 +359,8 @@
         return this.get('tags/' + tagId + '/copy-dry');
     };
 
-
-
     /**
-     * Copy a tag to another project
+     * Copies a tag to another project
      *
      * @param {Number} projectId Copy TO Project ID
      * @param {Number} tagId The tag ID
@@ -392,5 +373,4 @@
 
         return this.post('tags/' + tagId + '/copy-to-project/' + projectId);
     };
-
 }(window, document, jQuery));
