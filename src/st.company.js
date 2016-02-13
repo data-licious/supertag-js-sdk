@@ -108,7 +108,7 @@
      * @returns {jqXHR}
      */
     StSDK.prototype.getStarted = function (companyName, projectName, projectSite) {
-        return this.post('get-started', {
+        return this.post('get-started', null, {
             'companyName': companyName,
             'projectName': projectName,
             'projectSite': projectSite
