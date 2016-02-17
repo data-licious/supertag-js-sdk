@@ -468,4 +468,17 @@
 
         return this.post('companies/' + companyId + '/project', null, createData);
     };
+
+    /**
+     * Delete the project
+     *
+     * @param {Number} projectId The project ID
+     *
+     * @returns {jqXHR}
+     */
+    StSDK.prototype.deleteProject = function(projectId) {
+        StSDK.validateInt('Project ID', projectId);
+
+        return this.delete('projects/' + projectId);
+    };
 }(window));
