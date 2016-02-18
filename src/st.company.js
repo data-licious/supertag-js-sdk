@@ -115,4 +115,17 @@
         });
     };
 
+    /**
+     * Delete company
+     *
+     * @param {Number} companyId The company ID
+     *
+     * @returns {jqXHR}
+     */
+    StSDK.prototype.deleteCompany = function(companyId) {
+        StSDK.validateInt('company ID', companyId);
+
+        return this.delete('companies/' + companyId);
+    };
+
 }(window));
