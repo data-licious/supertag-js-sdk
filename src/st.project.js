@@ -85,10 +85,10 @@
      *
      * @returns {jqXHR}
      */
-    StSDK.prototype.getProject = function(id) {
+    StSDK.prototype.getProject = function(id, ajaxOpts) {
         StSDK.validateInt('Project ID', id);
 
-        return this.get('projects/' + id);
+        return this.get('projects/' + id, {}, ajaxOpts);
     };
 
     /**

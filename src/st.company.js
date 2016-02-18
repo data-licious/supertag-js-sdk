@@ -10,10 +10,10 @@
      *
      * @returns {jqXHR}
      */
-    StSDK.prototype.getCompany = function (id) {
+    StSDK.prototype.getCompany = function (id, ajaxOpts) {
         StSDK.validateInt('Company ID', id);
 
-        return this.get('companies/' + id);
+        return this.get('companies/' + id, {}, ajaxOpts);
     };
 
     /**
