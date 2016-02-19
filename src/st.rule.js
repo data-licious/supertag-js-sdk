@@ -62,6 +62,21 @@
     };
 
     /**
+     * Gets rule with conditions
+     *
+     * @param {Number} id ID of the project
+     * @param {Number} ruleId ID of the rule
+     *
+     * @returns {jqXHR}
+     */
+    StSDK.prototype.getProjectRule = function(id, ruleId) {
+        StSDK.validateInt('Project ID', id);
+        StSDK.validateInt('Rule ID', ruleId);
+
+        return this.get('projects/' + id + '/rules/' + ruleId);
+    };
+
+    /**
      * Gets all rules available in the given project
      *
      * @param {Number} id ID of the project
