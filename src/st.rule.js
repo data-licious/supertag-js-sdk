@@ -77,6 +77,22 @@
     };
 
     /**
+     * Gets rule with conditions by Rule Tag
+     *
+     * @param {Number} id ID of the project
+     * @param {Number} ruleTagId ID of the RuleTag
+     *
+     * @returns {jqXHR}
+     */
+    StSDK.prototype.getProjectRuleByRuleTag = function(id, ruleTagId) {
+        StSDK.validateInt('Project ID', id);
+        StSDK.validateInt('RuleTag ID', ruleTagId);
+
+        return this.get('projects/' + id + '/rule-by-tag/' + ruleTagId);
+    };
+
+
+    /**
      * Gets all rules available in the given project
      *
      * @param {Number} id ID of the project
