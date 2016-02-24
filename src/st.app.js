@@ -295,8 +295,10 @@
                 var grouped = {},
                     groupedAppOnly = {},
                     groupedVendorOnly = {},
+                    groupedPlatformOnly = {},
                     standard = [],
                     standardVendorOnly = [],
+                    standardPlatformOnly = [],
                     apps = StSDK.jsonDecode(data);
 
                 $.each(apps, function(k, app) {
@@ -318,6 +320,12 @@
                         groupedVendorOnly[vendor] = [app];
                     } else {
                         groupedVendorOnly[vendor].push(app);
+                    }
+
+                    if (!(platform in groupedPlatformOnly)) {
+                        groupedPlatformOnly[platform] = [app];
+                    } else {
+                        groupedPlatformOnly[platform].push(app);
                     }
 
                     if (StSDK.APP_TEMPLATE_FORMAT_GROUPED_APP_ONLY === format) {
@@ -362,14 +370,14 @@
                     return StSDK.jsonEncode(standard);
                 }
 
-                $.each(groupedVendorOnly, function(vendorName, apps) {
-                    standardVendorOnly.push({
-                        vendor: vendorName,
+                $.each(groupedPlatformOnly, function(platformName, apps) {
+                    standardPlatformOnly.push({
+                        platform: platformName,
                         applications: apps
                     });
                 });
 
-                return StSDK.jsonEncode(standardVendorOnly);
+                return StSDK.jsonEncode(standardPlatformOnly);
             }
         });
     };
