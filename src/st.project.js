@@ -266,7 +266,15 @@
      * @returns {jqXHR}
      */
     StSDK.prototype.getProjectOverview = function(id) {
+        StSDK.validateInt('Project ID', id);
 
+        return this.get('projects/' + id + '/overview', null, {
+            dataFilter: function(data, type) {
+                var overviewDetails = StSDK.jsonDecode(data);
+
+                // return StSDK.jsonEncode(?);
+            }
+        });
     }
 
     /**
