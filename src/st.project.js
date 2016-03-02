@@ -259,6 +259,17 @@
     };
 
     /**
+     * Get project's overview details
+     *
+     * @param {Number} id The project ID
+     *
+     * @returns {jqXHR}
+     */
+    StSDK.prototype.getProjectOverview = function(id) {
+
+    }
+
+    /**
      * Gets the applications installed in a given project
      *
      * @param {Number} id The project ID
