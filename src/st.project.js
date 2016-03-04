@@ -271,7 +271,7 @@
         return this.get('projects/' + id + '/overview', null, {
             dataFilter: function(data, type) {
                 var overviewDetails = StSDK.jsonDecode(data);
-console.log('here finally');
+
                 return StSDK.jsonEncode(overviewDetails);
             }
         });
