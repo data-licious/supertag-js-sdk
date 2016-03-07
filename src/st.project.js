@@ -481,4 +481,17 @@
 
         return this.delete('projects/' + projectId);
     };
+
+    /**
+     * Get project Codes versions for code compare
+     *
+     * @param {Number} projectId The project ID
+     *
+     * @returns {jqXHR}
+     */
+    StSDK.prototype.getProjectCodeForCodeCompare = function(projectId, baseVersion, matchVersion) {
+        StSDK.validateInt('Project ID', projectId);
+
+        return this.get('projects/' + projectId + '/code-compare/' + baseVersion + '/' + matchVersion);
+    };
 }(window));
