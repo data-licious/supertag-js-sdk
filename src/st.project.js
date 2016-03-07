@@ -110,8 +110,8 @@
             'deployment_type': data.deployment_type,
             'hosted_subdomain': data.hosted_subdomain,
             'include_turbobytes_code': data.include_turbobytes_code,
-            'obfuscate_js': data.obfuscate_js
-
+            'obfuscate_js': data.obfuscate_js,
+            'use_opt_out': data.obfuscate_js
         };
 
         return this.put('projects/' + projectId, null, updateData);
