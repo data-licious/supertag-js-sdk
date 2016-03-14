@@ -111,7 +111,7 @@
             'hosted_subdomain': data.hosted_subdomain,
             'include_turbobytes_code': data.include_turbobytes_code,
             'obfuscate_js': data.obfuscate_js,
-            'use_opt_out': data.obfuscate_js
+            'use_opt_out': data.use_opt_out
         };
 
         return this.put('projects/' + projectId, null, updateData);
