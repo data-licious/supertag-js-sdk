@@ -494,4 +494,17 @@
 
         return this.get('projects/' + projectId + '/code-compare/' + baseVersion + '/' + matchVersion);
     };
+
+    /**
+     * Get File size of Project Code
+     *
+     * @param {Number} projectId The project ID
+     *
+     * @returns {jqXHR}
+     */
+    StSDK.prototype.getProjectCodeFileSize = function(projectId) {
+        StSDK.validateInt('Project ID', projectId);
+
+        return this.get('projects/' + projectId + '/code-size');
+    };
 }(window));
