@@ -463,6 +463,7 @@
         StSDK.validateInt('Company ID', companyId);
         var createData = {
             'name': data.name,
+            'type': data.type,
             'async': data.async
         };
 
