@@ -112,6 +112,8 @@
             'include_turbobytes_code': data.include_turbobytes_code,
             'obfuscate_js': data.obfuscate_js,
             'live_testing_refresh_interval': data.liveTestingRefreshInterval,
+            'testAndroidUuids': data.testAndroidUuids,
+            'testAdvertiserIds': data.testAdvertiserIds,
             'use_opt_out': data.use_opt_out
         };
 
