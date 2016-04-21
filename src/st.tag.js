@@ -373,4 +373,17 @@
 
         return this.post('tags/' + tagId + '/copy-to-project/' + projectId);
     };
+
+    /**
+     * Gets tag audit
+     *
+     * @param {Number} tagId The tag ID
+     *
+     * @returns {jqXHR}
+     */
+    StSDK.prototype.getTagAudit = function(tagId) {
+        StSDK.validateInt('Tag ID', tagId);
+
+        return this.get('tags/' + tagId + '/audits');
+    };
 }(window, document, jQuery));
