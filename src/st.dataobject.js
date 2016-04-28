@@ -41,6 +41,7 @@
                         is_updated:dataObject.is_updated,
                         is_editable:dataObject.is_editable,
                         autoinstall_app_list: dataObject.autoinstall_app_list,
+                        variable_type: dataObject.variable_type,
                         name: dataObject.name,
                         type: dataObject.type,
                         owner_type: dataObject.owner_type,
@@ -112,6 +113,9 @@
      * @returns {String}
      */
     StSDK.prototype.getDataObjectTypeLabel = function(data) {
+        if (data.type == 'variable_template_variable') {
+            data.type =  data.variable_type;
+        }
         switch (data.type) {
             case "affinity_group_variable":
                 return "Affinity";
@@ -128,8 +132,6 @@
                 return "Query Parameter";
             case "string_variable":
                 return "String";
-            case "variable_template_variable":
-                return data.vendor;
             case "rule_bound_variable":
                 return "Rule based";
             case "referrer_parameter_variable":
