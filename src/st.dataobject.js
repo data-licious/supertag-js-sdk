@@ -40,7 +40,7 @@
                         is_new:dataObject.is_new,
                         is_updated:dataObject.is_updated,
                         is_editable:dataObject.is_editable,
-                        is_auto_installed:dataObject.is_auto_installed,
+                        autoinstall_app_list: dataObject.autoinstall_app_list,
                         name: dataObject.name,
                         type: dataObject.type,
                         owner_type: dataObject.owner_type,
