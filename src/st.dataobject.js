@@ -113,10 +113,16 @@
      * @returns {String}
      */
     StSDK.prototype.getDataObjectTypeLabel = function(data) {
-        if (data.type == 'variable_template_variable') {
-            data.type =  data.variable_type;
+        if (data.type === 'variable_template_variable') {
+            var _label = _getGetDataObjectTypeLabelByType(data.variable_type);
+            return (_label)?_label:data.vendor; // in case of existed VariableTemplateVariable
         }
-        switch (data.type) {
+
+        return _getGetDataObjectTypeLabelByType(data.type);
+    };
+
+    function _getGetDataObjectTypeLabelByType(dataObjectType) {
+        switch (dataObjectType) {
             case "affinity_group_variable":
                 return "Affinity";
             case "cookie_parameter_variable":
@@ -139,7 +145,7 @@
         }
 
         return "";
-    };
+    }
 
     /**
      * Returns information about data object type
