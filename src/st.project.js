@@ -114,6 +114,7 @@
             'live_testing_refresh_interval': data.liveTestingRefreshInterval,
             'testAndroidUuids': data.testAndroidUuids,
             'testAdvertiserIds': data.testAdvertiserIds,
+            'sdk_type': data.sdk_type,
             'use_opt_out': data.use_opt_out
         };
 
@@ -486,6 +487,7 @@
         var createData = {
             'name': data.name,
             'type': data.type,
+            'sdk_type': data.sdk_type,
             'async': data.async
         };
 
