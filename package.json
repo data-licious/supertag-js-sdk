@@ -2,16 +2,16 @@
   "name": "supertag-js-sdk",
   "version": "0.1.0",
   "description": "SuperTag JavaScript SDK",
-  "homepage": "https://github.com/supertag/supertag-js-sdk#readme",
+  "homepage": "https://github.com/data-licious/supertag-js-sdk#readme",
   "license": "ISC",
   "author": "SuperTag Team <supertag@datalicious.com>",
   "main": "src/st.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/supertag/supertag-js-sdk.git"
+    "url": "git+https://github.com/data-licious/supertag-js-sdk.git"
   },
   "bugs": {
-    "url": "https://github.com/supertag/supertag-js-sdk/issues"
+    "url": "https://github.com/data-licious/supertag-js-sdk/issues"
   },
   "devDependencies": {
     "bower": "^1.5.2",

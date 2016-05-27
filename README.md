@@ -1,4 +1,4 @@
-[ ![Codeship Status for supertag/supertag-js-sdk](https://codeship.com/projects/eb6fe080-435b-0133-a126-328cc272eda8/status?branch=master)](https://codeship.com/projects/104034)
+[ ![Codeship Status for data-licious/supertag-js-sdk](https://codeship.com/projects/eb6fe080-435b-0133-a126-328cc272eda8/status?branch=master)](https://codeship.com/projects/104034)
 
 SuperTag JavaScript SDK
 =========================
