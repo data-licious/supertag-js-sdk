@@ -115,7 +115,8 @@
             'testAndroidUuids': data.testAndroidUuids,
             'testAdvertiserIds': data.testAdvertiserIds,
             'sdk_type': data.sdk_type,
-            'use_opt_out': data.use_opt_out
+            'use_opt_out': data.use_opt_out,
+            'is_realtime_enabled': data.is_realtime_enabled
         };
 
         return this.put('projects/' + projectId, null, updateData);
