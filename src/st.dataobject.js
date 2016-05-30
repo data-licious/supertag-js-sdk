@@ -29,7 +29,6 @@
     StSDK.prototype.getProjectDataObjects = function(id, isSimpleVerion2) {
         StSDK.validateInt('Project ID', id);
         var _url = 'projects/' + id + '/data-objects';
-        console.log('[sdk] isSimpleVerion2', isSimpleVerion2);
         if (isSimpleVerion2) {
             _url += '?simple=2';
 
