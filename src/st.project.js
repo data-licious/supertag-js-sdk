@@ -279,7 +279,7 @@
                 return StSDK.jsonEncode(overviewDetails);
             }
         });
-    }
+    };
 
     /**
      * Gets the applications installed in a given project
@@ -533,4 +533,32 @@
 
         return this.get('projects/' + projectId + '/code-size');
     };
+
+    /**
+     * Create a new live testing session
+     * 
+     * @param {Number} projectId
+     * @param {String} deviceId
+     * 
+     * @returns {jqXHR}
+     */
+    StSDK.prototype.createLiveTestingSession = function(projectId, deviceId) {
+        StSDK.validateInt('Project ID', projectId);
+
+        return this.post('projects/' + projectId + '/live-testing-sessions/' + deviceId);
+    };
+
+    /**
+     * Delete a live testing session
+     *
+     * @param {Number} projectId
+     * @param {String} deviceId 
+     *
+     * @returns {jqXHR}
+     */
+    StSDK.prototype.deleteLiveTestingSession = function(projectId, deviceId) {
+        StSDK.validateInt('Project ID', projectId);
+        
+        return this.delete('projects/' + projectId + '/live-testing-sessions/' + deviceId);
+    }
 }(window));
