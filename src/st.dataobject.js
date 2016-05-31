@@ -26,15 +26,10 @@
      *
      * @returns {jqXHR}
      */
-    StSDK.prototype.getProjectDataObjects = function(id, isSimpleVerion2) {
+    StSDK.prototype.getProjectDataObjects = function(id) {
         StSDK.validateInt('Project ID', id);
-        var _url = 'projects/' + id + '/data-objects';
-        if (isSimpleVerion2) {
-            _url += '?simple=2';
 
-        }
-
-        return this.get(_url, null, {
+        return this.get('projects/' + id + '/data-objects', null, {
             'dataFilter': function (data) {
                 var res = [];
 
