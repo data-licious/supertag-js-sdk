@@ -20,6 +20,16 @@
     };
 
     /**
+     * Gets system data object types
+     *
+     * @returns {jqXHR}
+     */
+    StSDK.prototype.getAllSystemDataObjects = function(tagId, projectId) {
+
+        return this.get('system-data-object-types');
+    };
+
+    /**
      * Gets all data objects available in the specific project
      *
      * @param {Number} id ID of the project
@@ -54,6 +64,7 @@
                         num_tags: dataObject.usage ? (dataObject.usage.tags ? dataObject.usage.tags.length : 0) : 0,
                         num_rules: dataObject.usage ? (dataObject.usage.rules ? dataObject.usage.rules.length : 0) : 0,
                         variable_template: dataObject.variable_template,
+                        variable_template_id: dataObject.variable_template_id,
                         parameter_name: dataObject.parameter_name,
                         parameter_value: dataObject.parameter_value,
                         twig_template: dataObject.twig_template,
@@ -186,7 +197,7 @@
             case "rule_bound_variable":
                 return "";
             default:
-                return "";
+                return "value";
         }
     }
 
