@@ -64,7 +64,7 @@
                         num_tags: dataObject.usage ? (dataObject.usage.tags ? dataObject.usage.tags.length : 0) : 0,
                         num_rules: dataObject.usage ? (dataObject.usage.rules ? dataObject.usage.rules.length : 0) : 0,
                         variable_template: dataObject.variable_template,
-                        variable_template_id: dataObject.variable_template_id,
+                        variable_template_name: dataObject.variable_template_name,
                         parameter_name: dataObject.parameter_name,
                         parameter_value: dataObject.parameter_value,
                         twig_template: dataObject.twig_template,
@@ -126,7 +126,8 @@
     StSDK.prototype.getDataObjectTypeLabel = function(data) {
         if (data.type === 'variable_template_variable') {
             var _label = _getGetDataObjectTypeLabelByType(data.variable_type);
-            return (_label)?_label:data.vendor; // in case of existed VariableTemplateVariable
+
+            return (_label)?_label:data.variable_template_name; // in case of existed VariableTemplateVariable
         }
 
         return _getGetDataObjectTypeLabelByType(data.type);
