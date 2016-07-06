@@ -212,7 +212,7 @@
             {
                 type: "variable_template_variable",
                 name: dataObject.vendor,
-                parameterName: dataObject.parameter_name
+                paramName: dataObject.parameter_name
             },
             {
                 type: "query_parameter_variable",
