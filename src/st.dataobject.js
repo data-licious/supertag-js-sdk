@@ -24,9 +24,9 @@
      *
      * @returns {jqXHR}
      */
-    StSDK.prototype.getAllSystemDataObjects = function(tagId, projectId) {
+    StSDK.prototype.getAllSystemDataObjects = function(projectId) {
 
-        return this.get('system-data-object-types');
+        return this.get('projects/' + projectId + '/system-data-object-types');
     };
 
     /**
