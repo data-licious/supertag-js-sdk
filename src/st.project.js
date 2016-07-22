@@ -289,8 +289,9 @@
      *
      * @returns {jqXHR}
      */
-    StSDK.prototype.getProjectApplications = function(id, format) {
+    StSDK.prototype.getProjectApplications = function(id, format, withTags) {
         var format = format || StSDK.PROJECT_APP_FORMAT_FLAT;
+        var withTags = typeof withTags === 'undefined' ? true : !!withTags;
         StSDK.validateInt('Project ID', id);
         StSDK.validateOpts('Format', format, [
             StSDK.PROJECT_APP_FORMAT_FLAT,
@@ -298,7 +299,7 @@
             StSDK.PROJECT_APP_FORMAT_STANDARD_WITH_PLATFORM
         ]);
 
-        return this.get('projects/' + id + '/apps', null, {
+        return this.get('projects/' + id + '/apps', {"withTags": withTags}, {
             dataFilter: function(data, type) {
                 if (StSDK.PROJECT_APP_FORMAT_FLAT === format || 'json' !== type) {
                     return data;
@@ -311,21 +312,22 @@
                 $.each(apps, function(k, app) {
                     var tagTmpls = {},
                         vendor = app.vendor.toLowerCase(),
-                        platform = '[' + vendor +  ']' + app.platform.toLowerCase(),
-                        tags = app.tags;
+                        platform = '[' + vendor +  ']' + app.platform.toLowerCase();
 
-                    $.each(tags, function(j, tag) {
-                        var tagTmplId = tag.templateId;
+                    if (withTags) {
+                        $.each(app.tags, function (j, tag) {
+                            var tagTmplId = tag.templateId;
 
-                        if (!(tagTmplId in tagTmpls)) {
-                            tagTmpls[tagTmplId] = [tag];
-                        } else {
-                            tagTmpls[tagTmplId].push(tag);
-                        }
-                    });
+                            if (!(tagTmplId in tagTmpls)) {
+                                tagTmpls[tagTmplId] = [tag];
+                            } else {
+                                tagTmpls[tagTmplId].push(tag);
+                            }
+                        });
 
-                    app['tag_templates'] = tagTmpls;
-                    delete app.tags;
+                        app['tag_templates'] = tagTmpls;
+                        delete app.tags;
+                    }
 
                     if (!(platform in grouped)) {
                         grouped[platform] = [app];
