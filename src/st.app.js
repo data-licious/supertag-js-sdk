@@ -50,15 +50,16 @@
      *
      * @returns {jqXHR}
      */
-    StSDK.prototype.getApp = function(id, format) {
+    StSDK.prototype.getApp = function(projectId, appId, format) {
         var format = format || StSDK.APP_FORMAT_FLAT;
-        StSDK.validateInt('App ID', id);
+        StSDK.validateInt('Project ID', projectId);
+        StSDK.validateInt('App ID', appId);
         StSDK.validateOpts('Format', format, [
             StSDK.APP_FORMAT_FLAT,
             StSDK.APP_FORMAT_STANDARD
         ]);
 
-        return this.get('apps/' + id, null, {
+        return this.get('projects/' + projectId + '/apps/' + appId, null, {
             dataFilter: function(data, type) {
                 if (StSDK.APP_FORMAT_FLAT === format || 'json' !== type) {
                     return data;
