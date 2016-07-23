@@ -100,6 +100,47 @@
     };
 
     /**
+     * Gets all app template simple list [id, name]
+     *
+     * @returns {jqXHR}
+     */
+    StSDK.prototype.getAllAppTemplates = function() {
+        return this.get('all-app-templates');
+    };
+
+    /**
+     * Add an app template to company
+     *
+     * @param {Number} id The Company ID
+     * @param {Number} id The app template ID
+     * @param {String} list ['black', 'white']
+     *
+     * @returns {jqXHR}
+     */
+    StSDK.prototype.addAppTemplate = function(companyId, appTemplateId, list) {
+        StSDK.validateInt('Company Id', companyId);
+        StSDK.validateInt('App Template Id', appTemplateId);
+
+        return this.post('company/' + companyId + '/add-app-template/' + appTemplateId, null, {'list': list});
+    };
+
+    /**
+     * Remove an app template to company
+     *
+     * @param {Number} id The Company ID
+     * @param {Number} id The app template ID
+     * @param {String} list ['black', 'white']
+     *
+     * @returns {jqXHR}
+     */
+    StSDK.prototype.removeAppTemplate = function(companyId, appTemplateId, list) {
+        StSDK.validateInt('Company Id', companyId);
+        StSDK.validateInt('App Template Id', appTemplateId);
+
+        return this.post('company/' + companyId + '/remove-app-template/' + appTemplateId, null, {'list': list});
+    };
+
+    /**
      * Creates an app template
      *
      * @param {Object} data The app template data
