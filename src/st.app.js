@@ -109,35 +109,63 @@
     };
 
     /**
-     * Add an app template to company
+     * Add an app template to company whitelist
      *
      * @param {Number} id The Company ID
      * @param {Number} id The app template ID
-     * @param {String} list ['black', 'white']
      *
      * @returns {jqXHR}
      */
-    StSDK.prototype.addAppTemplate = function(companyId, appTemplateId, list) {
+    StSDK.prototype.addAppTemplateWhitelist = function(companyId, appTemplateId) {
         StSDK.validateInt('Company Id', companyId);
         StSDK.validateInt('App Template Id', appTemplateId);
 
-        return this.post('company/' + companyId + '/add-app-template/' + appTemplateId, null, {'list': list});
+        return this.post('company/' + companyId + '/whitelist/' + appTemplateId, null, {});
     };
 
     /**
-     * Remove an app template to company
+     * Add an app template to company blacklist
      *
      * @param {Number} id The Company ID
      * @param {Number} id The app template ID
-     * @param {String} list ['black', 'white']
      *
      * @returns {jqXHR}
      */
-    StSDK.prototype.removeAppTemplate = function(companyId, appTemplateId, list) {
+    StSDK.prototype.addAppTemplateBlacklist = function(companyId, appTemplateId) {
         StSDK.validateInt('Company Id', companyId);
         StSDK.validateInt('App Template Id', appTemplateId);
 
-        return this.post('company/' + companyId + '/remove-app-template/' + appTemplateId, null, {'list': list});
+        return this.post('company/' + companyId + '/blacklist/' + appTemplateId, null, {});
+    };
+
+    /**
+     * Remove an app template from company whitelist
+     *
+     * @param {Number} id The Company ID
+     * @param {Number} id The app template ID
+     *
+     * @returns {jqXHR}
+     */
+    StSDK.prototype.removeAppTemplateFromWhitelist = function(companyId, appTemplateId) {
+        StSDK.validateInt('Company Id', companyId);
+        StSDK.validateInt('App Template Id', appTemplateId);
+
+        return this.delete('company/' + companyId + '/whitelist/' + appTemplateId);
+    };
+
+    /**
+     * Remove an app template from company blacklist
+     *
+     * @param {Number} id The Company ID
+     * @param {Number} id The app template ID
+     *
+     * @returns {jqXHR}
+     */
+    StSDK.prototype.removeAppTemplateFromBlacklist = function(companyId, appTemplateId) {
+        StSDK.validateInt('Company Id', companyId);
+        StSDK.validateInt('App Template Id', appTemplateId);
+
+        return this.delete('company/' + companyId + '/blacklist/' + appTemplateId);
     };
 
     /**
