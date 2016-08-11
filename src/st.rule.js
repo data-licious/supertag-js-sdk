@@ -29,8 +29,6 @@
         return this.post('projects/' + projectId + '/rule', null, ruleObj);
     };
 
-
-
     /**
      * Apply an rule to tag
      *
@@ -46,6 +44,21 @@
         StSDK.validateInt('Tag ID', tagId);
 
         return this.post('projects/' + projectId + '/apply/' + ruleId + '/' + tagId);
+    };
+
+    /**
+     * Add event to project
+     *
+     * @param {Number} projectId The project ID
+     * @param {Number} eventId The event ID
+     *
+     * @returns {jqXHR}
+     */
+    StSDK.prototype.addEventToProject = function(projectId, eventId) {
+        StSDK.validateInt('Project ID', projectId);
+        StSDK.validateInt('Event ID', eventId);
+
+        return this.post('projects/' + projectId + '/add-event/' + eventId);
     };
 
     /**
