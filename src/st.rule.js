@@ -62,6 +62,23 @@
     };
 
     /**
+     * Add Business rule to project
+     *
+     * @param {Number} projectId The project ID
+     * @param {Number} ruleId The rule ID
+     * @param {Number} tagId The container tag ID
+     *
+     * @returns {jqXHR}
+     */
+    StSDK.prototype.addBusinessRuleToProject = function(projectId, ruleId, tagId) {
+        StSDK.validateInt('Project ID', projectId);
+        StSDK.validateInt('Rule ID', ruleId);
+        StSDK.validateInt('Tag ID', tagId);
+
+        return this.post('projects/' + projectId + '/add-business-rule/' + ruleId + '/' + tagId);
+    };
+
+    /**
      * Gets all dataObjects available in the given project
      *
      * @param {Number} id ID of the project
