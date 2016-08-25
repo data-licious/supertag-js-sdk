@@ -343,7 +343,7 @@
                 return 'Change';
         }
 
-        return "";
+        return (typeName) ? typeName : '';
     };
 
 
