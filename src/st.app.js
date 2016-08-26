@@ -338,10 +338,11 @@
      *
      * @param {Number} projectId The project ID
      * @param {String} format The format of the response, options being `'flat'` (default), `'grouped'`, `'grouped_app_only'`, `'grouped_vendor_only'`, `'standard'` or `'standard_vendor_only'`
+     * @param {Boolean} isInstalledOnly The flag to get only installed App Templates
      *
      * @returns {jqXHR}
      */
-    StSDK.prototype.getAppTemplates = function(projectId, format) {
+    StSDK.prototype.getAppTemplates = function(projectId, format, isInstalledOnly) {
         StSDK.validateInt('Project ID', projectId);
 
         var format = format || StSDK.APP_TEMPLATE_FORMAT_FLAT;
@@ -353,8 +354,9 @@
             StSDK.APP_TEMPLATE_FORMAT_STANDARD,
             StSDK.APP_TEMPLATE_FORMAT_STANDARD_VENDOR_ONLY
         ]);
+        var installedParamStr = (isInstalledOnly) ? '?installed_only=1' : '';
 
-        return this.get('projects/' + projectId + '/app-templates', null, {
+        return this.get('projects/' + projectId + '/app-templates' + installedParamStr, null, {
             dataFilter: function(data, type) {
 
                 if (StSDK.APP_TEMPLATE_FORMAT_FLAT === format || 'json' !== type) {
