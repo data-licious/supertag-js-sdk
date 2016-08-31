@@ -3,6 +3,13 @@
 
     var StSDK = window.StSDK;
 
+
+    StSDK.PROJECT_TYPE_WEBSITE = 'website';
+    StSDK.PROJECT_TYPE_IOS = 'ios';
+    StSDK.PROJECT_TYPE_ANDROID = 'android';
+
+
+
     /**
      * @constant {string} APP_FORMAT_FLAT
      */
@@ -42,6 +49,26 @@
      * @constant {string} APP_TEMPLATE_FORMAT_STANDARD_VENDOR_ONLY
      */
     StSDK.APP_TEMPLATE_FORMAT_STANDARD_VENDOR_ONLY = 'standard_vendor_only';
+
+    /**
+     * Gets js-doc for new ui
+     *
+     * @returns {jqXHR}
+     */
+    StSDK.prototype.getJsDoc = function(projectType) {
+        var paramStr = '';
+        if (projectType) {
+            StSDK.validateOpts('Format', projectType, [
+                StSDK.PROJECT_TYPE_WEBSITE,
+                StSDK.PROJECT_TYPE_IOS,
+                StSDK.PROJECT_TYPE_ANDROID
+            ]);
+            paramStr = '?project_type=' + projectType;
+
+        }
+
+        return this.get('help/new-ui-js-doc' + paramStr);
+    };
 
     /**
      * Gets details of a given app
