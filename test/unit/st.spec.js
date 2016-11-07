@@ -38,7 +38,7 @@ describe('st', function() {
             expect(_stSDK.getDataObjectTypeLabel({"type": "affinity_group_variable" })).toBe("Affinity");
         });
         it('should return "Vendor" for generic data objects', function() {
-            expect(_stSDK.getDataObjectTypeLabel({"type": "variable_template_variable", "vendor": "Datalicious"})).toBe("Datalicious");
+            expect(_stSDK.getDataObjectTypeLabel({"type": "variable_template_variable", "variable_template_name": "Test DO"})).toBe("Test DO");
         });
     });
 });
