@@ -109,6 +109,7 @@
             'description': data.description,
             'deployment_type': data.deployment_type,
             'hosted_subdomain': data.hosted_subdomain,
+            'download_path': data.download_path,
             'include_turbobytes_code': data.include_turbobytes_code,
             'obfuscate_js': data.obfuscate_js,
             'live_testing_refresh_interval': data.liveTestingRefreshInterval,
