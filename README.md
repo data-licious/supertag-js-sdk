@@ -29,7 +29,9 @@ Example:
 
 ===
 
-#### [Docs](http://supertag.github.io/supertag-js-sdk-docs/src/st.js.html)
+#### Documentation
+
+Automatically generated documentations is available [here](http://supertag.github.io/supertag-js-sdk-docs/src/st.js.html).
 
 ===
 
