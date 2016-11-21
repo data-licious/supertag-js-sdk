@@ -31,8 +31,8 @@ Example:
 
 #### Documentation
 
-Automatically generated documentations is available [here](http://supertag.github.io/supertag-js-sdk-docs/src/st.js.html).
+Automatically generated documentations is available [here](http://data-licious.github.io/supertag-js-sdk-docs/src/st.js.html).
 
 ===
 
-For details of how to run the app and tests locally and other development/contributing information, please check out [CONTRIBUTING.md](https://github.com/supertag/supertag-js-sdk/blob/master/CONTRIBUTING.md)
+For details of how to run the app and tests locally and other development/contributing information, please check out [CONTRIBUTING.md](https://github.com/data-licious/supertag-js-sdk/blob/master/CONTRIBUTING.md)
