@@ -36,12 +36,15 @@
      *
      * @param {Number} projectId Project ID
      * @param {String} comment Deployment comment
+     * @param {Number[]} tagsToSkip Tag IDs to skip
      *
      * @returns {jqXHR}
      */
-    StSDK.prototype.scheduleDeployment = function(projectId, comment) {
-
-        return this.post('projects/' + projectId + '/deploy', undefined, {comment: comment});
+    StSDK.prototype.scheduleDeployment = function(projectId, comment, tagsToSkip) {
+        return this.post('projects/' + projectId + '/deploy', undefined, {
+            comment: comment,
+            tagsToSkip: tagsToSkip
+        });
     };
 
     /**
