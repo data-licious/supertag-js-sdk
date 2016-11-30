@@ -200,6 +200,8 @@
             case "event_container":
             case "event":
                 return "Event";
+            case "combined_rule":
+                return "Combined rule";
         }
 
         return "";
@@ -262,7 +264,7 @@
      * @returns {Array}
      */
     StSDK.prototype.getRuleTypeList = function() {
-        return ['business_rule', 'event'];
+        return ['business_rule', 'event', 'combined_rule'];
     };
 
     /**
