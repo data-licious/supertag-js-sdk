@@ -21,6 +21,9 @@
         if ('event' == data.type) {
             ruleObj.selector = data.selector;
             ruleObj.eventName = data.event_name;
+        } else if ('combined_rule' == data.type) {
+            ruleObj.logicalOperator = data.logical_operator;
+            ruleObj.rules = data.combined_rules;
         } else {
             ruleObj.logicalOperatorHandle = data.conditions.logicalOperatorHandle;
             ruleObj.children = data.conditions.children;
