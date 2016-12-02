@@ -23,7 +23,7 @@
             ruleObj.eventName = data.event_name;
         } else if ('combined_rule' == data.type) {
             ruleObj.logicalOperator = data.logical_operator;
-            ruleObj.rules = data.combined_rules;
+            ruleObj.innerRules = data.inner_rules;
         } else {
             ruleObj.logicalOperatorHandle = data.conditions.logicalOperatorHandle;
             ruleObj.children = data.conditions.children;
@@ -172,7 +172,7 @@
             'selector': data.selector,
             'event_name': data.event_name,
             'logical_operator': data.logical_operator,
-            'rules': data.rules
+            'inner_rules': data.inner_rules
         });
     };
 
