@@ -170,7 +170,9 @@
             'conditions': data.conditions,
             'type': data.type,
             'selector': data.selector,
-            'event_name': data.event_name
+            'event_name': data.event_name,
+            'logical_operator': data.logical_operator,
+            'rules': data.rules
         });
     };
 
