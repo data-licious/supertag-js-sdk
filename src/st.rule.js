@@ -22,8 +22,8 @@
             ruleObj.selector = data.selector;
             ruleObj.eventName = data.event_name;
         } else if ('combined_rule' == data.type) {
-            ruleObj.logicalOperator = data.logical_operator;
-            ruleObj.innerRules = data.inner_rules;
+            ruleObj.logicalOperator = data.logicalOperator;
+            ruleObj.innerRules = data.innerRules;
         } else {
             ruleObj.logicalOperatorHandle = data.conditions.logicalOperatorHandle;
             ruleObj.children = data.conditions.children;
@@ -171,8 +171,8 @@
             'type': data.type,
             'selector': data.selector,
             'event_name': data.event_name,
-            'logical_operator': data.logical_operator,
-            'inner_rules': data.inner_rules
+            'logicalOperator': data.logicalOperator,
+            'innerRules': data.innerRules
         });
     };
 
