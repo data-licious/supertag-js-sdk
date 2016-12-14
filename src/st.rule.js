@@ -49,6 +49,22 @@
     };
 
     /**
+     * Duplicate an rule
+     * @param {Number} id The rule ID
+     * @param {Number} projectId  The project ID
+     * @param {Object} data The rule data
+     *
+     * @returns {jqXHR}
+     */
+    StSDK.prototype.duplicateRule = function(id, projectId, data) {
+        StSDK.validateInt('Rule ID', id);
+
+        return this.post('projects/' + projectId + '/rule/' + id, null, {
+            'name': data.name
+        });
+    };
+
+    /**
      * Apply an rule to tag
      *
      * @param {Number} projectId The project ID
