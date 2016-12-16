@@ -100,8 +100,8 @@
      * @returns {jqXHR}
      */
     StSDK.prototype.updateProject = function(projectId, data) {
-        StSDK.validateInt('Project ID', projectId);
-        var updateData = {
+
+        return this.put('projects/' + projectId, null, {
             'async': data.async,
             'compressor': data.compressor,
             'minify_js': data.minify_js,
@@ -118,10 +118,8 @@
             'sdk_type': data.sdk_type,
             'use_opt_out': data.use_opt_out,
             'is_realtime_enabled': data.is_realtime_enabled,
-            'tag_monitoring_enabled': data.tag_monitoring_enabled
-        };
-
-        return this.put('projects/' + projectId, null, updateData);
+            'is_monitoring_enabled': data.is_monitoring_enabled
+        });
     };
 
     /**
