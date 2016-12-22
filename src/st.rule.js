@@ -49,6 +49,22 @@
     };
 
     /**
+     * Duplicate an rule
+     * @param {Number} id The rule ID
+     * @param {Number} projectId  The project ID
+     * @param {Object} data The rule data
+     *
+     * @returns {jqXHR}
+     */
+    StSDK.prototype.duplicateRule = function(id, projectId, data) {
+        StSDK.validateInt('Rule ID', id);
+
+        return this.post('projects/' + projectId + '/rule/' + id, null, {
+            'name': data.name
+        });
+    };
+
+    /**
      * Apply an rule to tag
      *
      * @param {Number} projectId The project ID
@@ -95,6 +111,23 @@
         StSDK.validateInt('Tag ID', tagId);
 
         return this.post('projects/' + projectId + '/add-business-rule/' + ruleId + '/' + tagId);
+    };
+
+    /**
+     * Add Combined rule to project
+     *
+     * @param {Number} projectId The project ID
+     * @param {Number} ruleId The rule ID
+     * @param {Number} tagId The container tag ID
+     *
+     * @returns {jqXHR}
+     */
+    StSDK.prototype.addCombinedRuleToProject = function(projectId, ruleId, tagId) {
+        StSDK.validateInt('Project ID', projectId);
+        StSDK.validateInt('Rule ID', ruleId);
+        StSDK.validateInt('Tag ID', tagId);
+
+        return this.post('projects/' + projectId + '/add-combined-rule/' + ruleId + '/' + tagId);
     };
 
     /**
