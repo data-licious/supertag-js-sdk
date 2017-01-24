@@ -115,7 +115,6 @@
             'live_testing_refresh_interval': data.liveTestingRefreshInterval,
             'testAndroidUuids': data.testAndroidUuids,
             'testAdvertiserIds': data.testAdvertiserIds,
-            'sdk_type': data.sdk_type,
             'use_opt_out': data.use_opt_out,
             'is_realtime_enabled': data.is_realtime_enabled,
             'is_monitoring_enabled': data.is_monitoring_enabled
@@ -488,7 +487,6 @@
         var createData = {
             'name': data.name,
             'type': data.type,
-            'sdk_type': data.sdk_type,
             'async': data.async
         };
 
@@ -536,10 +534,10 @@
 
     /**
      * Create a new live testing session
-     * 
+     *
      * @param {Number} projectId
      * @param {String} deviceId
-     * 
+     *
      * @returns {jqXHR}
      */
     StSDK.prototype.createLiveTestingSession = function(projectId, deviceId) {
@@ -552,13 +550,13 @@
      * Delete a live testing session
      *
      * @param {Number} projectId
-     * @param {String} deviceId 
+     * @param {String} deviceId
      *
      * @returns {jqXHR}
      */
     StSDK.prototype.deleteLiveTestingSession = function(projectId, deviceId) {
         StSDK.validateInt('Project ID', projectId);
-        
+
         return this.delete('projects/' + projectId + '/live-testing-sessions/' + deviceId);
     }
 }(window));
