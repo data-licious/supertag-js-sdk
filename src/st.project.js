@@ -104,6 +104,7 @@
         return this.put('projects/' + projectId, null, {
             'async': data.async,
             'compressor': data.compressor,
+            'tag_governance': data.tag_governance,
             'minify_js': data.minify_js,
             'name': data.name,
             'description': data.description,
