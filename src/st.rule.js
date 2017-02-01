@@ -223,6 +223,8 @@
                 return "Event";
             case "combined_rule":
                 return "Combined rule";
+            case "special_rule":
+                return "Special rule";
         }
 
         return "";
