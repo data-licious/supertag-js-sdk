@@ -107,11 +107,12 @@
      *
      * @returns {jqXHR}
      */
-    StSDK.prototype.getStarted = function (companyName, projectName, projectSite) {
+    StSDK.prototype.getStarted = function (companyName, projectName, projectSite,projectType) {
         return this.post('get-started', null, {
             'companyName': companyName,
             'projectName': projectName,
-            'projectSite': projectSite
+            'projectSite': projectSite,
+            'projectType':projectType
         });
     };
 
