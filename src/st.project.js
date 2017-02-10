@@ -571,7 +571,7 @@
     StSDK.prototype.getMinificationStatus = function (projectId) {
         StSDK.validateInt('Project ID', projectId);
 
-        return this.get('projects/' + projectId +'test/minification/status');
+        return this.get('projects/' + projectId +'/test/minification/status');
     };
 
     /**
