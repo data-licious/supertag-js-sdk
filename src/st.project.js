@@ -585,6 +585,6 @@
     StSDK.prototype.toggleMinification = function (projectId, action) {
         StSDK.validateInt('Project ID', projectId);
 
-        return this.post('projects/' + projectId +'test/minification/toggle/'+ action , null);
+        return this.post('projects/' + projectId +'/test/minification/toggle/'+ action , null);
     };
 }(window));
