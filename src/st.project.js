@@ -559,4 +559,31 @@
 
         return this.delete('projects/' + projectId + '/live-testing-sessions/' + deviceId);
     }
+
+    /**
+     * Get minification status
+     *
+     * @param {Number} projectId The project ID
+     *
+     * @returns {jqXHR}
+     */
+
+    StSDK.prototype.getMinificationStatus = function (projectId) {
+        StSDK.validateInt('Project ID', projectId);
+
+        return this.get('projects/' + projectId +'test/minification/status');
+    };
+
+    /**
+     * Get minification status
+     *
+     * @param {Number} projectId The project ID
+     * @param {String}  Char
+     * @returns {jqXHR}
+     */
+    StSDK.prototype.toggleMinification = function (projectId, action) {
+        StSDK.validateInt('Project ID', projectId);
+
+        return this.post('projects/' + projectId +'test/minification/toggle/'+ action , null);
+    };
 }(window));
