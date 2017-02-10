@@ -578,7 +578,8 @@
      * Get minification status
      *
      * @param {Number} projectId The project ID
-     * @param {String}  Char
+     * @param {String}  Character
+     *
      * @returns {jqXHR}
      */
     StSDK.prototype.toggleMinification = function (projectId, action) {
