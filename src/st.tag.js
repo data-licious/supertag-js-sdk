@@ -347,6 +347,19 @@
     };
 
     /**
+     * Restore Tag.
+     *
+     * @param {Number} tagId Tag ID
+     * @param {Number} parentId Parent Container ID
+     *
+     * @returns {jqXHR}
+     */
+    StSDK.prototype.scheduleRedeployment = function(tagId, parentId) {
+
+        return this.post('tags/restore/' + tagId + '/' + parentId, undefined, {});
+    };
+
+    /**
      * Gets all tags, data-objects and rules will be duplicated on the tag copying
      *
      * @param {Number} tagId The root tag ID
