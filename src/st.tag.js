@@ -354,7 +354,7 @@
      *
      * @returns {jqXHR}
      */
-    StSDK.prototype.scheduleRedeployment = function(tagId, parentId) {
+    StSDK.prototype.restoreTag = function(tagId, parentId) {
 
         return this.post('tags/restore/' + tagId + '/' + parentId, undefined, {});
     };
