@@ -359,7 +359,6 @@
         return this.post('tags/restore/' + tagId + '/' + parentId, undefined, {});
     };
 
-
     /**
      * Gets all tags, data-objects and rules will be duplicated on the tag copying
      *
