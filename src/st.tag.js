@@ -194,6 +194,25 @@
     };
 
     /**
+     * Create a tag governance
+     *
+     * @param {Number} projectId The project ID
+     * @param {Number} id The tag ID
+     * @param {Number} tagOwnerId The tag owner ID
+     * @param {Object} data The data of the tag
+     *
+     * @returns {jqXHR}
+     */
+    StSDK.prototype.createTagGovernance = function(projectId, id, tagOwnerId, data) {
+        StSDK.validateInt('Project ID', projectId);
+        StSDK.validateInt('Tag Owner ID', tagOwnerId);
+        StSDK.validateInt('Tag ID', id);
+        StSDK.validatePlainObj('Tag data', data);
+
+        return this.post('projects/' + projectId + '/tag-governance/' + id + '/' + tagOwnerId, null, data);
+    };
+
+    /**
      * Duplicates a tag
      *
      * @param {Number} projectId The project ID

@@ -104,6 +104,7 @@
         return this.put('projects/' + projectId, null, {
             'async': data.async,
             'compressor': data.compressor,
+            'tag_governance': data.tag_governance,
             'minify_js': data.minify_js,
             'name': data.name,
             'description': data.description,
@@ -453,6 +454,39 @@
         }
 
         return this.post('projects/' + projectId + '/grant-access/' + email + '/' + role, null, data);
+    };
+
+    /**
+     * Add tag owner
+     *
+     * @param {Number} projectId The project ID
+     * @param {Object} data The data of the tag owner
+     *
+     * @returns {jqXHR}
+     */
+    StSDK.prototype.addTagOwner = function(projectId, data) {
+        StSDK.validateInt('Project ID', projectId);
+        var createData = {
+            'name': data.name,
+            'email': data.email
+        };
+
+        return this.post('projects/' + projectId + '/tag-owner', null, createData);
+    };
+
+    /**
+     * Remove tag owner
+     *
+     * @param {Number} projectId The project ID
+     * @param {Number} tagOwnerId The tag owner ID
+     *
+     * @returns {jqXHR}
+     */
+    StSDK.prototype.removeTagOwner = function(projectId, tagOwnerId) {
+        StSDK.validateInt('Project ID', projectId);
+        StSDK.validateInt('Tag owner ID', tagOwnerId);
+
+        return this.delete('projects/' + projectId + '/tag-owner/' + tagOwnerId);
     };
 
     /**
