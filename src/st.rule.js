@@ -263,15 +263,15 @@
             case "ends_with":
                 return "Ends with";
             case "equal":
-                return "Equal";
+                return "Equals";
             case "greater_than":
-                return "Greater than";
+                return "Is greater than";
             case "less_than":
-                return "Less than";
+                return "Is less than";
             case "not_contains":
-                return "Not contains";
+                return "Does not contain";
             case "not_equal":
-                return "Not equal";
+                return "Does not equal";
             case "regex_match":
                 return "Regex match";
             case "starts_with":
