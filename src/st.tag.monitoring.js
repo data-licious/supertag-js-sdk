@@ -15,13 +15,27 @@
     };
 
     /**
-     * Gets all the tag monitoring dashboards
+     * Create tag monitoring dashboard
      *
      * @param {*} projectId The Project ID.
+     * @param {*} data request data.
      *
      * @returns {jqXHR}
      */
-    StSDK.prototype.getTagMonitoringDashboards = function(projectId) {
-        return this.get('tag-monitoring/' + projectId + '/dashboards');
+    StSDK.prototype.createTagMonitoringDashboards = function(projectId, data) {
+        return this.post('tag-monitoring/' + projectId + '/dashboards', null, data);
+    };
+
+    /**
+     * Update tag monitoring dashboard
+     *
+     * @param {*} projectId The Project ID.
+     * @param {*} dashboardId The dashboard ID.
+     * @param {*} data request data.
+     *
+     * @returns {jqXHR}
+     */
+    StSDK.prototype.updateTagMonitoringDashboards = function(projectId, dashboardId, data) {
+        return this.put('tag-monitoring/' + projectId + '/dashboards/' + dashboardId, null, data);
     };
 }(window, document, jQuery));
