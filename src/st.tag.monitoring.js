@@ -38,4 +38,17 @@
     StSDK.prototype.updateTagMonitoringDashboards = function(projectId, dashboardId, data) {
         return this.put('tag-monitoring/' + projectId + '/dashboards/' + dashboardId, null, data);
     };
+
+    /**
+     * Deletes tag monitoring dashboard
+     *
+     * @param {*} projectId The Project ID.
+     * @param {*} dashboardId The dashboard ID.
+     * @param {*} data request data.
+     *
+     * @returns {jqXHR}
+     */
+    StSDK.prototype.deleteTagMonitoringDashboards = function(projectId, dashboardId) {
+        return this.delete('tag-monitoring/' + projectId + '/dashboards/' + dashboardId);
+    };
 }(window, document, jQuery));
