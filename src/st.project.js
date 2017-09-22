@@ -118,7 +118,8 @@
             'testAdvertiserIds': data.testAdvertiserIds,
             'use_opt_out': data.use_opt_out,
             'is_realtime_enabled': data.is_realtime_enabled,
-            'is_monitoring_enabled': data.is_monitoring_enabled
+            'is_monitoring_enabled': data.is_monitoring_enabled,
+            'is_failure_protection_enabled': data.is_failure_protection_enabled
         });
     };
 
